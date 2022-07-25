@@ -14,9 +14,9 @@
         </Console>
         <RollingFile name="file" fileName="logs/${logFileName}.log" filePattern="logs/${logFileName}.%d{yyyy-MM-dd-hh}.log">
             <PatternLayout pattern="${fileLayout}" />
-            <!--<Policies>
-                <TimeBasedTriggeringPolicy modulate="true" interval="1" />&lt;!&ndash; 시간별 로그 파일 생성&ndash;&gt;
-            </Policies>-->
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1" />
+            </Policies>
             <DefaultRolloverStrategy max="5" fileIndex="min" /><!-- 롤링 파일 5개 까지 생성 -->
         </RollingFile>
     </Appenders>

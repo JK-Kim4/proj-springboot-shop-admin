@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.template.springmybatis.demo.repository.DemoRepository">
+
+    <!-- FIND ALL -->
+    <select id="findAll" resultType="test">
+        SELECT *
+        FROM TEST
+    </select>
+
+    <!-- FIND BY ID -->
+    <select id="findById" resultType="test">
+        SELECT *
+        FROM TEST
+        WHERE ID = #{id}
+    </select>
+
+    <!-- SAVE Entity-->
+    <insert id="save" parameterType="test">
+        INSERT INTO TEST
+            (ID, VALUE)
+        VALUES
+            (#{id}, #{value})
+    </insert>
+
+    <!-- UPDATE Entity-->
+    <update id="update" parameterType="test">
+        UPDATE TEST
+        SET VALUE = #{value}
+        WHERE ID = #{id}
+    </update>
+
+</mapper>

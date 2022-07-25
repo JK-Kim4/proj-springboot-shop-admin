@@ -19,8 +19,10 @@ repositories {
 }
 
 dependencies {
+    implementation 'junit:junit:4.13.1'
+
     //Spring Web
-    //implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
     //Spring devtools
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -46,6 +48,9 @@ dependencies {
 
     //mybatis
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+
+    //mybatis test
+    testImplementation "org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.2.2"
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 

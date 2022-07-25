@@ -8,17 +8,12 @@ server:
 
 ## spring profile ?? ? database ??
 spring:
-  profiles:
-## active profile
-    active: loc
-  #    active: dev
-  #    active: prod
 ## datasource
   datasource:
     #driver-class-name: org.mariadb.jdbc.Driver
     driver-class-name: com.mysql.cj.jdbc.Driver
-    jdbc-url: jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8&useTimezone=true&serverTimezone=Asia/Seoul
-    username: { database username}
+    url: jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8&useTimezone=true&serverTimezone=Asia/Seoul
+    username: { database username }
     password: { database password }
 
 ## logging configuration
