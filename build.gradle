@@ -39,10 +39,10 @@ dependencies {
     //implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
     //mariadb client
-    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+    //runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
     //mysql connector
-    //runtimeOnly 'mysql:mysql-connector-java'
+    runtimeOnly 'mysql:mysql-connector-java'
 
     //mybatis
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
