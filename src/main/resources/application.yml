@@ -1,0 +1,38 @@
+## server configuration PORT ? Encoding ??
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+
+## spring profile ?? ? database ??
+spring:
+  profiles:
+## active profile
+    active: loc
+  #    active: dev
+  #    active: prod
+## datasource
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    #driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: { database PATH }
+    username: { database username }
+    password: { databse password }
+
+## logging configuration
+logging:
+  config: classpath:log4j2.xml
+
+## mybatis configuration
+mybatis:
+  ## configuration ??? ?? ??? ??? ??, ?? ?? ??? ????.
+  #config-location: classpath:mybatis/mybatis-config.xml
+  configuration:
+    map-underscore-to-camel-case: true
+  ## Mapper Location ??
+  mapper-locations: classpath:mybatis/mappers/*Mapper.xml
+  ## Model package aliases ??
+  type-aliases-package: com.template.springmybatis.demo.controller.model
+

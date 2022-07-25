@@ -19,13 +19,43 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
-    compileOnly 'org.projectlombok:lombok'
+    //Spring Web
+    //implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    //Spring devtools
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+    //logging - log4j2
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+
+    //lombok
+    compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    //Spring session jdbc
+    //implementation 'org.springframework.session:spring-session-jdbc'
+
+    //JDBC
+    //implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    //mariadb client
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+    //mysql connector
+    //runtimeOnly 'mysql:mysql-connector-java'
+
+    //mybatis
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+//logging - Spring boot starter는 기본적으로 logback logging을 사용하므로 log4j2사용을 위해 exclude 처리
+configurations {
+    all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
 }
 
 tasks.named('test') {
