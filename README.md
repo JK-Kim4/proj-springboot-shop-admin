@@ -4,6 +4,6 @@
 
 - 적용 Dependency
   - Logging : log4j2
-  - Database : spring jdbc, mariaDB client(active), mysql connector
+  - Database : spring jdbc, mysql client(active), mariadb client
   - Framework : mybatis
   - etc : spring-devtools, lombok
