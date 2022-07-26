@@ -1,4 +1,4 @@
-## server configuration PORT ? Encoding ??
+## server configuration PORT 및 Encoding 설정
 server:
   port: 8080
   servlet:
@@ -6,7 +6,7 @@ server:
       charset: UTF-8
       force: true
 
-## spring profile ?? ? database ??
+## spring profile 및 database 설정
 spring:
 ## datasource
   datasource:
@@ -22,12 +22,12 @@ logging:
 
 ## mybatis configuration
 mybatis:
-  ## configuration ??? ?? ??? ??? ??, ?? ?? ??? ????.
+  ## configuration mybatis 설정 파일로 xml을 사용할 경우.
   #config-location: classpath:mybatis/mybatis-config.xml
   configuration:
     map-underscore-to-camel-case: true
-  ## Mapper Location ??
+  ## Mapper Location
   mapper-locations: classpath:mybatis/mappers/*Mapper.xml
-  ## Model package aliases ??
+  ## Model package aliases
   type-aliases-package: com.template.springmybatis.demo.controller.model
 
