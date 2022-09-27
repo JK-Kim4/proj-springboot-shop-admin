@@ -4,9 +4,9 @@ plugins {
     id 'java'
 }
 
-group = 'com.template'
+group = 'com.magazine'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '8'
 
 configurations {
     compileOnly {
@@ -34,18 +34,14 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    //Spring session jdbc
-    //implementation 'org.springframework.session:spring-session-jdbc'
+    //DBMS:oracle
+    runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
+    implementation group: 'com.oracle.database.nls', name: 'orai18n', version: '21.5.0.0'
 
-    //JDBC
-    //implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-
-    //mariadb client
-    //runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
-
-    //mysql connector
-    runtimeOnly 'mysql:mysql-connector-java'
-
+    //DBMS: mariaDB
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.1'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
     //mybatis
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 
@@ -56,6 +52,9 @@ dependencies {
     testImplementation "org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.2.2"
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    //mustache
+    implementation 'org.springframework.boot:spring-boot-starter-mustache'
 
 }
 
