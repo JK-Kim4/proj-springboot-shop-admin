@@ -1,4 +1,4 @@
-## server configuration PORT 및 Encoding 설정
+## server configuration
 server:
   port: 8080
   servlet:
@@ -6,28 +6,48 @@ server:
       charset: UTF-8
       force: true
 
-## spring profile 및 database 설정
+---
 spring:
-## datasource
-  datasource:
-    #driver-class-name: org.mariadb.jdbc.Driver
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8&useTimezone=true&serverTimezone=Asia/Seoul
-    username: { database username }
-    password: { database password }
+  config:
+    activate:
+      on-profile: loc
+---
+## active profile : dev
+spring:
+  config:
+    activate:
+      on-profile: dev
+---
+## active profile : prod
+spring:
+  config:
+    activate:
+      on-profile: prod
+---
 
-## logging configuration
+## logging
 logging:
   config: classpath:log4j2.xml
+  register-shutdown-hook: true
 
-## mybatis configuration
-mybatis:
-  ## configuration mybatis 설정 파일로 xml을 사용할 경우.
-  #config-location: classpath:mybatis/mybatis-config.xml
-  configuration:
-    map-underscore-to-camel-case: true
-  ## Mapper Location
-  mapper-locations: classpath:mybatis/mappers/*Mapper.xml
-  ## Model package aliases
-  type-aliases-package: com.template.springmybatis.demo.controller.model
+## active profile
+spring:
+  session:
+    store-type: jdbc
+  mustache:
+    servlet:
+      expose-session-attributes: true
+    ## upload file size
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+  main:
+    allow-circular-references: true
+
+server:
+  shutdown: graceful
+  servlet:
+    session:
+      timeout: 1800
 
