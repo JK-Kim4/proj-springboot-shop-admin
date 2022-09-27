@@ -40,3 +40,5 @@ out/
 application-dev.yml
 application-loc.yml
 application-prod.yml
+
+**/samples
