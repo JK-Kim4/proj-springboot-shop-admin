@@ -9,7 +9,9 @@
 
     <typeAliases>
         <typeAlias type="com.changbi.magazineadmin.controller.member.domain.Member" alias="member" />
-        <typeAlias type="com.changbi.magazineadmin.controller.member.domain.Address" alias="address" />
+        <typeAlias type="com.changbi.magazineadmin.controller.weekly_comment.domain.WeeklyComment" alias="weeklyComment" />
+        <typeAlias type="com.changbi.magazineadmin.controller.weekly_comment.domain.WeeklyCommentCategory" alias="weeklyCommentCategory" />
+
 
     </typeAliases>
 
