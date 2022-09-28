@@ -23,8 +23,6 @@ public class MemberController {
         List<Member> members = memberService.selectMemberAll();
         model.addAttribute("members", members);
 
-        log.debug("member get 0 = " + members.get(0));
-
         return "/contents/member/list";
     }
 }
