@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.changbi.magazineadmin.repository.mysql.AuthorRepository">
+
+    <select id="selectAuthorAll" resultType="author">
+        SELECT
+            *
+        FROM
+            AUTHOR
+        ORDER BY AUTHOR_SEQ DESC
+    </select>
+
+    <select id="selectAuthorById" resultType="author">
+        SELECT
+            *
+        FROM
+            AUTHOR
+        WHERE
+            AUTHOR_SEQ = #{authorId}
+    </select>
+
+    <insert id="insertAuthor" parameterType="author">
+        INSERT INTO AUTHOR
+            (AUTHOR_KR_NAME, AUTHOR_CONTENT, AUTHOR_THUMBNAIL_IMAGE, USE_YN)
+        VALUES
+            (#{authorKrName}, #{authorContent}, #{authorThumbnailImage}, #{useYn})
+    </insert>
+
+    <update id="updateAuthor" parameterType="author">
+        UPDATE AUTHOR
+            AUTHOR_KR_NM = #{authorKrNm},
+            AUTHOR_THUMBNAIL_IMAGE = #{authorThumbnailImage},
+            AUTHOR_CONTENT = #{authorContent},
+            USE_YN = #{useYn},
+            UPDATE_DATE = NOW()
+        WHERE AUTHOR_SEQ = #{authorSeq}
+    </update>
+</mapper>

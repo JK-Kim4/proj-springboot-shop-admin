@@ -20,14 +20,18 @@ public class WeeklyCommentController {
     private final WeeklyCommentService weeklyCommentService;
 
     @GetMapping("/list")
-    public String list(Model model){
+    public String listPage(Model model){
 
         List<WeeklyComment> weeklyComments = weeklyCommentService.selectWCAll();
-
         if(weeklyComments != null && weeklyComments.size() > 0){
             model.addAttribute("weeklyComments", weeklyComments);
         }
 
         return "/contents/weekly-comment/list";
+    }
+
+    @GetMapping("/insert")
+    public String insertPage(Model model){
+        return "/contents/weekly-comment/insert";
     }
 }
