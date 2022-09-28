@@ -1,0 +1,48 @@
+{{>layouts/header}}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">회원 관리</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="/index">홈</a></li>
+                <li class="breadcrumb-item active">회원 목록</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card">
+                    <!--<div class="card-header">
+                        <button class="btn btn-primary" onclick="location.href='/signUp'"> 사용자 등록 </button>
+                    </div>-->
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <!--<th class="col-md-1"> 아이디 </th>
+                                <th class="col-md-1"> 회원명 </th>
+                                <th class="col-md-1"> 닉네임 </th>-->
+                                <th class="col-md-1"> 이메일 </th>
+                                <!--<th class="col-md-1"> 휴대폰 번호 </th>
+                                <th class="col-md-1"> 회원 종류 </th>
+                                <th class="col-md-1"> 가입일 </th>-->
+                                </thead>
+                                <tbody>
+                                {{#members}}
+                                    <tr>
+                                        {{#email}}<td class="col-md-1">{{email}}</td>{{/email}}
+                                        {{^email}}<td class="col-md-1">없음</td>{{/email}}
+
+                                    </tr>
+                                {{/members}}
+                                {{^members}}
+                                    <tr>
+                                        <td colspan="5"> 사용자가 없습니다.</td>
+                                    </tr>
+                                {{/members}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    {{>layouts/footer}}

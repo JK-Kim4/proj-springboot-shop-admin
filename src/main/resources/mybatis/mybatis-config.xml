@@ -3,6 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="com.changbi.magazineadmin.controller.member.domain.Member" alias="member" />
+        <typeAlias type="com.changbi.magazineadmin.controller.member.domain.Address" alias="address" />
+
+    </typeAliases>
+
 
 </configuration>
 

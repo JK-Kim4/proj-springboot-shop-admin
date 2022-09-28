@@ -3,35 +3,12 @@ package com.changbi.magazineadmin.controller.member.domain;
 import lombok.Data;
 
 @Data
-public class Member {
-
-
-    private int customercode;
-
-    private String customername;
-
-    private int customerkind;
-
-    private String email;
-
-    private String webuserid;
-
-    private String nickname;
-
-    private String mobileno;
-
-    private String joindate;
-
-    private String updatedate;
-
-    /*회원 타입 : [01:관리자 ,02:일반 회원 ,03:어린이 회원 ,04:어린이 회원(보호자 미동의) , 05:창비 직원 ,06:미승인 회원]*/
-    private String webusertype;
-
-    private boolean webuserconfirmyn;
+public class Address {
 
     private String POSTNO1;
     private String ADDRESS1_1;
     private String ADDRESS1_2;
+
 
     private String POSTNO2;
     private String ADDRESS2_1;
@@ -53,5 +30,4 @@ public class Member {
     private String POSTNO3_New;
     private String ADDRESS3_1_NEW;
     private String ADDRESS3_2_NEW;
-
 }
