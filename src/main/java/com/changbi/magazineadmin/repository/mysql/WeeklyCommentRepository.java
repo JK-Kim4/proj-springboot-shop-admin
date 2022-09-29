@@ -15,4 +15,8 @@ public interface WeeklyCommentRepository {
     List<WeeklyMeta> selectWeeklyCommentAuthor(int weeklySeq);
 
     WeeklyComment selectWeeklyCommentBySeq(int weeklySeq);
+
+    int deleteWeeklyAuthor(int weeklySeq);
+
+    int updateWeeklyComment(WeeklyComment weeklyComment);
 }

@@ -60,4 +60,22 @@ public class WeeklyCommentService {
     public WeeklyComment selectWeeklyCommentBySeq(int weeklySeq) {
         return weeklyCommentRepository.selectWeeklyCommentBySeq(weeklySeq);
     }
+
+    public int updateWeeklyComment(WeeklyComment weeklyComment, int weeklySeq) {
+        int result = 0;
+        weeklyComment.setWeeklySeq(weeklySeq);
+
+        try {
+            List<WeeklyMeta> authList = setWeeklyAuthor(weeklyComment.getAuthArray(), weeklySeq);
+            weeklyCommentRepository.updateWeeklyComment(weeklyComment);
+            weeklyCommentRepository.deleteWeeklyAuthor(weeklySeq);
+            result = weeklyCommentRepository.insertWeeklyAuthor(authList);
+            return result;
+        }catch (Exception e){
+            log.error("Weekly Comment insert error occur !!", e);
+            result = 0;
+            return result;
+        }
+
+    }
 }

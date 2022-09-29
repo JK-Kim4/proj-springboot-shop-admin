@@ -8,6 +8,30 @@ let main = {
             _this.insert();
         });
 
+        /*수정*/
+        $("#weeklyUpdateBtn").on("click", function (){
+            let weeklySeq = $("#selectedWeeklySeq").val();
+            if(weeklySeq == '' || weeklySeq == null || weeklySeq == undefined){
+                alert("시스템 오류 발생. 관리자에게 문의해 주세요.");
+                return;
+            }else {
+                _this.update(weeklySeq);
+            }
+        });
+
+        /*삭제*/
+        $("#weeklyDeleteBtn").on("click", function (){
+            let weeklySeq = $("#selectedWeeklySeq").val();
+            if(weeklySeq == '' || weeklySeq == null || weeklySeq == undefined){
+                alert("시스템 오류 발생. 관리자에게 문의해 주세요.");
+                return;
+            }else {
+                _this.delete(weeklySeq);
+            }
+
+        });
+
+        /*검색*/
         $("#searchBtn").on('click', function (){
             let keyword = $("#searchKeyword").val();
             if(keyword == '' || keyword == undefined){
@@ -30,7 +54,6 @@ let main = {
             let keyword = $("#searchAuthNm").val();
             _this.searchAuthor(keyword, 1, 10);
         });
-
 
         /*저자 입력 버튼*/
         $("#authRegBtn").on("click", function (){
@@ -233,6 +256,96 @@ let main = {
             }
         });
     },
+    update : function (weeklySeq){
+//입력값
+        //사용여부
+        let useYn = $(":radio[name=inputUseYn]:checked").val();
+        //주간논평 제목
+        let title = $("#inputTitle").val();
+        let subtitle = $("#inputSubtitle").val();
+        //주간논평 본문
+        let content = CKEDITOR.instances['inputContent'].getData();
+        //섬네일 이미지
+        let weeklyThumbnailImage = $("#weeklyThumbnailImage").val();
+        let weeklyThumbnailImageFileName = $("#weeklyThumbnailImageFileName").val();
+
+        /*입력 데이터 검증*/
+        if(title == '' || title == undefined){
+            alert("본문 제목을 입력해 주세요. (필수 항목)");
+            $("#inputTitle").focus();
+            return;
+        }else if(content == '' || content == undefined){
+            alert("내용을 입력해 주세요. (필수 항목)");
+            $("#inputContent").focus();
+            return;
+        };
+
+        let data = {
+            useYn : useYn,
+            weeklyTitle : title,
+            weeklySubtitle: subtitle,
+            weeklyContent : content,
+            weeklyThumbnailImage : weeklyThumbnailImage,
+            weeklyThumbnailImageFileName : weeklyThumbnailImageFileName
+        };
+
+        //저자 List
+        if(authCnt > 0){
+            let authArray = [];
+            for(let i = 1; i <= authCnt; i ++ ){
+                if($("#inputCode"+i+"_01").val() != undefined){
+                    authArray.push({authorSeq : $("#inputCode"+i+"_01").val(), weeklySeq : 0});
+                }
+            }
+            data.authArray = authArray;
+        };
+
+        $.ajax({
+            url : "/weeklyComment/update/"+weeklySeq,
+            method : "POST",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data : JSON.stringify(data),
+            success : function (result){
+
+                if(result.resultCd == '0000'){
+                    alert(result.resultMsg);
+                    location.reload();
+                }else{
+                    alert(result.resultMsg);
+                    location.reload();
+                }
+
+            },
+            error : function (x, h, r){
+                alert("시스템 에러 발생. 지속적인 오류 발생 시 관리자에게 문의해 주세요");
+                location.reload();
+            }
+        });
+    },
+    delete : function (weeklySeq){
+        $.ajax({
+            url : "/weeklyComment/delete/"+weeklySeq,
+            method : "POST",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success : function (result){
+
+                if(result > 0){
+                    alert("삭제가 완료되었습니다.");
+                    location.href = "/weeklyComment/list"
+                }else{
+                    alert("삭제에 실패하였습니다. 다시 시도해 주세요");
+                    location.reload();
+                }
+
+            },
+            error : function (x, h, r){
+                alert("시스템 에러 발생. 지속적인 오류 발생 시 관리자에게 문의해 주세요");
+                location.reload();
+            }
+        });
+    },
     getWeeklyList : function (pageNum, pageSize){
 
         $.ajax({
@@ -308,7 +421,7 @@ let main = {
             },
             success : function (result){
 
-                let html = main.drawBookList(result.list);
+                let html = main.drawWeeklyList(result.list);
                 $("#weeklyCommentList").html(html);
 
                 html = "";

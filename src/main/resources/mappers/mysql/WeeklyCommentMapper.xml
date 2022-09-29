@@ -75,4 +75,24 @@
         </foreach>
     </insert>
 
+    <update id="updateWeeklyComment" parameterType="weeklyComment">
+        <![CDATA[
+        UPDATE WEEKLY_COMMENT
+        SET
+            WEEKLY_TITLE = #{weeklyTitle}
+          ,WEEKLY_SUBTITLE = #{weeklySubtitle}
+          ,WEEKLY_CONTENT = #{weeklyContent}
+          ,WEEKLY_THUMGNAIL_IMAGE = #{weeklyThumbnailImage}
+          ,WEEKLY_THUMGNAIL_IMAGE_FILE_NAME = #{weeklyThumbnailImageFileName}
+          ,UPDATE_DATE = now()
+          ,USE_YN = #{useYn}
+        WHERE WEEKLY_SEQ = #{weeklySeq}
+        ]]>
+    </update>
+
+    <delete id="deleteWeeklyAuthor" parameterType="int">
+        DELETE FROM AUTHOR_WEEKLY
+        WHERE WEEKLY_SEQ = #{weeklySeq}
+    </delete>
+
 </mapper>
