@@ -12,6 +12,7 @@
         <typeAlias type="com.changbi.magazineadmin.controller.weekly_comment.domain.WeeklyComment" alias="weeklyComment" />
         <typeAlias type="com.changbi.magazineadmin.controller.weekly_comment.domain.WeeklyCommentCategory" alias="weeklyCommentCategory" />
         <typeAlias type="com.changbi.magazineadmin.controller.author.domain.Author" alias="author" />
+        <typeAlias type="com.changbi.magazineadmin.controller.weekly_comment.domain.WeeklyMeta" alias="authMeta"></typeAlias>
 
 
     </typeAliases>

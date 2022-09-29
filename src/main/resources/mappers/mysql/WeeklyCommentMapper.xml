@@ -12,4 +12,49 @@
         ORDER BY WEEKLY_SEQ DESC
     </select>
 
+    <insert id="insertWeeklyComment" parameterType="weeklyComment"
+            useGeneratedKeys="true" keyProperty="weeklySeq" keyColumn="WEEKLY_SEQ">
+    <![CDATA[
+        INSERT INTO WEEKLY_COMMENT (
+            WEEKLY_TITLE
+            ,WEEKLY_SUBTITLE
+            ,WEEKLY_CONTENT
+            ,WEEKLY_THUMGNAIL_IMAGE
+            ,WEEKLY_THUMGNAIL_IMAGE_FILE_NAME
+            ,APPEND_DATE
+            ,UPDATE_DATE
+            ,VIEW_COUNT
+            ,USE_YN
+        ) VALUES (
+            #{weeklyTitle}
+            ,#{weeklySubtitle}
+            ,#{weeklyContent}
+            ,#{weeklyThumbnailImage}
+            ,#{weeklyThumbnailImageFileName}
+            ,now()
+            ,now()
+            ,0
+            ,#{useYn}
+        )
+    ]]>
+    </insert>
+
+    <insert id="insertWeeklyAuthor" parameterType="authMeta">
+        <![CDATA[
+        INSERT INTO AUTHOR_WEEKLY
+        (
+            AUTHOR_SEQ
+            ,WEEKLY_SEQ
+        )VALUES
+        ]]>
+        <foreach collection="list" item="item" separator=",">
+        <![CDATA[
+        (
+            #{item.authorSeq}
+            ,#{item.weeklySeq}
+        )
+        ]]>
+        </foreach>
+    </insert>
+
 </mapper>

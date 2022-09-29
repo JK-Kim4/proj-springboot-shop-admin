@@ -33,7 +33,7 @@ public class WeeklyCommentController {
 
     @PostMapping("/insert")
     @ResponseBody
-    public int insert(@RequestParam WeeklyComment weeklyComment){
+    public int insert(@RequestBody WeeklyComment weeklyComment){
         return weeklyCommentService.insertWeeklyComment(weeklyComment);
     }
 }

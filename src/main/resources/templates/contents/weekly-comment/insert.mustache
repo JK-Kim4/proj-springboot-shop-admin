@@ -22,22 +22,28 @@
                                     <input type="text" class="form-control " id="inputTitle" placeholder="제목을 입력해 주세요" required>
                                 </div>
                             </div>
-                            <div class="col-md-3 form-check-inline">
-                                <label for="inputUseYn">노출 여부</label>
-                                <small class="text-muted"><sup  style="color:red;">*</sup></small>
-                                <fieldset>
-                                    <div class="form-group">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inputUseYn" id="useY" value="true" checked>
-                                            <label class="form-check-label" for="useY">Y</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inputUseYn" id="useN" value="false">
-                                            <label class="form-check-label" for="useN">N</label>
-                                        </div>
-                                    </div>
-                                </fieldset>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="inputSubtitle"> 부제목 </label>
+                                    <input type="text" class="form-control " id="inputSubtitle" placeholder="부제목을 입력해 주세요">
+                                </div>
                             </div>
+                        </div>
+                        <div class="col-md-3 form-check-inline">
+                            <label for="inputUseYn">노출 여부</label>
+                            <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                            <fieldset>
+                                <div class="form-group">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inputUseYn" id="useY" value="true" checked>
+                                        <label class="form-check-label" for="useY">Y</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inputUseYn" id="useN" value="false">
+                                        <label class="form-check-label" for="useN">N</label>
+                                    </div>
+                                </div>
+                            </fieldset>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-3">
@@ -66,7 +72,7 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-8 col-sm-6">
-                                                                <input type="text" class="form-control " id="searchAuthNm" placeholder="작가">
+                                                                <input type="text" class="form-control " id="searchAuthNm" placeholder="저자">
                                                             </div>
                                                             <div class="col-4 col-sm-6">
                                                                 <button class="btn btn-secondary" id="searchAuthBtn">검색</button>
@@ -104,12 +110,13 @@
                             <!--file upload test-->
                             <div class="col-md-6">
                                 <label class="form-label" for="inputImage">섬네일 이미지</label>
-                                <input type="file" class="form-control" id="inputImage" name="inputImage" >
-                                <input type="hidden" id="uploadThumbImgUrl" >
-                                <input type="hidden" id="uploadImgNm" >
+                                <input type="file" class="form-control" id="inputFile" name="inputFile" >
+                                <input type="hidden" id="uploadValid" value="N">
+                                <input type="hidden" id="weeklyThumbnailImage" >
+                                <input type="hidden" id="weeklyThumbnailImageFileName" >
                             </div>
                             <div class="col-md-3" style="padding-top:32px;" id="imgControl">
-                                <button class="btn btn-dark" id="uploadImageBtn" style="display: block">이미지 업로드</button>
+                                <button class="btn btn-dark" id="uploadBtn" style="display: block">이미지 업로드</button>
                                 <!--<button class="btn btn-success" id="defaultSuccess" style="display: none;" disabled>업로드 완료</button>-->
                             </div>
                         </div>
