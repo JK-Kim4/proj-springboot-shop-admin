@@ -2,13 +2,13 @@ package com.changbi.magazineadmin.controller.author;
 
 import com.changbi.magazineadmin.controller.author.domain.Author;
 import com.changbi.magazineadmin.service.AuthorService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,10 +21,6 @@ public class AuthorController {
     /*페이지*/
     @GetMapping("/list")
     public String listPage(Model model){
-        List<Author> authors = authorService.selectAuthorAll();
-        if(authors != null && authors.size() > 0){
-            model.addAttribute("authors", authors);
-        }
         return "/contents/author/list";
     }
 
@@ -35,24 +31,53 @@ public class AuthorController {
     }
 
     /*페이지*/
-    @GetMapping("/update/{authorId}")
-    public String updatePage(@PathVariable("authorId") int authorId, Model model){
-        Author result = authorService.selectAuthorById(authorId);
+    @GetMapping("/update/{authorSeq}")
+    public String updatePage(@PathVariable("authorSeq") int authorSeq, Model model){
+        Author result = authorService.selectAuthorById(authorSeq);
         if(result != null){
-            model.addAttribute("author", authorId);
+            model.addAttribute("author", result);
         }
         return "/contents/author/update";
     }
 
     /*로직*/
     @PostMapping("/insert")
+    @ResponseBody
     public int insertMethod(@RequestBody Author author){
         return authorService.insertAuthor(author);
     }
 
     /*로직*/
-    @PostMapping("/update")
-    public int updateMethod(@RequestBody Author author){
-        return authorService.updateAuthor(author);
+    @PostMapping("/update/{authorSeq}")
+    @ResponseBody
+    public int updateMethod(@PathVariable("authorSeq") int authorSeq, @RequestBody Author author){
+        return authorService.updateAuthor(authorSeq, author);
     }
+
+    /*로직*/
+    @PostMapping("/delete/{authorSeq}")
+    @ResponseBody
+    public int deleteMethod(@PathVariable("authorSeq") int authorSeq){
+        return authorService.deleteAuthor(authorSeq);
+    }
+
+    /*로직*/
+    @PostMapping("/authors")
+    @ResponseBody
+    public PageInfo<Author> authorSelectAll(int pageNum, int pageSize){
+
+        PageHelper.startPage(pageNum, pageSize);
+        return PageInfo.of(authorService.selectAuthorAll());
+    }
+
+    /*로직*/
+    @PostMapping("/search/{keyword}")
+    @ResponseBody
+    public PageInfo<Author> searchAuthor(@PathVariable("keyword") String keyword, int pageNum, int pageSize){
+
+        PageHelper.startPage(pageNum, pageSize);
+        return PageInfo.of(authorService.selectAuthorByKeyword(keyword));
+
+    }
+
 }

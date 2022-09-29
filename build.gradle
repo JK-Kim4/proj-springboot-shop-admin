@@ -56,6 +56,16 @@ dependencies {
     //mustache
     implementation 'org.springframework.boot:spring-boot-starter-mustache'
 
+    //pagehelper
+    implementation group: 'com.github.pagehelper', name: 'pagehelper-spring-boot-starter', version: '1.2.10'
+
+    //ncloud object storage
+    implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.1000')
+    implementation 'com.amazonaws:aws-java-sdk-s3'
+
+    //lucy xss filter (admin page 내 xss filter 사용 시 form-data에 대한 filtering 처리만으로 유효함)
+    implementation group: 'com.navercorp.lucy', name: 'lucy-xss-servlet', version: '2.0.0'
+
 }
 
 //logging - Spring boot starter는 기본적으로 logback logging을 사용하므로 log4j2사용을 위해 exclude 처리

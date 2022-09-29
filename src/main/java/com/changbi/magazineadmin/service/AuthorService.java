@@ -19,15 +19,24 @@ public class AuthorService {
         return authorRepository.selectAuthorAll();
     }
 
-    public Author selectAuthorById(int authorId) {
-        return authorRepository.selectAuthorById(authorId);
+    public Author selectAuthorById(int authorSeq) {
+        return authorRepository.selectAuthorById(authorSeq);
     }
 
     public int insertAuthor(Author author) {
         return authorRepository.insertAuthor(author);
     }
 
-    public int updateAuthor(Author author) {
+    public int updateAuthor(int authorSeq, Author author) {
+        author.setAuthorSeq(authorSeq);
         return authorRepository.updateAuthor(author);
+    }
+
+    public List<Author> selectAuthorByKeyword(String keyword) {
+        return authorRepository.selectAuthorByKeyword(keyword);
+    }
+
+    public int deleteAuthor(int authorSeq) {
+        return authorRepository.deleteAuthor(authorSeq);
     }
 }

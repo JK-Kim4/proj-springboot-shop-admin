@@ -9,9 +9,13 @@ import java.util.List;
 public interface AuthorRepository {
     List<Author> selectAuthorAll();
 
-    Author selectAuthorById(int authorId);
+    Author selectAuthorById(int authorSeq);
 
     int insertAuthor(Author author);
 
     int updateAuthor(Author author);
+
+    List<Author> selectAuthorByKeyword(String keyword);
+
+    int deleteAuthor(int authorSeq);
 }

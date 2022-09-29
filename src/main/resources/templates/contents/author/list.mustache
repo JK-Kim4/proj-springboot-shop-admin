@@ -11,6 +11,7 @@
                 <div class="card">
                     <div class="card-header">
                         <button class="btn btn-primary" onclick="location.href='/author/insert'"> 저자 등록 </button>
+                        <input class="align-self-end" type="text" name="searchKeyword" id="searchKeyword" ><button id="searchBtn">저자 검색</button>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -22,37 +23,25 @@
                                     <th class="col-md-1"> 등록일 </th>
                                     <th class="col-md-1"> 수정일 </th>
                                 </thead>
-                                <tbody>
-                                {{#authors}}
-                                    <tr>
-                                        {{#authorSeq}}<td class="col-md-1">{{authorSeq}}</td>{{/authorSeq}}
-                                        {{^authorSeq}}<td class="col-md-1"> - </td>{{/authorSeq}}
-
-                                        {{#authorKrName}}<td class="col-md-1">{{authorKrName}}</td>{{/authorKrName}}
-                                        {{^authorKrName}}<td class="col-md-1"> - </td>{{/authorKrName}}
-
-                                        {{#useYn}}<td class="col-md-1">{{useYn}}</td>{{/useYn}}
-                                        {{^useYn}}<td class="col-md-1"> - </td>{{/useYn}}
-
-                                        {{#appendDate}}<td class="col-md-1">{{appendDate}}</td>{{/appendDate}}
-                                        {{^appendDate}}<td class="col-md-1"> - </td>{{/appendDate}}
-
-                                        {{#updateDate}}<td class="col-md-1">{{updateDate}}</td>{{/updateDate}}
-                                        {{^updateDate}}<td class="col-md-1"> - </td>{{/updateDate}}
-
-                                    </tr>
-                                {{/authors}}
-                                {{^authors}}
-                                    <tr>
-                                        <td colspan="7"> 등록된 저자가 없습니다. </td>
-                                    </tr>
-                                {{/authors}}
+                                <tbody id="authorList">
                                 </tbody>
                             </table>
+
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination" id="pagingNav">
+                                </ul>
+                            </nav>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+    <script src="/js/author.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function (){
+            main.getAuthorList(1,10);
+        });
+    </script>
 {{>layouts/footer}}

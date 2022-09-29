@@ -12,6 +12,7 @@ public class Author {
     private String authorKrName;
     private String authorContent;
     private String authorThumbnailImage;
+    private String authorThumbnailImageFileName;
     private LocalDateTime appendDate;
     private LocalDateTime updateDate;
     private int appendUser;
