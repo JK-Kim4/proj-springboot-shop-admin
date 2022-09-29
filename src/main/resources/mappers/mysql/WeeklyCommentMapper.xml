@@ -12,6 +12,24 @@
         ORDER BY WEEKLY_SEQ DESC
     </select>
 
+    <select id="selectWeeklyCommentAuthor" parameterType="int" resultType="WeeklyMeta">
+        SELECT
+            A.AUTHOR_SEQ
+            ,B.AUTHOR_KR_NAME
+        FROM AUTHOR_WEEKLY A
+        INNER JOIN AUTHOR B
+        ON A.AUTHOR_SEQ = B.AUTHOR_SEQ
+        WHERE A.WEEKLY_SEQ = #{weeklySeq}
+    </select>
+
+    <select id="selectWeeklyCommentBySeq" parameterType="int" resultType="weeklyComment">
+        <![CDATA[
+        SELECT *
+        FROM WEEKLY_COMMENT
+        WHERE WEEKLY_SEQ = #{weeklySeq}
+        ]]>
+    </select>
+
     <insert id="insertWeeklyComment" parameterType="weeklyComment"
             useGeneratedKeys="true" keyProperty="weeklySeq" keyColumn="WEEKLY_SEQ">
     <![CDATA[
@@ -39,7 +57,7 @@
     ]]>
     </insert>
 
-    <insert id="insertWeeklyAuthor" parameterType="authMeta">
+    <insert id="insertWeeklyAuthor" parameterType="WeeklyMeta">
         <![CDATA[
         INSERT INTO AUTHOR_WEEKLY
         (

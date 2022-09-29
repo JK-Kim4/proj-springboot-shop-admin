@@ -10,5 +10,6 @@ public class WeeklyMeta {
 
     private int weeklySeq;
     private int authorSeq;
+    private String authorKrName;
 
 }

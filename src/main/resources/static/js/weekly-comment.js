@@ -8,6 +8,16 @@ let main = {
             _this.insert();
         });
 
+        $("#searchBtn").on('click', function (){
+            let keyword = $("#searchKeyword").val();
+            if(keyword == '' || keyword == undefined){
+                alert("검색어를 입력해 주세요.");
+                return;
+            }
+            _this.getWeeklyListByKeyword(keyword, 1, 10);
+
+        });
+
 
         /*이미지 업로드*/
         $("#uploadBtn").on("click", function (){
@@ -220,6 +230,168 @@ let main = {
             error : function (x, h, r){
                 alert("시스템 에러 발생. 지속적인 오류 발생 시 관리자에게 문의해 주세요");
                 location.reload();
+            }
+        });
+    },
+    getWeeklyList : function (pageNum, pageSize){
+
+        $.ajax({
+            url : "/weeklyComment/weeklyComments",
+            method : "POST",
+            dataType : "json",
+            data : {
+                pageNum : pageNum,
+                pageSize : pageSize
+            },
+            success : function (result){
+                let html = "";
+                if(result.list.length > 0){
+                    html = main.drawWeeklyList(result.list);
+                }else{
+                    html = "<tr><td colspan='4' style='text-align: center;'> 등록된 주간논평이 없습니다.</td></tr>"
+                }
+
+                $("#weeklyCommentList").html(html);
+
+                html = "";
+
+                /*pagination*/
+                if(result.prePage == 0){
+                    html += "<li class='page-item disable' ><a class='page-link'>Previous</a></li>"
+                }else{
+                    html += "<li class='page-item'><a class='page-link' onclick='main.getWeeklyList("+result.prePage+", 10)'>Previous</a></li>"
+                }
+
+                if(result.navigatepageNums.length > 0){
+                    for(let i = result.navigateFirstPage; i <= result.navigateLastPage; i++){
+                        if(result.pageNum == i){
+                            html += "<li class='page-item active'><a class='page-link' onclick='main.getWeeklyList("+i+", 10)'>"+i+"</a></li>"
+                        }else{
+                            html += "<li class='page-item'><a class='page-link' onclick='main.getWeeklyList("+i+", 10)'>"+i+"</a></li>"
+                        }
+                    }
+                }
+                if(result.nextPage == 0){
+                    html += "<li class='page-item disable' ><a class='page-link'>Next</a></li>"
+                }else{
+                    html += "<li class='page-item'><a class='page-link' onclick='main.getWeeklyList("+result.nextPage+", 10)'>Next</a></li>"
+                }
+                $("#pagingNav").html(html);
+            },
+            error : function (x, h, r){
+                console.log(x);
+            }
+        });
+    },
+    drawWeeklyList : function (data){
+        let html = "";
+        $.each(data, function (index, item){
+            html += "<tr>" +
+                "<td class='col-md-1'>"+item.weeklySeq+"</td>" +
+                "<td class='col-md-4'><a href='/weeklyComment/update/"+item.weeklySeq+"'>"+item.weeklyTitle+"</a></td>" +
+                "<td class='col-md-1'>"+item.useYn+"</td>" +
+                "<td class='col-md-1'>"+item.appendDate+"</td>" +
+                "<td class='col-md-1'>"+item.updateDate+"</td>" +
+                "<td class='col-md-1'>"+item.viewCount+"</td>" +
+                "</tr>";
+        });
+        return html;
+    },
+    getWeeklyListByKeyword : function (keyword, pageNum, pageSize){
+        $.ajax({
+            url : "/book/search/" +keyword,
+            method : "POST",
+            dataType: "json",
+            data : {
+                pageNum : pageNum,
+                pageSize : pageSize
+            },
+            success : function (result){
+
+                let html = main.drawBookList(result.list);
+                $("#weeklyCommentList").html(html);
+
+                html = "";
+                if(result.prePage == 0){
+                    html += "<li class='page-item disable' ><a class='page-link'>Previous</a></li>"
+                }else{
+                    html += "<li class='page-item'><a class='page-link' onclick='main.getWeeklyListByKeyword("+'"'+keyword+'"'+","+result.prePage+", 10)'>Previous</a></li>"
+                }
+
+                if(result.navigatepageNums.length > 0){
+                    for(let i = result.navigateFirstPage; i <= result.navigateLastPage; i++){
+                        if(result.pageNum == i){
+                            html += "<li class='page-item active'><a class='page-link' onclick='main.getWeeklyListByKeyword("+'"'+keyword+'"'+","+i+", 10)'>"+i+"</a></li>"
+                        }else{
+                            html += "<li class='page-item'><a class='page-link' onclick='main.getWeeklyListByKeyword("+'"'+keyword+'"'+","+i+", 10)'>"+i+"</a></li>"
+                        }
+                    }
+                }
+                if(result.nextPage == 0){
+                    html += "<li class='page-item disable' ><a class='page-link'>Next</a></li>"
+                }else{
+                    html += "<li class='page-item'><a class='page-link' onclick='main.getWeeklyListByKeyword("+'"'+keyword+'"'+","+result.nextPage+", 10)'>Next</a></li>"
+                }
+
+                $("#pagingNav").html(html);
+            },
+            error : function (x,h,r){
+                console.log(x);
+            }
+        });
+    },
+    getWeeklyData : function (weeklySeq){
+        $.ajax({
+            url : "/weeklyComment/"+weeklySeq,
+            method : "GET",
+            dataType: 'json',
+            success : function (result){
+
+                $("#inputTitle").val(result.weeklyTitle);
+                $("#inputSubtitle").val(result.weeklySubtitle);
+                //content
+                $("#inputContent").val(result.weeklyContent);
+                //useYn
+                if(result.useYn == 1){
+                    $("#useY").prop("checked", true);
+                }else{
+                    $("#useN").prop("checked", true);
+                }
+
+
+                $("#weeklyThumbnailImage").val(result.weeklyThumbnailImage);
+                $("#weeklyThumbnailImageFileName").val(result.weeklyThumbnailImageFileName);
+
+                $("#uploadedImg").val('업로드 자료 : ' +result.weeklyThumbnailImageFileName);
+
+            },
+            error : function (x,h,r){
+                console.log(x);
+            }
+        });
+    },
+    getAuthData : function (weeklySeq){
+        $.ajax({
+            url : "/weeklyComment/authorMeta/"+weeklySeq,
+            method : "GET",
+            dataType: "json",
+            success : function (result){
+
+                console.log(result);
+
+                let html = "";
+                if(result != null && result.length > 0){
+                    authCnt = result.length;
+                    result.forEach((element,index) => {
+                        $("#inputAuthSearch").append("<span>"+element.authorKrName+", </span>");
+                        html += "<input type='hidden' id='inputCode"+(index+1)+"_01' value='"+element.authorSeq+"'>";
+                    });
+                    $("#inputAuthSearch").append(html);
+                }
+            },
+            error : function (x,h,r){
+                console.log(x);
+                alert("시스템 에러 발생 : 저자 조회");
             }
         });
     }

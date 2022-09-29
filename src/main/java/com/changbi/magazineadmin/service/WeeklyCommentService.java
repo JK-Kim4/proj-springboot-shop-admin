@@ -17,7 +17,6 @@ public class WeeklyCommentService {
     private final WeeklyCommentRepository weeklyCommentRepository;
 
     public List<WeeklyComment> selectWCAll() {
-
         return weeklyCommentRepository.selectWCAll();
     }
 
@@ -52,5 +51,13 @@ public class WeeklyCommentService {
             throw new NullPointerException();
         }
 
+    }
+
+    public List<WeeklyMeta> selectWeeklyCommentAuthor(int weeklySeq) {
+        return weeklyCommentRepository.selectWeeklyCommentAuthor(weeklySeq);
+    }
+
+    public WeeklyComment selectWeeklyCommentBySeq(int weeklySeq) {
+        return weeklyCommentRepository.selectWeeklyCommentBySeq(weeklySeq);
     }
 }

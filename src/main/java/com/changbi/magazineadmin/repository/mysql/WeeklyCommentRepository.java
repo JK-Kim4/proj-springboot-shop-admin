@@ -11,4 +11,8 @@ public interface WeeklyCommentRepository {
     int insertWeeklyComment(WeeklyComment weeklyComment);
 
     int insertWeeklyAuthor(List<WeeklyMeta> authList);
+
+    List<WeeklyMeta> selectWeeklyCommentAuthor(int weeklySeq);
+
+    WeeklyComment selectWeeklyCommentBySeq(int weeklySeq);
 }
