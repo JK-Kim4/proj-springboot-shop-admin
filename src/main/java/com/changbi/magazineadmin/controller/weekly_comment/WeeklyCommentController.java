@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,17 +18,22 @@ public class WeeklyCommentController {
 
     @GetMapping("/list")
     public String listPage(Model model){
-
-        List<WeeklyComment> weeklyComments = weeklyCommentService.selectWCAll();
-        if(weeklyComments != null && weeklyComments.size() > 0){
-            model.addAttribute("weeklyComments", weeklyComments);
-        }
-
         return "/contents/weekly-comment/list";
     }
 
     @GetMapping("/insert")
     public String insertPage(Model model){
         return "/contents/weekly-comment/insert";
+    }
+
+    @GetMapping("/update")
+    public String updatePage() {
+        return "/contents/weekly-comment/update";
+    }
+
+    @PostMapping("/insert")
+    @ResponseBody
+    public int insert(@RequestParam WeeklyComment weeklyComment){
+        return weeklyCommentService.insertWeeklyComment(weeklyComment);
     }
 }

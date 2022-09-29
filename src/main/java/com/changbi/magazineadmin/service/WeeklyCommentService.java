@@ -19,4 +19,8 @@ public class WeeklyCommentService {
 
         return weeklyCommentRepository.selectWCAll();
     }
+
+    public int insertWeeklyComment(WeeklyComment weeklyComment) {
+        return 0;
+    }
 }

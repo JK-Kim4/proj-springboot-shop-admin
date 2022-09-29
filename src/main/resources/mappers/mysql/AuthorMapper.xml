@@ -30,15 +30,37 @@
 
     <insert id="insertAuthor" parameterType="author">
         INSERT INTO AUTHOR
-            (AUTHOR_KR_NAME, AUTHOR_CONTENT, AUTHOR_THUMBNAIL_IMAGE,AUTHOR_THUMBNAIL_IMAGE_FILE_NAME, APPEND_DATE, UPDATE_DATE, USE_YN)
+            (
+             AUTHOR_KR_NAME,
+             AUTHOR_CH_NAME,
+             AUTHOR_EN_NAME,
+             AUTHOR_CONTENT,
+             AUTHOR_THUMBNAIL_IMAGE,
+             AUTHOR_THUMBNAIL_IMAGE_FILE_NAME,
+             APPEND_DATE,
+             UPDATE_DATE,
+             USE_YN
+             )
         VALUES
-            (#{authorKrName}, #{authorContent}, #{authorThumbnailImage},#{authorThumbnailImageFileName},NOW(), NOW(), #{useYn})
+            (
+             #{authorKrName},
+             #{authorChName},
+             #{authorEnName},
+             #{authorContent},
+             #{authorThumbnailImage},
+             #{authorThumbnailImageFileName},
+             NOW(),
+             NOW(),
+             #{useYn}
+             )
     </insert>
 
     <update id="updateAuthor" parameterType="author">
         UPDATE AUTHOR
         SET
             AUTHOR_KR_NAME = #{authorKrName},
+            AUTHOR_CH_NAME = #{authorChName},
+            AUTHOR_EN_NAME = #{authorEnName},
             AUTHOR_THUMBNAIL_IMAGE = #{authorThumbnailImage},
             AUTHOR_THUMBNAIL_IMAGE_FILE_NAME = #{authorThumbnailImageFileName},
             AUTHOR_CONTENT = #{authorContent},

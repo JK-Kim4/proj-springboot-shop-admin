@@ -10,6 +10,8 @@ public class Author {
     private int authorSeq;
     private int authorOrgSeq;
     private String authorKrName;
+    private String authorChName;
+    private String authorEnName;
     private String authorContent;
     private String authorThumbnailImage;
     private String authorThumbnailImageFileName;

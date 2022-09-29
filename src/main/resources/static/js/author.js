@@ -40,6 +40,8 @@ let main = {
 
         //TODO : 필수 데이터 검증
         let krName = $("#inputKrNm").val();
+        let chName = $("#inputChNm").val();
+        let enName = $("#inputEnNm").val();
         let useYn = $(':radio[name="inputYn"]:checked').val();
         let content = $("#inputContent").val();
 
@@ -50,6 +52,8 @@ let main = {
 
         let data = {
             authorKrName : krName,
+            authorChName : chName,
+            authorEnName : enName,
             useYn : useYn,
             authorContent : content
         }
@@ -85,6 +89,8 @@ let main = {
         //TODO : 필수 데이터 검증
         let authorSeq = $("#authorSeq").val();
         let krName = $("#inputKrNm").val();
+        let chName = $("#inputChNm").val();
+        let enName = $("#inputEnNm").val();
         let useYn = $(':radio[name="inputYn"]:checked').val();
         let content = $("#inputContent").val();
 
@@ -96,6 +102,8 @@ let main = {
 
         let data = {
             authorKrName : krName,
+            authorChName : chName,
+            authorEnName : enName,
             useYn : useYn,
             authorContent : content
         }
@@ -220,16 +228,12 @@ let main = {
                 pageSize : pageSize
             },
             success : function (result){
-
-                console.log("저자 데이터 조회 성공 " + result)
-
                 let html = "";
-
                 if(result.list.length > 0){
                     /*저자 데이터*/
                     html = main.drawAuthorListData(result.list);
                 }else{
-                    html = "<tr><td colspan='5' style='text-align: center;'> 등록된 저자가 없습니다.</td></tr>"
+                    html = "<tr><td colspan='7' style='text-align: center;'> 등록된 저자가 없습니다.</td></tr>"
                 }
 
                 $("#authorList").html(html);
@@ -271,6 +275,8 @@ let main = {
             html += "<tr>" +
                 "<td class='col-md-1'>"+item.authorSeq+"</td>" +
                 "<td class='col-md-1'><a href='/author/update/"+item.authorSeq+"'>"+item.authorKrName+"</a></td>" +
+                "<td class='col-md-1'>"+item.authorChName+"</td>" +
+                "<td class='col-md-1'>"+item.authorEnName+"</td>" +
                 "<td class='col-md-1'>"+item.useYn+"</td>" +
                 "<td class='col-md-1'>"+item.appendDate+"</td>" +
                 "<td class='col-md-1'>"+item.updateDate+"</td>" +
