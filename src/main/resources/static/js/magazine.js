@@ -2,7 +2,151 @@ main = {
     init : function (){
         let _this = this;
 
+        /*등록*/
+        $("#magazineInsertBtn").on("click", function (){
+           _this.insert();
+        });
 
+        /*파일업로드*/
+        $("#uploadBtn").on("click", function (){
+            $('#loading').show();
+            _this.upload();
+        });
+
+        /*기사 헤드 타이틀 추가*/
+        $("#addArticleHeadBtn").on("click", function (){
+            let html = "";
+            html += "<div class='form-group row mt-2'>" +
+                        "<div class='col-8'>" +
+                            "<textarea class='form-control' id='inputArticleHead"+(articleCnt+1)+"' rows='5' ></textarea>" +
+                        "</div>"+
+                            "<input type='text'> 노출 순서"+
+                            "<button type='button' class='btn btn-danger col-sm-2 articleHeadRemoveBtn' style='max-height: 35px;' >삭제</button>" +
+                    "</div>";
+            articleCnt++;
+            $("#articleHeadDiv").append(html);
+
+            $(".articleHeadRemoveBtn").on("click", function (){
+                $(this).prev().remove(); // remove the textbox
+                $(this).remove(); // remove the button
+                articleCnt--;
+            });
+        });
+
+    },
+    insert : function (){
+        //입력값
+        //사용여부
+        let useYn = $(":radio[name=inputUseYn]:checked").val();
+        //주간논평 제목
+        let title = $("#inputTitle").val();
+        let category = $("select[name=inputCategory] option:selected").val();
+        let year = $("select[name=inputYear] option:selected").val();
+        let season= $("select[name=inputSeason] option:selected").val();
+        let volume = $("#inputVolume").val();
+        //주간논평 본문
+        let content = CKEDITOR.instances['inputContent'].getData();
+        //섬네일 이미지
+        let magazineThumbnailImage = $("#magazineThumbnailImage").val();
+        let magazineThumbnailImageFileName = $("#magazineThumbnailImageFileName").val();
+
+        /*입력 데이터 검증*/
+        if(title == '' || title == undefined){
+            alert("본문 제목을 입력해 주세요. (필수 항목)");
+            $("#inputTitle").focus();
+            return;
+        }else if(content == '' || content == undefined){
+            alert("내용을 입력해 주세요. (필수 항목)");
+            $("#inputContent").focus();
+            return;
+        }else if((year == '' || year == undefined) ||
+                    (season == '' || season == undefined) ||
+                        (volume == '' || volume == undefined)){
+            alert("계간지 발간 정보를 입력해 주세요.");
+            $("select[name=inputYear]").focus();
+            return;
+        };
+
+        let data = {
+            useYn : useYn,
+            magazineTitle : title,
+            magazineContent : content,
+            magazineVolume : volume,
+            magazineYear : year,
+            magazineSeason : season,
+            magazineThumbnailImage : magazineThumbnailImage,
+            magazineThumbnailImageFileName : magazineThumbnailImageFileName
+        };
+
+        //저자 List
+        if(articleCnt > 0){
+            let articleHeadArray = [];
+            for(let i = 1; i <= articleCnt; i ++ ){
+                if($("#inputCode"+i+"_01").val() != undefined){
+                    articleHeadArray.push({authorSeq : $("#inputCode"+i+"_01").val(), weeklySeq : 0});
+                }
+            }
+            data.articleHeadArray = authArray;
+        };
+
+
+    },
+    upload : function (){
+
+        let inputFile = $("#inputFile")[0].files[0];
+        let formData = new FormData();
+        let html = "";
+
+        if(inputFile == null || inputFile == undefined){
+            alert("업로드할 파일을 선택해 주세요");
+            return;
+        }
+
+        new Compressor(inputFile, {
+            quality: 0.8,
+            convertSize : 5000000,
+            success : function (result){
+                formData.append("files", new File([result], inputFile.name));
+                $.ajax({
+                    type : "POST",
+                    url : "/file/upload/image",
+                    enctype : "multipart/form-data",
+                    data : formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success : function (data){
+
+                        if(data.resultCd = '0000'){
+                            alert("파일 업로드 성공 : " + data.resultMsg);
+
+                            $('#loading').hide();
+                            $("#uploadImgBtn").hide();
+                            $("#magazineThumbnailImage").val(data.resultMsg);
+                            $("#magazineThumbnailImageFileName").val(data.orgFileNm);
+                            $("#uploadValid").val("Y");
+                            html += "<img src='" + data.resultMsg + "' alt='uploadImage' style='max-width: 150px;'>";
+                            $("#imgControl").html(html);
+                        }else{
+                            alert("파일 업로드 실패, 다시 시도해 주세요.");
+                            $("#uploadValid").val("N");
+                            $("#magazineThumbnailImage").val("");
+                            $("#magazineThumbnailImageFileName").val("");
+                        }
+                    },
+                    error : function (data){
+                        alert("시스템 에러 발생. 지속적인 오류 발생 시 관리자에게 문의해 주세요");
+                        $("#uploadValid").val("N");
+                        $("#magazineThumbnailImage").val("");
+                        $("#magazineThumbnailImageFileName").val("");
+                    }
+                });
+            },
+            error : function (){
+                console.log('resize error');
+                return;
+            }
+        });
     },
     getMagazineList : function (pageNum, pageSize){
         $.ajax({
@@ -73,6 +217,21 @@ main = {
                     "</tr>";
         });
         return html;
+    },
+    getMagazineYears : function (){
+        try{
+            for(let i = 1965; i <= 2050; i++){
+                $("#inputYear").append("<option value='"+i+"'>"+i+"</option>");
+            }
+            return true;
+        }catch (e){
+            return false;
+        }
+    },
+    selectNowYear : function (){
+        let now = new Date();
+        let year = now.getFullYear();
+        $("#inputYear").val(year).attr("selected", "selected");
     }
 }
 

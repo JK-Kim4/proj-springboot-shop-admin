@@ -23,6 +23,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-md-3 form-check-inline">
                                 <label for="inputUseYn">노출 여부</label>
@@ -41,16 +42,68 @@
                                 </fieldset>
                             </div>
                             <div class="col-md-3 form-check-inline">
-                                <select name="inputCategory" required>
-                                    <option value="1" selected> 계간 창작과비평 </option>
-                                    <option value="2" > 계간 창비어린이 </option>
-                                    <option value="3" > 계간 창작과비평 L </option>
-                                </select>
+                                <label for="inputCategory">카테고리</label>
+                                <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                                <div class="form-group">
+                                    <select name="inputCategory" id="inputCategory"required>
+                                        <option value="1" selected> 계간 창작과비평 </option>
+                                        <option value="2" > 계간 창비어린이 </option>
+                                        <option value="3" > 계간 창작과비평 L </option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3 form-check-inline">
+                                <label for="inputInformation">계간지 정보</label>
+                                <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-1">
+                                <select class="form-control" name="inputYear" id="inputYear">
+                                    <script type="text/javascript">
+                                        $(document).ready(function (){
+                                            if(main.getMagazineYears()){
+                                                main.selectNowYear();
+                                            }
+                                        });
+                                    </script>
+                                </select>
+                            </div>
+                            <div class="col-md-1">년</div>
+                            <div class="col-md-1">
+                                <select class="form-control" name="inputSeason" id="inputSeason">
+                                    <option value="1">봄</option>
+                                    <option value="2">여름</option>
+                                    <option value="3">가을</option>
+                                    <option value="4">겨울</option>
+                                </select>
+                            </div>
+                            <div class="col-md-1"> </div>
+                            <div class="col-md-1">
+                                <input type="text" class="form-control" name="inputVolume" id="inputVolume" placeholder="호수">
+                            </div>
+                            <div class="col-md-1">
+                                <span>호</span>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row">
+                            <div class="form-group mb-3">
+                                <label for="inputContent"> 계간지 본문 </label>
+                                <textarea class="form-control" id="inputContent" rows="13"></textarea>
+                            </div>
+                        </div>
+
                         <div class="form-group mb-3">
-                            <label for="inputContent"> 계간지 본문 </label>
-                            <textarea class="form-control" id="inputContent" rows="13"></textarea>
+                            <label for="inputArticleHead"> 기사 헤드 타이틀 (Chapter)</label>
+                            <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                            <button type="button" id="addArticleHeadBtn">추가</button>
+                            <div class="form-group" id="articleHeadDiv"></div>
                         </div>
 
                         <!--표지 이미지 업로드 START-->
@@ -70,7 +123,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-primary" id="weeklyInsertBtn"> 등록 </button>
+                        <button class="btn btn-primary" id="magazineInsertBtn"> 등록 </button>
                         <button class="btn btn-dark" onclick="history.back();"> 취소 </button>
                     </div>
                 </div>
@@ -78,6 +131,9 @@
         </div>
     </main>
     <script type="text/javascript">
+
+        let articleCnt = 0;
+
         /*Ready Start*/
         $(function (){
             /*CKeditor - 계간지 상세*/
@@ -90,6 +146,7 @@
                 fontSize_defaultLabel: '12',
                 skin: 'office2013',
                 language: 'ko',
+                height: '350px'
             });
         });
         /*Ready End*/

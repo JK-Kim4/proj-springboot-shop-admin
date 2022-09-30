@@ -7,9 +7,7 @@ import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -43,5 +41,12 @@ public class MagazineController {
     public PageInfo<Magazine> selectMagazineAll(int pageNum, int pageSize){
         PageHelper.startPage(pageNum, pageSize);
         return PageInfo.of(magazineService.selectMagazineAll());
+    }
+
+    /*로직*/
+    @PostMapping("/insert")
+    @ResponseBody
+    public int insertMethod(@RequestBody Magazine magazine){
+        return magazineService.insertMagazine(magazine);
     }
 }

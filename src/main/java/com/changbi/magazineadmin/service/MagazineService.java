@@ -18,4 +18,8 @@ public class MagazineService {
     public List<Magazine> selectMagazineAll() {
         return magazineRepository.selectMagazineAll();
     }
+
+    public int insertMagazine(Magazine magazine) {
+        return magazineRepository.insertMagazine(magazine);
+    }
 }
