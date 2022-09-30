@@ -34,6 +34,9 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
+    //spring security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
     //DBMS:oracle
     runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
     implementation group: 'com.oracle.database.nls', name: 'orai18n', version: '21.5.0.0'
@@ -42,6 +45,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.1'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+
     //mybatis
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 

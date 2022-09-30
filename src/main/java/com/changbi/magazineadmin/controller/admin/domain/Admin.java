@@ -1,7 +1,69 @@
 package com.changbi.magazineadmin.controller.admin.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Collections;
 
 @Data
-public class Admin {
+@NoArgsConstructor
+public class Admin implements UserDetails {
+
+    private int adminSeq;
+    private String adminId;
+    private String adminPassword;
+    private String adminName;
+    private LocalDateTime appendDate;
+    private LocalDateTime updateDate;
+    private LocalDateTime passwordExpiredDate;
+    private int loginFailCount;
+    private boolean useYn;
+    private String adminRule;
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singletonList(new SimpleGrantedAuthority(this.adminRule));
+    }
+
+    @Override
+    public String getPassword() {
+        return this.adminPassword;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.adminId;
+    }
+
+    public String getUserNickName(){
+        return this.adminName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
 }
