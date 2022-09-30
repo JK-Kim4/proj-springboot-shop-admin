@@ -49,4 +49,11 @@ public class MagazineController {
     public int insertMethod(@RequestBody Magazine magazine){
         return magazineService.insertMagazine(magazine);
     }
+
+    /*로직*/
+    @PostMapping("/update")
+    @ResponseBody
+    public int updateMethod(@RequestBody Magazine magazine){
+        return magazineService.updateMagazine(magazine);
+    }
 }

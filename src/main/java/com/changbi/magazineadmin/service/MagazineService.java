@@ -45,6 +45,10 @@ public class MagazineService {
         return result;
     }
 
+    public int updateMagazine(Magazine magazine) {
+        return 0;
+    }
+
     private List<ArticleHead> setMagazineSeq(List<ArticleHead> param, int magazineSeq){
         if(param != null && param.size() > 0){
             for(int i = 0; i < param.size(); i++){
