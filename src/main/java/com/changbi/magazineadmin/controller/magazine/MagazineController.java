@@ -64,7 +64,7 @@ public class MagazineController {
     @GetMapping("/search/{searchKeyword}/{searchType}")
     @ResponseBody
     public PageInfo<Magazine> selectMagazineBySearch(@PathVariable("searchKeyword") String searchKeyword,
-                                                     @PathVariable(value = "searchType", required = false) String searchType,
+                                                     @PathVariable(value = "searchType", required = false) int searchType,
                                                      int pageNum, int pageSize){
 
         log.debug("searchType : " + searchType);
