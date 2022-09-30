@@ -84,7 +84,10 @@ let main = {
                         "           autoKrNm = '"+item.authorKrName+"'" +
                         ">" +
                         "<label for='"+item.authorSeq+"'>"+item.authorKrName+"</label></td>" +
-                        "<td><span>"+item.authorChName+"</span></td>";
+                        "<td><span>";
+                        if(item.authorChName != null) html += item.authorChName;
+                        else html += "-";
+                        html += "</span></td>";
                 });
                 $("#searchAuthResult").html(html);
 

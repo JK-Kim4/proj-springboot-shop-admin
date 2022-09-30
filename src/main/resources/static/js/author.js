@@ -275,8 +275,14 @@ let main = {
             html += "<tr>" +
                 "<td class='col-md-1'>"+item.authorSeq+"</td>" +
                 "<td class='col-md-1'><a href='/author/update/"+item.authorSeq+"'>"+item.authorKrName+"</a></td>" +
-                "<td class='col-md-1'>"+item.authorChName+"</td>" +
-                "<td class='col-md-1'>"+item.authorEnName+"</td>" +
+                "<td class='col-md-1'>";
+                    if(item.authorChName != null) html += item.authorChName;
+                    else html += "-";
+                html +="</td>" +
+                "<td class='col-md-1'>";
+                if(item.authorEnName != null) html += item.authorEnName;
+                else html += "-";
+                html +="</td>" +
                 "<td class='col-md-1'>"+item.useYn+"</td>" +
                 "<td class='col-md-1'>"+item.appendDate+"</td>" +
                 "<td class='col-md-1'>"+item.updateDate+"</td>" +
