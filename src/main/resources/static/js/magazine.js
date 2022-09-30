@@ -16,21 +16,30 @@ main = {
         /*기사 헤드 타이틀 추가*/
         $("#addArticleHeadBtn").on("click", function (){
             let html = "";
-            html += "<div class='form-group row mt-2'>" +
-                        "<div class='col-8'>" +
-                            "<textarea class='form-control' id='inputArticleHead"+(articleCnt+1)+"' rows='5' ></textarea>" +
-                        "</div>"+
-                            "<input type='text'> 노출 순서"+
-                            "<button type='button' class='btn btn-danger col-sm-2 articleHeadRemoveBtn' style='max-height: 35px;' >삭제</button>" +
-                    "</div>";
-            articleCnt++;
+            ++articleCnt;
+            html +=     "<div id='articleHead"+(articleCnt)+"' class='row'>" +
+                            "<span>"+articleCnt +". </span>" +
+                            "<div class='col-8'>" +
+                                "<input  class='form-control' type='text' id='inputArticleHead"+(articleCnt)+"_01' placeholder='헤드 타이틀을 입력해 주세요'>" +
+                            "</div>" +
+                            "<div class='col-2'>" +
+                                "<input class='form-control' type='number' id='inputArticleHead"+(articleCnt)+"_02' placeholder='노출 순서 설정'>"+
+                            "</div>" +
+                            "<div class='col-2'>"+
+                                "<button type='button' class='btn btn-danger articleHeadRemoveBtn' data-cnt='"+(articleCnt)+"' style='max-height: 35px;' >삭제</button>" +
+                            "</div>" +
+                        "</div>";
+
             $("#articleHeadDiv").append(html);
 
-            $(".articleHeadRemoveBtn").on("click", function (){
-                $(this).prev().remove(); // remove the textbox
-                $(this).remove(); // remove the button
+            $(".articleHeadRemoveBtn").off().on("click", function (){
+                $("#articleHead"+$(this).attr("data-cnt")).remove();
+                /*$(this).prev().prev().remove(); // remove the textbox
+                $(this).remove(); // remove the button*/
+                $(this).remove();
                 articleCnt--;
             });
+
         });
 
     },
@@ -78,17 +87,39 @@ main = {
             magazineThumbnailImageFileName : magazineThumbnailImageFileName
         };
 
-        //저자 List
+        //헤드 타이틀 List
         if(articleCnt > 0){
             let articleHeadArray = [];
             for(let i = 1; i <= articleCnt; i ++ ){
                 if($("#inputCode"+i+"_01").val() != undefined){
-                    articleHeadArray.push({authorSeq : $("#inputCode"+i+"_01").val(), weeklySeq : 0});
+                    articleHeadArray.push({articleHeadTitle : $("#inputArticleHead"+i+"_01").val(), ordered : $("#inputArticleHead"+i+"_02").val()});
                 }
             }
-            data.articleHeadArray = authArray;
+            data.articleHeadArray = articleHeadArray;
         };
 
+        $.ajax({
+            url : "/magazine/insert",
+            method : "POST",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data : JSON.stringify(data),
+            success : function (result){
+
+                if(result > 0){
+                    alert("계간지 등록 성공");
+                    location.href = "/magazine/list";
+                }else{
+                    alert("계간지 등록 실패");
+                    location.reload();
+                }
+
+            },
+            error : function (x, h, r){
+                alert("시스템 에러 발생. 지속적인 오류 발생 시 관리자에게 문의해 주세요");
+                location.reload();
+            }
+        });
 
     },
     upload : function (){

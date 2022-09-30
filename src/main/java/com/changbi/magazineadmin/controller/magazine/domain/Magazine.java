@@ -1,9 +1,12 @@
 package com.changbi.magazineadmin.controller.magazine.domain;
 
+import com.changbi.magazineadmin.controller.article.domain.ArticleHead;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -26,4 +29,5 @@ public class Magazine {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
+    private List<ArticleHead> articleHeadArray = new ArrayList<>();
 }
