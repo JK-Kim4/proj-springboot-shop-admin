@@ -92,12 +92,19 @@ main = {
         if(articleCnt > 0){
             let articleHeadArray = [];
             for(let i = 1; i <= articleCnt; i ++ ){
-                if($("#inputCode"+i+"_01").val() != undefined){
-                    articleHeadArray.push({articleHeadTitle : $("#inputArticleHead"+i+"_01").val(), ordered : $("#inputArticleHead"+i+"_02").val()});
+                if($("#inputArticleHead"+i+"_01").val() != undefined){
+                    if($("#inputArticleHead"+i+"_02").val() == '' || $("#inputArticleHead"+i+"_02").val() == undefined){
+                        alert("정렬 순서를 설정해 주세요");
+                        return
+                    }else{
+                        articleHeadArray.push({articleHeadTitle : $("#inputArticleHead"+i+"_01").val(), ordered : $("#inputArticleHead"+i+"_02").val()});
+                    }
                 }
             }
             data.articleHeadArray = articleHeadArray;
         };
+
+        console.log(data.articleHeadArray[0]);
 
         $.ajax({
             url : "/magazine/insert",

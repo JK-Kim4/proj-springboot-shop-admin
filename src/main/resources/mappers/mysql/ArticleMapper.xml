@@ -18,7 +18,7 @@
         (
             #{item.magazineSeq}
             ,#{item.articleHeadTitle}
-            ,#{ordered}
+            ,#{item.ordered}
         )
         ]]>
         </foreach>

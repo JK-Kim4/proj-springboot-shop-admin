@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -20,7 +19,7 @@ public class Magazine {
     private String magazineYear;
     private String magazineSeason;
     private String magazineThumbnailImage;
-    private String magazineThumbnailFileName;
+    private String magazineThumbnailImageFileName;
     private LocalDateTime appendDate;
     private LocalDateTime updateDate;
     private int appendUser;
@@ -29,5 +28,5 @@ public class Magazine {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
-    private List<ArticleHead> articleHeadArray = new ArrayList<>();
+    private List<ArticleHead> articleHeadArray;
 }
