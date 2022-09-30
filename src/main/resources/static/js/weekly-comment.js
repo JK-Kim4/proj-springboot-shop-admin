@@ -10,25 +10,12 @@ let main = {
 
         /*수정*/
         $("#weeklyUpdateBtn").on("click", function (){
-            let weeklySeq = $("#selectedWeeklySeq").val();
-            if(weeklySeq == '' || weeklySeq == null || weeklySeq == undefined){
-                alert("시스템 오류 발생. 관리자에게 문의해 주세요.");
-                return;
-            }else {
-                _this.update(weeklySeq);
-            }
+                _this.update();
         });
 
         /*삭제*/
         $("#weeklyDeleteBtn").on("click", function (){
-            let weeklySeq = $("#selectedWeeklySeq").val();
-            if(weeklySeq == '' || weeklySeq == null || weeklySeq == undefined){
-                alert("시스템 오류 발생. 관리자에게 문의해 주세요.");
-                return;
-            }else {
-                _this.delete(weeklySeq);
-            }
-
+            _this.delete();
         });
 
         /*검색*/
@@ -256,8 +243,14 @@ let main = {
             }
         });
     },
-    update : function (weeklySeq){
-//입력값
+    update : function (){
+
+        let weeklySeq = $("#selectedWeeklySeq").val();
+        if(weeklySeq == '' || weeklySeq == null || weeklySeq == undefined) {
+            alert("시스템 오류 발생. 관리자에게 문의해 주세요.");
+            return;
+        }
+        //입력값
         //사용여부
         let useYn = $(":radio[name=inputUseYn]:checked").val();
         //주간논평 제목
@@ -308,11 +301,11 @@ let main = {
             data : JSON.stringify(data),
             success : function (result){
 
-                if(result.resultCd == '0000'){
-                    alert(result.resultMsg);
+                if(result > 0){
+                    alert("주간논평 수정 완료");
                     location.reload();
                 }else{
-                    alert(result.resultMsg);
+                    alert("수정에 실패하였습니다. 다시 시도해주세요.");
                     location.reload();
                 }
 
@@ -323,7 +316,14 @@ let main = {
             }
         });
     },
-    delete : function (weeklySeq){
+    delete : function (){
+
+        let weeklySeq = $("#selectedWeeklySeq").val();
+        if(weeklySeq == '' || weeklySeq == null || weeklySeq == undefined){
+            alert("시스템 오류 발생. 관리자에게 문의해 주세요.");
+            return;
+        }
+
         $.ajax({
             url : "/weeklyComment/delete/"+weeklySeq,
             method : "POST",
@@ -332,7 +332,7 @@ let main = {
             success : function (result){
 
                 if(result > 0){
-                    alert("삭제가 완료되었습니다.");
+                    alert("주간논평 삭제 완료");
                     location.href = "/weeklyComment/list"
                 }else{
                     alert("삭제에 실패하였습니다. 다시 시도해 주세요");

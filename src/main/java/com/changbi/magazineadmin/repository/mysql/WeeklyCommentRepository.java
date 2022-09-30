@@ -19,4 +19,6 @@ public interface WeeklyCommentRepository {
     int deleteWeeklyAuthor(int weeklySeq);
 
     int updateWeeklyComment(WeeklyComment weeklyComment);
+
+    int deleteWeeklyComment(int weeklySeq);
 }

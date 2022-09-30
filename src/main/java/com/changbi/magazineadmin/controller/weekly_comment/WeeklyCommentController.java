@@ -76,4 +76,12 @@ public class WeeklyCommentController {
                             @RequestBody WeeklyComment weeklyComment){
         return weeklyCommentService.updateWeeklyComment(weeklyComment, weeklySeq);
     }
+
+    /*로직*/
+    @PostMapping("/delete/{weeklySeq}")
+    @ResponseBody
+    public int deleteMethod(@PathVariable("weeklySeq") int weeklySeq){
+        return weeklyCommentService.deleteWeeklyComment(weeklySeq);
+
+    }
 }

@@ -111,6 +111,7 @@
                             <!--file upload test-->
                             <div class="col-md-6">
                                 <label class="form-label" for="inputImage">섬네일 이미지</label>
+                                <input type="text" class="form-control" id="uploadedImg" disabled>
                                 <input type="file" class="form-control" id="inputFile" name="inputFile" >
                                 <input type="hidden" id="uploadValid" value="N">
                                 <input type="hidden" id="weeklyThumbnailImage" >
@@ -124,7 +125,7 @@
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-primary" id="weeklyUpdateBtn"> 수정 </button>
-                        <button class="btn btn-primary" id="weeklyDeleteBtn"> 삭제 </button>
+                        <button class="btn btn-danger" id="weeklyDeleteBtn"> 삭제 </button>
                         <button class="btn btn-dark" onclick="history.back();"> 취소 </button>
                     </div>
                 </div>

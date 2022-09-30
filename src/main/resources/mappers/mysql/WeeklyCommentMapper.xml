@@ -95,4 +95,9 @@
         WHERE WEEKLY_SEQ = #{weeklySeq}
     </delete>
 
+    <delete id="deleteWeeklyComment" parameterType="int">
+        DELETE FROM WEEKLY_COMMENT
+        WHERE WEEKLY_SEQ = #{weeklySeq}
+    </delete>
+
 </mapper>

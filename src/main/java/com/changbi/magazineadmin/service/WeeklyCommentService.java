@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,7 +30,6 @@ public class WeeklyCommentService {
             int genWeeklySeq = weeklyComment.getWeeklySeq();
 
             List<WeeklyMeta> authList = setWeeklyAuthor(weeklyComment.getAuthArray(), genWeeklySeq);
-
             result = weeklyCommentRepository.insertWeeklyAuthor(authList);
 
             return result;
@@ -46,11 +46,17 @@ public class WeeklyCommentService {
             for(int i = 0; i < param.size(); i++){
                 param.get(i).setWeeklySeq(weeklyId);
             }
-            return param;
         }else{
-            throw new NullPointerException();
+            List<WeeklyMeta> emptyList = new ArrayList<>();
+            WeeklyMeta noOne = WeeklyMeta.builder()
+                    .authorKrName("없음")
+                    .authorSeq(0)
+                    .weeklySeq(weeklyId)
+                    .build();
+            emptyList.add(noOne);
+            param = emptyList;
         }
-
+        return param;
     }
 
     public List<WeeklyMeta> selectWeeklyCommentAuthor(int weeklySeq) {
@@ -77,5 +83,9 @@ public class WeeklyCommentService {
             return result;
         }
 
+    }
+
+    public int deleteWeeklyComment(int weeklySeq) {
+        return weeklyCommentRepository.deleteWeeklyComment(weeklySeq);
     }
 }
