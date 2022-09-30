@@ -66,10 +66,10 @@ public class MagazineService {
         return param;
     }
 
-    public List<Magazine> selectMagazineBySearch(String keyword, String category) {
+    public List<Magazine> selectMagazineBySearch(String searchKeyword, String searchType) {
         SearchDto searchDto = SearchDto.builder()
-                .keyword(keyword)
-                .category(category)
+                .searchKeyword(searchKeyword)
+                .searchType(searchType)
                 .build();
         return magazineRepository.selectMagazineBySearch(searchDto);
     }

@@ -9,13 +9,13 @@ main = {
 
         /*검색*/
         $("#searchBtn").on('click', function (){
-            let keyword = $("#searchKeyword").val();
-            let category = $("#searchCategory").val();
-            if(keyword == '' || keyword == undefined){
+            let searchKeyword = $("#searchKeyword").val();
+            let searchType = $("#searchType").val();
+            if(searchKeyword == '' || searchKeyword == undefined){
                 alert("검색어를 입력해 주세요.");
                 return;
             }
-            _this.getMagazineListByKeyword(keyword, category,1, 10);
+            _this.getMagazineListByKeyword(searchKeyword, searchType,1, 10);
 
         });
 
@@ -276,9 +276,9 @@ main = {
             }
         });
     },
-    getMagazineListByKeyword : function (keyword, category, pageNum, pageSize){
+    getMagazineListByKeyword : function (searchKeyword, searchType, pageNum, pageSize){
         $.ajax({
-            url : "/magazine/search/" +keyword+ "/" +category,
+            url : "/magazine/search/" +searchKeyword+ "/" +searchType,
             method : "get",
             dataType: "json",
             data : {

@@ -8,12 +8,12 @@ import lombok.*;
 @Setter
 public class SearchDto {
 
-    private String keyword;
-    private String category;
+    private String searchKeyword;
+    private String searchType;
 
     @Builder
-    public SearchDto(String keyword, String category){
-        this.keyword = keyword;
-        this.category = category;
+    public SearchDto(String searchKeyword, String searchType){
+        this.searchKeyword = searchKeyword;
+        this.searchType = searchType;
     }
 }
