@@ -1,0 +1,56 @@
+{{>layouts/header}}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">계간지 관리</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="/index">홈</a></li>
+                <li class="breadcrumb-item active">계간지 목록</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-primary" onclick="location.href='/magazine/insert'"> 계간지 등록 </button>
+                        <input class="align-self-end" type="text" name="searchKeyword" id="searchKeyword" >
+                        <select name="searchCategory">
+                            <option disabled selected> 카테고리 분류 </option>
+                            <option value="0" > 전체 </option>
+                            <option value="1" > 계간 창작과비평 </option>
+                            <option value="2" > 계간 창비어린이 </option>
+                            <option value="3" > 계간 창작과비평 L </option>
+                        </select>
+                        <button id="searchBtn">계간지 검색</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th class="col-md-1"> 번호 </th>
+                                    <th class="col-md-1"> 카테고리 </th>
+                                    <th class="col-md-2"> 계간지 명 </th>
+                                    <th class="col-md-1"> 사용여부 </th>
+                                    <th class="col-md-1"> 등록일 </th>
+                                    <th class="col-md-1"> 수정일 </th>
+                                </thead>
+                                <tbody id="magazineList">
+                                </tbody>
+                            </table>
+
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination" id="pagingNav">
+                                </ul>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="/js/magazine.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function (){
+            main.getMagazineList(1,10);
+        });
+    </script>
+{{>layouts/footer}}
