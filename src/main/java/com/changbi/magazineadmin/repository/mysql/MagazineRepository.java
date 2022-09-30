@@ -1,7 +1,6 @@
 package com.changbi.magazineadmin.repository.mysql;
 
 import com.changbi.magazineadmin.controller.magazine.domain.Magazine;
-import com.changbi.magazineadmin.dto.SearchDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,5 +11,5 @@ public interface MagazineRepository {
 
     int insertMagazine(Magazine magazine);
 
-    List<Magazine> selectMagazineBySearch(SearchDto dto);
+    List<Magazine> selectMagazineBySearch(String searchKeyword);
 }

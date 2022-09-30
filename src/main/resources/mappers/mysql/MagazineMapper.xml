@@ -10,21 +10,11 @@
         ORDER BY MAGAZINE_SEQ DESC
     </select>
 
-    <select id="selectMagazineBySearch" parameterType="searchDto">
+    <select id="selectMagazineBySearch" parameterType="String" resultType="magazine">
         SELECT *
         FROM MAGAZINE
         WHERE 1=1
-        <if test="keyword != null and !keyword.equals('')">
-        AND MAGAZINE_TITLE LIKE CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test="category != null and !category.equals('')">
-            <if test="category = 0 or category.equals(0)">
-            AND 1=1
-            </if>
-            <if test="!category = 0 or !category.equals(0)">
-            AND MAGAZINE_CATEGORY_SEQ = #{category}
-            </if>
-        </if>
+        AND MAGAZINE_TITLE LIKE CONCAT('%', #{searchKeyword}, '%')
         ORDER BY MAGAZINE_SEQ DESC
     </select>
 

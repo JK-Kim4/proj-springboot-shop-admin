@@ -2,7 +2,6 @@ package com.changbi.magazineadmin.service;
 
 import com.changbi.magazineadmin.controller.article.domain.ArticleHead;
 import com.changbi.magazineadmin.controller.magazine.domain.Magazine;
-import com.changbi.magazineadmin.dto.SearchDto;
 import com.changbi.magazineadmin.repository.mysql.ArticleRepository;
 import com.changbi.magazineadmin.repository.mysql.MagazineRepository;
 import lombok.RequiredArgsConstructor;
@@ -67,10 +66,6 @@ public class MagazineService {
     }
 
     public List<Magazine> selectMagazineBySearch(String searchKeyword, String searchType) {
-        SearchDto searchDto = SearchDto.builder()
-                .searchKeyword(searchKeyword)
-                .searchType(searchType)
-                .build();
-        return magazineRepository.selectMagazineBySearch(searchDto);
+        return magazineRepository.selectMagazineBySearch(searchKeyword);
     }
 }

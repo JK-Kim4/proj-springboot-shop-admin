@@ -277,6 +277,10 @@ main = {
         });
     },
     getMagazineListByKeyword : function (searchKeyword, searchType, pageNum, pageSize){
+
+        console.log(searchKeyword);
+        console.log(searchType);
+
         $.ajax({
             url : "/magazine/search/" +searchKeyword+ "/" +searchType,
             method : "get",

@@ -66,6 +66,10 @@ public class MagazineController {
     public PageInfo<Magazine> selectMagazineBySearch(@PathVariable("searchKeyword") String searchKeyword,
                                                      @PathVariable(value = "searchType", required = false) String searchType,
                                                      int pageNum, int pageSize){
+
+        log.debug("searchType : " + searchType);
+        log.debug("searchKeyword : " + searchKeyword);
+
         PageHelper.startPage(pageNum, pageSize);
         return PageInfo.of(magazineService.selectMagazineBySearch(searchKeyword, searchType));
     }
