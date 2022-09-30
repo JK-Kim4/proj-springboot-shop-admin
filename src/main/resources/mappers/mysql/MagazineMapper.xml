@@ -17,7 +17,7 @@
         <if test='searchKeyword != null and (!searchKeyword.equals(""))'>
         AND MAGAZINE_TITLE LIKE CONCAT('%', #{searchKeyword}, '%')
         </if>
-        <if test='searchType != null and (!searchType.equals("")) and (!searchType.equals("0"))'>
+        <if test='searchType != null and searchType > 0'>
         AND MAGAZINE_CATEGORY_SEQ = #{searchType}
         </if>
         ORDER BY MAGAZINE_SEQ DESC

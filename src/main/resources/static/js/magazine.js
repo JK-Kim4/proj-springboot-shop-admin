@@ -11,10 +11,10 @@ main = {
         $("#searchBtn").on('click', function (){
             let searchKeyword = $("#searchKeyword").val();
             let searchType = $("#searchType").val();
-            if(searchKeyword == '' || searchKeyword == undefined){
+            /*if(searchKeyword == '' || searchKeyword == undefined){
                 alert("검색어를 입력해 주세요.");
                 return;
-            }
+            }*/
             _this.getMagazineListByKeyword(searchKeyword, searchType,1, 10);
 
         });
@@ -278,8 +278,6 @@ main = {
     },
     getMagazineListByKeyword : function (searchKeyword, searchType, pageNum, pageSize){
 
-        console.log(searchKeyword);
-        console.log(searchType);
 
         $.ajax({
             url : "/magazine/search/" +searchKeyword+ "/" +searchType,

@@ -11,5 +11,5 @@ public interface MagazineRepository {
 
     int insertMagazine(Magazine magazine);
 
-    List<Magazine> selectMagazineBySearch(String searchKeyword, String searchType);
+    List<Magazine> selectMagazineBySearch(String searchKeyword, int searchType);
 }

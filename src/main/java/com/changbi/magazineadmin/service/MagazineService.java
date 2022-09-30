@@ -66,7 +66,6 @@ public class MagazineService {
     }
 
     public List<Magazine> selectMagazineBySearch(String searchKeyword, int searchType) {
-        String type = String.valueOf(searchType);
-        return magazineRepository.selectMagazineBySearch(searchKeyword, type);
+        return magazineRepository.selectMagazineBySearch(searchKeyword, searchType);
     }
 }

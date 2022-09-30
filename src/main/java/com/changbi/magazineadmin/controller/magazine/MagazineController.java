@@ -63,13 +63,12 @@ public class MagazineController {
     /*로직*/
     @GetMapping("/search/{searchKeyword}/{searchType}")
     @ResponseBody
-    public PageInfo<Magazine> selectMagazineBySearch(@PathVariable("searchKeyword") String searchKeyword,
-                                                     @PathVariable(value = "searchType", required = false) int searchType,
+    public PageInfo<Magazine> selectMagazineBySearch(@PathVariable(name = "searchKeyword") String searchKeyword,
+                                                     @PathVariable(name = "searchType", required = false) Integer searchType,
                                                      int pageNum, int pageSize){
-
-        log.debug("searchType : " + searchType);
-        log.debug("searchKeyword : " + searchKeyword);
-
+        if(searchType == null){
+            searchType = 0;
+        }
         PageHelper.startPage(pageNum, pageSize);
         return PageInfo.of(magazineService.selectMagazineBySearch(searchKeyword, searchType));
     }
