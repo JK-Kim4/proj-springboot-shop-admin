@@ -79,6 +79,7 @@ main = {
         let data = {
             useYn : useYn,
             magazineTitle : title,
+            magazineCategorySeq : category,
             magazineContent : content,
             magazineVolume : volume,
             magazineYear : year,

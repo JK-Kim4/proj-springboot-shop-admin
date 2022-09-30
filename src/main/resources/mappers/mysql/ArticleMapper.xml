@@ -4,4 +4,23 @@
 
 <mapper namespace="com.changbi.magazineadmin.repository.mysql.ArticleRepository">
 
+    <insert id="insertArticleHead" parameterType="articleHead">
+        <![CDATA[
+        INSERT INTO ARTICLE_HEAD
+        (
+            MAGAZINE_SEQ
+            ,ARTICLE_HEAD_TITLE
+            ,ORDERED
+        )VALUES
+        ]]>
+        <foreach collection="list" item="item" separator=",">
+            <![CDATA[
+        (
+            #{item.magazineSeq}
+            ,#{item.articleHeadTitle}
+            ,#{ordered}
+        )
+        ]]>
+        </foreach>
+    </insert>
 </mapper>
