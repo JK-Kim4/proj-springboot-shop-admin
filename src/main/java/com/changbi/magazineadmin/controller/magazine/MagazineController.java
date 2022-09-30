@@ -7,6 +7,7 @@ import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -30,8 +31,9 @@ public class MagazineController {
     }
 
     /*페이지*/
-    @GetMapping("/update")
-    public String updatePage(){
+    @GetMapping("/update/{magazineSeq}")
+    public String updatePage(@PathVariable("magazineSeq") int magazineSeq, Model model){
+        model.addAttribute("magazineSeq", magazineSeq);
         return "/contents/magazine/update";
     }
 
@@ -51,9 +53,20 @@ public class MagazineController {
     }
 
     /*로직*/
-    @PostMapping("/update")
+    @PostMapping("/update/{magazineSeq}")
     @ResponseBody
-    public int updateMethod(@RequestBody Magazine magazine){
-        return magazineService.updateMagazine(magazine);
+    public int updateMethod(@PathVariable("magazineSeq") int magazineSeq,
+                            @RequestBody Magazine magazine){
+        return magazineService.updateMagazine(magazine, magazineSeq);
+    }
+
+    /*로직*/
+    @GetMapping("/search/{keyword}/{category}")
+    @ResponseBody
+    public PageInfo<Magazine> selectMagazineBySearch(@PathVariable("keyword") String keyword,
+                                                     @PathVariable(value = "category", required = false) String category,
+                                                     int pageNum, int pageSize){
+        PageHelper.startPage(pageNum, pageSize);
+        return PageInfo.of(magazineService.selectMagazineBySearch(keyword, category));
     }
 }

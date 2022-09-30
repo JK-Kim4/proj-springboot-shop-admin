@@ -10,6 +10,24 @@
         ORDER BY MAGAZINE_SEQ DESC
     </select>
 
+    <select id="selectMagazineBySearch" parameterType="searchDto">
+        SELECT *
+        FROM MAGAZINE
+        WHERE 1=1
+        <if test="keyword != null and !keyword.equals('')">
+        AND MAGAZINE_TITLE LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="category != null and !category.equals('')">
+            <if test="category = 0 or category.equals(0)">
+            AND 1=1
+            </if>
+            <if test="!category = 0 or !category.equals(0)">
+            AND MAGAZINE_CATEGORY_SEQ = #{category}
+            </if>
+        </if>
+        ORDER BY MAGAZINE_SEQ DESC
+    </select>
+
     <insert id="insertMagazine" parameterType="magazine"
             useGeneratedKeys="true" keyProperty="magazineSeq" keyColumn="MAGAZINE_SEQ">
         <![CDATA[

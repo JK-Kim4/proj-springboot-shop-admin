@@ -7,6 +7,18 @@ main = {
            _this.insert();
         });
 
+        /*검색*/
+        $("#searchBtn").on('click', function (){
+            let keyword = $("#searchKeyword").val();
+            let category = $("#searchCategory").val();
+            if(keyword == '' || keyword == undefined){
+                alert("검색어를 입력해 주세요.");
+                return;
+            }
+            _this.getMagazineListByKeyword(keyword, category,1, 10);
+
+        });
+
         /*파일업로드*/
         $("#uploadBtn").on("click", function (){
             $('#loading').show();
@@ -187,6 +199,34 @@ main = {
             }
         });
     },
+    getMagazine : function (magazineSeq){
+        $.ajax({
+            url : "/magazine/"+magazineSeq,
+            method : "GET",
+            dataType: 'json',
+            success : function (result){
+
+
+            },
+            error : function (x,h,r){
+                console.log(x);
+            }
+        });
+    },
+    getArticleHead : function (magazineSeq){
+        $.ajax({
+            url : "/article/head/"+magazineSeq,
+            method : "GET",
+            dataType: 'json',
+            success : function (result){
+
+
+            },
+            error : function (x,h,r){
+                console.log(x);
+            }
+        });
+    },
     getMagazineList : function (pageNum, pageSize){
         $.ajax({
             url : "/magazine/magazines",
@@ -232,6 +272,49 @@ main = {
                 $("#pagingNav").html(html);
             },
             error : function (x, h, r){
+                console.log(x);
+            }
+        });
+    },
+    getMagazineListByKeyword : function (keyword, category, pageNum, pageSize){
+        $.ajax({
+            url : "/magazine/search/" +keyword+ "/" +category,
+            method : "get",
+            dataType: "json",
+            data : {
+                pageNum : pageNum,
+                pageSize : pageSize
+            },
+            success : function (result){
+
+                let html = main.drawMagazineList(result.list);
+                $("#magazineList").html(html);
+
+                html = "";
+                if(result.prePage == 0){
+                    html += "<li class='page-item disable' ><a class='page-link'>Previous</a></li>"
+                }else{
+                    html += "<li class='page-item'><a class='page-link' onclick='main.getMagazineListByKeyword("+'"'+keyword+'"'+","+'"'+category+'"'+","+result.prePage+", 10)'>Previous</a></li>"
+                }
+
+                if(result.navigatepageNums.length > 0){
+                    for(let i = result.navigateFirstPage; i <= result.navigateLastPage; i++){
+                        if(result.pageNum == i){
+                            html += "<li class='page-item active'><a class='page-link' onclick='main.getMagazineListByKeyword("+'"'+keyword+'"'+","+'"'+category+'"'+","+i+", 10)'>"+i+"</a></li>"
+                        }else{
+                            html += "<li class='page-item'><a class='page-link' onclick='main.getMagazineListByKeyword("+'"'+keyword+'"'+","+'"'+category+'"'+","+i+", 10)'>"+i+"</a></li>"
+                        }
+                    }
+                }
+                if(result.nextPage == 0){
+                    html += "<li class='page-item disable' ><a class='page-link'>Next</a></li>"
+                }else{
+                    html += "<li class='page-item'><a class='page-link' onclick='main.getMagazineListByKeyword("+'"'+keyword+'"'+","+'"'+category+'"'+","+result.nextPage+", 10)'>Next</a></li>"
+                }
+
+                $("#pagingNav").html(html);
+            },
+            error : function (x,h,r){
                 console.log(x);
             }
         });
