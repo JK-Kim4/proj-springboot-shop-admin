@@ -12,4 +12,6 @@ public interface MagazineRepository {
     int insertMagazine(Magazine magazine);
 
     List<Magazine> selectMagazineBySearch(String searchKeyword, int searchType);
+
+    Magazine selectMagazineBySeq(int magazineSeq);
 }

@@ -68,4 +68,8 @@ public class MagazineService {
     public List<Magazine> selectMagazineBySearch(String searchKeyword, int searchType) {
         return magazineRepository.selectMagazineBySearch(searchKeyword, searchType);
     }
+
+    public Magazine selectMagazineBySeq(int magazineSeq) {
+        return magazineRepository.selectMagazineBySeq(magazineSeq);
+    }
 }

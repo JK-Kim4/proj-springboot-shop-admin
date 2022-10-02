@@ -46,6 +46,13 @@ public class MagazineController {
     }
 
     /*로직*/
+    @GetMapping("/magazine/{magazineSeq}")
+    @ResponseBody
+    public Magazine selectMagazineBySeq(@PathVariable(name = "magazineSeq") int magazineSeq){
+        return magazineService.selectMagazineBySeq(magazineSeq);
+    }
+
+    /*로직*/
     @PostMapping("/insert")
     @ResponseBody
     public int insertMethod(@RequestBody Magazine magazine){
