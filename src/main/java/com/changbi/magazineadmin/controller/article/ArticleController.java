@@ -2,7 +2,9 @@ package com.changbi.magazineadmin.controller.article;
 
 import com.changbi.magazineadmin.controller.article.domain.Article;
 import com.changbi.magazineadmin.controller.article.domain.ArticleHead;
+import com.changbi.magazineadmin.controller.magazine.domain.Magazine;
 import com.changbi.magazineadmin.service.ArticleService;
+import com.changbi.magazineadmin.service.MagazineService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ import java.util.List;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final MagazineService magazineService;
 
     /*페이지*/
     @GetMapping("/list")
@@ -29,7 +32,11 @@ public class ArticleController {
 
     /*페이지*/
     @GetMapping("/insert")
-    public String insertPage(){
+    public String insertPage(Model model){
+
+        List<Magazine> magazines = magazineService.selectMagazineAll();
+        model.addAttribute("magazines", magazines);
+
         return "/contents/article/insert";
     }
 
