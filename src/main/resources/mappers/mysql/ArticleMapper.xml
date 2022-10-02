@@ -29,4 +29,9 @@
         ]]>
         </foreach>
     </insert>
+
+    <delete id="deleteArticleHead">
+        DELETE FROM ARTICLE_HEAD
+        WHERE MAGAZINE_SEQ = #{magazineSeq}
+    </delete>
 </mapper>

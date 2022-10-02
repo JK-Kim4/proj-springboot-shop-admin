@@ -11,4 +11,6 @@ public interface ArticleRepository {
     int insertArticleHead(List<ArticleHead> articleHeads);
 
     List<ArticleHead> selectArticleHeadByMgSeq(int magazineSeq);
+
+    int deleteArticleHead(int magazineSeq);
 }

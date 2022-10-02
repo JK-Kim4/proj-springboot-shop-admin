@@ -222,8 +222,25 @@ main = {
         });
     },
     delete : function (){
+        let magazineSeq = $("#selectedMagazineSeq").val();
+        $.ajax({
+           url: "/magazine/delete/"+magazineSeq,
+           method: "POST",
+            success: function (result){
+               if(result > 0){
+                   alert("계간지 삭제 성공");
+                   location.href = "/magazine/list";
+               }else{
+                   alert("계간지 삭제 실패");
+                   location.reload();
+               }
 
-
+            },
+            error : function (x, h, r){
+               alert("시스템 오류 발생. 관리자에게 문의해 주세요.");
+               return;
+            }
+        });
     },
     upload : function (){
 

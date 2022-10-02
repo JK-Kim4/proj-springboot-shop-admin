@@ -73,4 +73,10 @@ public class MagazineService {
     public Magazine selectMagazineBySeq(int magazineSeq) {
         return magazineRepository.selectMagazineBySeq(magazineSeq);
     }
+
+    public int deleteMagazine(int magazineSeq) {
+
+        articleRepository.deleteArticleHead(magazineSeq);
+        return magazineRepository.deleteMagazine(magazineSeq);
+    }
 }

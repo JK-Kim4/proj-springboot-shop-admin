@@ -16,4 +16,6 @@ public interface MagazineRepository {
     Magazine selectMagazineBySeq(int magazineSeq);
 
     int updateMagazine(Magazine magazine);
+
+    int deleteMagazine(int magazineSeq);
 }
