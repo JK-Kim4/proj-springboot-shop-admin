@@ -2,6 +2,21 @@ package com.changbi.magazineadmin.controller.article.domain;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class Article {
+
+    private int articleSeq;
+    private int magazineSeq;
+    private int articleHeadSeq;
+    private String articleTitle;
+    private String articleContent;
+    private int ebookPage;
+    private int ordered;
+    private int viewCount;
+    private boolean useYn;
+    private LocalDateTime appendDate;
+    private LocalDateTime updateDate;
+
 }

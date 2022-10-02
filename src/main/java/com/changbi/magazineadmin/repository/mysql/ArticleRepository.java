@@ -1,5 +1,6 @@
 package com.changbi.magazineadmin.repository.mysql;
 
+import com.changbi.magazineadmin.controller.article.domain.Article;
 import com.changbi.magazineadmin.controller.article.domain.ArticleHead;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,4 +14,16 @@ public interface ArticleRepository {
     List<ArticleHead> selectArticleHeadByMgSeq(int magazineSeq);
 
     int deleteArticleHead(int magazineSeq);
+
+    List<Article> selectArticleAll();
+
+    Article selectArticleBySeq(int articleSeq);
+
+    int deleteArticle(int articleSeq);
+
+    int deleteArticlesByMgSeq(int magazineSeq);
+
+    int insertArticle(Article article);
+
+    int updateArticle(Article article);
 }
