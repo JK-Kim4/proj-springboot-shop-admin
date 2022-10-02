@@ -45,8 +45,9 @@ public class MagazineService {
         return result;
     }
 
-    public int updateMagazine(Magazine magazine, int megazineSeq) {
-        return 0;
+    public int updateMagazine(Magazine magazine, int magazineSeq) {
+        magazine.setMagazineSeq(magazineSeq);
+        return magazineRepository.updateMagazine(magazine);
     }
 
     private List<ArticleHead> setMagazineSeq(List<ArticleHead> param, int magazineSeq){

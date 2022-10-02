@@ -4,6 +4,12 @@
 
 <mapper namespace="com.changbi.magazineadmin.repository.mysql.ArticleRepository">
 
+    <select id="selectArticleHeadByMgSeq" resultType="articleHead">
+        SELECT *
+        FROM ARTICLE_HEAD
+        WHERE MAGAZINE_SEQ = #{magazineSeq}
+    </select>
+
     <insert id="insertArticleHead" parameterType="articleHead">
         <![CDATA[
         INSERT INTO ARTICLE_HEAD

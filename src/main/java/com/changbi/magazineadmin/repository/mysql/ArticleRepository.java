@@ -7,5 +7,8 @@ import java.util.List;
 
 @Mapper
 public interface ArticleRepository {
+
     int insertArticleHead(List<ArticleHead> articleHeads);
+
+    List<ArticleHead> selectArticleHeadByMgSeq(int magazineSeq);
 }

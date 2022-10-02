@@ -14,4 +14,6 @@ public interface MagazineRepository {
     List<Magazine> selectMagazineBySearch(String searchKeyword, int searchType);
 
     Magazine selectMagazineBySeq(int magazineSeq);
+
+    int updateMagazine(Magazine magazine);
 }
