@@ -24,10 +24,10 @@
             ,B.ARTICLE_HEAD_SEQ
             ,B.ARTICLE_HEAD_TITLE
             ,C.MAGAZINE_VOLUME
-            ,C.MATAZINE_SEQ
+            ,C.MAGAZINE_SEQ
         FROM ARTICLE A
         LEFT JOIN ARTICLE_HEAD B
-        ON A.ARTICLE_SEQ = B.ARTICLE_SEQ
+        ON A.ARTICLE_HEAD_SEQ = B.ARTICLE_HEAD_SEQ
         LEFT JOIN MAGAZINE C
         ON B.MAGAZINE_SEQ = C.MAGAZINE_SEQ
         ORDER BY ARTICLE_SEQ DESC
@@ -55,7 +55,7 @@
         )
             VALUES
         (
-            #{magazineSeq}
+            (SELECT MAGAZINE_SEQ FROM ARTICLE_HEAD WHERE ARTICLE_HEAD_SEQ = #{articleHeadSeq})
             ,#{articleHeadSeq}
             ,#{articleTitle}
             ,#{articleContent}

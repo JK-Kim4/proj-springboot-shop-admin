@@ -41,8 +41,10 @@ public class ArticleController {
     }
 
     /*페이지*/
-    @GetMapping("/update/{artileSeq}")
+    @GetMapping("/update/{articleSeq}")
     public String updatePage (@PathVariable(name = "articleSeq")int articleSeq, Model model){
+        List<Magazine> magazines = magazineService.selectMagazineAll();
+        model.addAttribute("magazines", magazines);
         model.addAttribute("articleSeq", articleSeq);
         return "/contents/article/update";
 

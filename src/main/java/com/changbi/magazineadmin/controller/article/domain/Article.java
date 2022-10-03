@@ -10,6 +10,7 @@ public class Article {
 
     private int articleSeq;
     private int magazineSeq;
+    private String magazineVolume;
     private int articleHeadSeq;
     private String articleTitle;
     private String articleContent;

@@ -100,18 +100,39 @@
                         </div>
                         <div class="row">
                             <div class="col-md-3 form-check-inline">
-                                <label for="inputInformation">계간지 및 헤드 타이틀 선택</label>
+                                <label for="inputInformation">추가 정보</label>
                                 <small class="text-muted"><sup  style="color:red;">*</sup></small>
                             </div>
                         </div>
-
+                        <br>
                         <div class="row">
-                            <div class="col-md-1">
+                            <div class="col-md-2">
+                                <span>웹뷰 페이지</span>
+                                <input type="number" class="form-control" name="inputEbookPage" id="inputEbookPage" placeholder="페이지">
+                            </div>
+                            <div class="col-md-2">
+                                <span>노출 순서</span>
+                                <input type="number" class="form-control" name="inputOrdered" id="inputOrdered" placeholder="노출 순서">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <span>계간지 호수</span>
+                                <small class="text-muted"><sup  style="color:red;">*</sup></small>
                                 <select class="form-control" name="inputVolume" id="inputVolume">
+                                    <option disabled selected>계간지 호수를 선택해 주세요.</option>
+                                    {{#magazines}}
+                                        <option value="{{magazineSeq}}">{{magazineVolume}} 호</option>
+                                    {{/magazines}}
+                                    {{^magazines}}
+                                        <option disabled selected>등록된 계간지가 없습니다.</option>
+                                    {{/magazines}}
                                 </select>
                             </div>
-                            <div class="col-md-1">년</div>
-                            <div class="col-md-1">
+                            <div class="col-md-6">
+                                <span>아티클 헤드</span>
+                                <small class="text-muted"><sup  style="color:red;">*</sup></small>
                                 <select class="form-control" name="inputHeadTitle" id="inputHeadTitle">
                                 </select>
                             </div>

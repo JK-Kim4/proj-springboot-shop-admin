@@ -37,6 +37,15 @@ let main = {
             _this.modalHide("searchAuthModal");
         });
 
+        /*검색*/
+        $("#searchBtn").on('click', function (){
+            let keyword = $("#searchKeyword").val();
+            if(keyword == '' || keyword == undefined){
+                alert("검색어를 입력해 주세요.");
+                return;
+            }
+            _this.getArticleListByKeyword(keyword, 1, 10);
+        });
 
     },
     insert : function () {
@@ -108,8 +117,114 @@ let main = {
 
     },
     getArticleList : function (pageNum, pageSize){
+        $.ajax({
+            url: "/article/articles",
+            method: "GET",
+            dataType: "json",
+            data : {
+                pageNum : pageNum,
+                pageSize : pageSize
+            },
+            success: function (result){
+                let html = "";
+                if(result.list.length > 0){
+                    html = main.drawArticleList(result.list);
+                }else{
+                    html = "<tr><td colspan='7' style='text-align: center;'> 등록된 아티클이 없습니다.</td></tr>"
+                }
 
+                $("#articleList").html(html);
 
+                html = "";
+
+                /*pagination*/
+                if(result.prePage == 0){
+                    html += "<li class='page-item disable' ><a class='page-link'>Previous</a></li>"
+                }else{
+                    html += "<li class='page-item'><a class='page-link' onclick='main.getArticleList("+result.prePage+", 10)'>Previous</a></li>"
+                }
+
+                if(result.navigatepageNums.length > 0){
+                    for(let i = result.navigateFirstPage; i <= result.navigateLastPage; i++){
+                        if(result.pageNum == i){
+                            html += "<li class='page-item active'><a class='page-link' onclick='main.getArticleList("+i+", 10)'>"+i+"</a></li>"
+                        }else{
+                            html += "<li class='page-item'><a class='page-link' onclick='main.getArticleList("+i+", 10)'>"+i+"</a></li>"
+                        }
+                    }
+                }
+                if(result.nextPage == 0){
+                    html += "<li class='page-item disable' ><a class='page-link'>Next</a></li>"
+                }else{
+                    html += "<li class='page-item'><a class='page-link' onclick='main.getArticleList("+result.nextPage+", 10)'>Next</a></li>"
+                }
+                $("#pagingNav").html(html);
+            },
+            error : function (x, h, r){
+                alert("시스템 오류 발생. 관리자에게 문의해 주세요.");
+                return;
+            }
+
+        });
+
+    },
+    drawArticleList : function (data){
+        let html = "";
+        $.each(data, function (index, item){
+            html += "<tr>" +
+                "<td class='col-md-1'>"+item.articleSeq+"</td>" +
+                "<td class='col-md-1'>"+item.magazineVolume+"</td>" +
+                "<td class='col-md-4'><a href='/article/update/"+item.articleSeq+"'>"+item.articleTitle+"</a></td>" +
+                "<td class='col-md-1'>"+item.useYn+"</td>" +
+                "<td class='col-md-1'>"+item.appendDate+"</td>" +
+                "<td class='col-md-1'>"+item.updateDate+"</td>" +
+                "<td class='col-md-1'>"+item.viewCount+"</td>" +
+                "</tr>"
+        });
+        return html;
+    },
+    getArticleListByKeyword : function (keyword, pageNum, pageSize){
+        $.ajax({
+            url : "/article/search/" +keyword,
+            method : "POST",
+            dataType: "json",
+            data : {
+                pageNum : pageNum,
+                pageSize : pageSize
+            },
+            success : function (result){
+
+                let html = main.drawArticleList(result.list);
+                $("#articleList").html(html);
+
+                html = "";
+                if(result.prePage == 0){
+                    html += "<li class='page-item disable' ><a class='page-link'>Previous</a></li>"
+                }else{
+                    html += "<li class='page-item'><a class='page-link' onclick='main.getArticleListByKeyword("+'"'+keyword+'"'+","+result.prePage+", 10)'>Previous</a></li>"
+                }
+
+                if(result.navigatepageNums.length > 0){
+                    for(let i = result.navigateFirstPage; i <= result.navigateLastPage; i++){
+                        if(result.pageNum == i){
+                            html += "<li class='page-item active'><a class='page-link' onclick='main.getArticleListByKeyword("+'"'+keyword+'"'+","+i+", 10)'>"+i+"</a></li>"
+                        }else{
+                            html += "<li class='page-item'><a class='page-link' onclick='main.getArticleListByKeyword("+'"'+keyword+'"'+","+i+", 10)'>"+i+"</a></li>"
+                        }
+                    }
+                }
+                if(result.nextPage == 0){
+                    html += "<li class='page-item disable' ><a class='page-link'>Next</a></li>"
+                }else{
+                    html += "<li class='page-item'><a class='page-link' onclick='main.getArticleListByKeyword("+'"'+keyword+'"'+","+result.nextPage+", 10)'>Next</a></li>"
+                }
+
+                $("#pagingNav").html(html);
+            },
+            error : function (x,h,r){
+                console.log(x);
+            }
+        });
     },
     searchAuthor : function (keyword, pageNum, pageSize){
 
