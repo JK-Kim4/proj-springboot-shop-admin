@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.changbi.magazineadmin.repository.mysql.AdminRepository">
+
+    <insert id="signUpAdmin" parameterType="admin">
+        INSERT INTO ADMINISTRATOR
+        (
+            ADMIN_ID, ADMIN_PASSWORD, ADMIN_NAME, ADMIN_RULE, APPEND_DATE, UPDATE_DATE, PASSWORD_EXPIRED_DATE
+        ) VALUES (
+             #{adminId}, #{adminPassword}, #{adminName}, #{adminRule}, now(), now(), (now() + interval 5 month)
+        )
+    </insert>
+
+</mapper>

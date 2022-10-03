@@ -18,6 +18,7 @@
         <typeAlias type="com.changbi.magazineadmin.controller.article.domain.ArticleHead" alias="articleHead"/>
         <typeAlias type="com.changbi.magazineadmin.dto.SearchDto" alias="searchDto"/>
         <typeAlias type="com.changbi.magazineadmin.controller.article.domain.ArticleMeta" alias="articleMeta"/>
+        <typeAlias type="com.changbi.magazineadmin.controller.admin.domain.Admin" alias="admin"/>
 
 
     </typeAliases>
