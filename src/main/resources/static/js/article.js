@@ -5,7 +5,7 @@ let main = {
 
         /*등록*/
         $("#articleInsertBtn").on("click", function (){
-
+            _this.insert();
         });
 
         /*수정*/
@@ -36,6 +36,75 @@ let main = {
 
             _this.modalHide("searchAuthModal");
         });
+
+
+    },
+    insert : function () {
+        //입력 데이터
+        let title = $("#inputTitle").val();
+        let useYn = $(":radio[name=inputUseYn]:checked").val();
+        let content = CKEDITOR.instances['inputContent'].getData();
+        let magazineSeq = $("#inputVolume").val();
+        let articleHeadSeq = $("#inputHeadTitle").val();
+        let ebookPage = $("#inputEbookPage").val();
+        let ordered = $("#inputOrdered").val();
+
+        //TODO input data validation
+
+
+        let data = {
+            articleTitle: title,
+            articleContent: content,
+            useYn: useYn,
+            magazineSeq: magazineSeq,
+            articleHeadSeq: articleHeadSeq,
+            ebookPage: ebookPage,
+            ordered : ordered
+        }
+
+        //저자 List
+        if(authCnt > 0){
+            let authArray = [];
+            for(let i = 1; i <= authCnt; i ++ ){
+                if($("#inputCode"+i+"_01").val() != undefined){
+                    authArray.push({authorSeq : $("#inputCode"+i+"_01").val(), articleSeq : 0});
+                }
+            }
+            data.authArray = authArray;
+        };
+
+        $.ajax({
+            url: "/article/insert",
+            method: "POST",
+            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            data : JSON.stringify(data),
+            success : function (result){
+                if(result != null && result > 0){
+                    console.log(result);
+
+                }else{
+                    alert("아티클 등록 실패");
+                    return;
+                }
+
+            },
+            error : function (x, h, r){
+                alert("시스템 에러 발생. 관리자에게 문의해 주세요");
+                return;
+            }
+
+        })
+
+
+    }
+    ,
+    update : function (){
+
+
+    },
+    delete : function (){
+
 
     },
     getArticleList : function (pageNum, pageSize){
@@ -114,9 +183,14 @@ let main = {
             method: "GET",
             contentType: 'application/json; charset=utf-8',
             success: function (result){
+                let html = "";
                 if(result != null && result.length > 0){
+                    $.each(result, function (index, item){
+                       html += "<option value='"+item.articleHeadSeq+"'>"+item.articleHeadTitle+"</option>"
+                    });
 
-
+                    $("#inputHeadTitle").html(html);
+                    console.log(result);
                 }else{
                     alert("등록된 헤드 타이틀이 없습니다.");
                     return;

@@ -39,7 +39,9 @@
         WHERE MAGAZINE_SEQ = #{magazineSeq}
     </select>
 
-    <insert id="insertArticle" parameterType="article">
+    <insert id="insertArticle" parameterType="article"
+            useGeneratedKeys="true" keyProperty="articleSeq" keyColumn="ARTICLE_SEQ">
+        <![CDATA[
         INSERT INTO ARTICLE
         (
             MAGAZINE_SEQ
@@ -62,6 +64,7 @@
             ,now()
             ,now()
         )
+        ]]>
     </insert>
 
     <insert id="insertArticleHead" parameterType="articleHead">
@@ -79,6 +82,24 @@
             #{item.magazineSeq}
             ,#{item.articleHeadTitle}
             ,#{item.ordered}
+        )
+        ]]>
+        </foreach>
+    </insert>
+
+    <insert id="insertArticleAuthor" parameterType="ArticleMeta">
+        <![CDATA[
+        INSERT INTO AUTHOR_ARTICLE
+        (
+            AUTHOR_SEQ
+            ,ARTICLE_SEQ
+        )VALUES
+        ]]>
+        <foreach collection="list" item="item" separator=",">
+            <![CDATA[
+        (
+            #{item.authorSeq}
+            ,#{item.articleSeq}
         )
         ]]>
         </foreach>

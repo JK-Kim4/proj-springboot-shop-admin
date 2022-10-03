@@ -2,6 +2,7 @@ package com.changbi.magazineadmin.repository.mysql;
 
 import com.changbi.magazineadmin.controller.article.domain.Article;
 import com.changbi.magazineadmin.controller.article.domain.ArticleHead;
+import com.changbi.magazineadmin.controller.article.domain.ArticleMeta;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -26,4 +27,6 @@ public interface ArticleRepository {
     int insertArticle(Article article);
 
     int updateArticle(Article article);
+
+    int insertArticleAuthor(List<ArticleMeta> authList);
 }

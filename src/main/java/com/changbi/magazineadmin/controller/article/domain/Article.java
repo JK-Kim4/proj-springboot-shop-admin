@@ -3,6 +3,7 @@ package com.changbi.magazineadmin.controller.article.domain;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class Article {
@@ -19,4 +20,5 @@ public class Article {
     private LocalDateTime appendDate;
     private LocalDateTime updateDate;
 
+    private List<ArticleMeta> authArray;
 }
