@@ -81,6 +81,7 @@ public class ArticleController {
 
     }
 
+    /*logic*/
     @GetMapping("/articleMeta/{articleSeq}")
     @ResponseBody
     public List<ArticleMeta> selectArticleAuthor(@PathVariable(name = "articleSeq") int articleSeq){

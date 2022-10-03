@@ -31,6 +31,7 @@ public class ArticleService {
     }
 
     public int deleteArticle(int articleSeq) {
+        articleRepository.deleteArticleAuthor(articleSeq);
         return articleRepository.deleteArticle(articleSeq);
     }
 
