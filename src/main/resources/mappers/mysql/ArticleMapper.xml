@@ -39,6 +39,17 @@
         WHERE MAGAZINE_SEQ = #{magazineSeq}
     </select>
 
+    <select id="selectArticleAuthor" resultType="articleMeta">
+        SELECT
+            A.ARTICLE_SEQ
+           ,B.AUTHOR_SEQ
+           ,B.AUTHOR_KR_NAME
+        FROM AUTHOR_ARTICLE A
+        LEFT JOIN AUTHOR B
+        ON A.AUTHOR_SEQ = B.AUTHOR_SEQ
+        WHERE A.ARTICLE_SEQ = #{articleSeq}
+    </select>
+
     <insert id="insertArticle" parameterType="article"
             useGeneratedKeys="true" keyProperty="articleSeq" keyColumn="ARTICLE_SEQ">
         <![CDATA[
@@ -87,7 +98,7 @@
         </foreach>
     </insert>
 
-    <insert id="insertArticleAuthor" parameterType="ArticleMeta">
+    <insert id="insertArticleAuthor" parameterType="articleMeta">
         <![CDATA[
         INSERT INTO AUTHOR_ARTICLE
         (
@@ -129,5 +140,10 @@
     <delete id="deleteArticlesByMgSeq">
         DELETE FROM ARTICLE
         WHERE MAGAZINE_SEQ = #{magazineSeq}
+    </delete>
+
+    <delete id="deleteArticleAuthor">
+        DELETE FROM AUTHOR_ARTICLE
+        WHERE ARTICLE_SEQ = #{articleSeq}
     </delete>
 </mapper>

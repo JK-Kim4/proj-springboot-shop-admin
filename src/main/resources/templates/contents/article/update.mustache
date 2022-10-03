@@ -14,6 +14,7 @@
                     <div class="card-header">
                     </div>
                     <div class="card-body">
+                        <input type="hidden" name="articleSeq" id="articleSeq" value="{{articleSeq}}">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
@@ -146,8 +147,8 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-primary" id="articleUpdateBtn"> 수정 </button>
-                        <button class="btn btn-primary" id="articleDeleteBtn"> 삭제 </button>
+                        <button class="btn btn-success" id="articleUpdateBtn"> 수정 </button>
+                        <button class="btn btn-danger" id="articleDeleteBtn"> 삭제 </button>
                         <button class="btn btn-dark" onclick="history.back();"> 취소 </button>
                     </div>
                 </div>
@@ -155,6 +156,7 @@
         </div>
     </main>
     <script type="text/javascript">
+        let authCnt = 0;
         /*Ready Start*/
         $(function (){
             /*CKeditor - 아티클 본문*/
@@ -169,6 +171,9 @@
                 language: 'ko',
                 height: '350px'
             });
+
+            main.getArticleData($("#articleSeq").val());
+            main.getArticleAuthData($("#articleSeq").val());
         });
         /*Ready End*/
     </script>

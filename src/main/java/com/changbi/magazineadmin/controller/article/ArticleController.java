@@ -2,6 +2,7 @@ package com.changbi.magazineadmin.controller.article;
 
 import com.changbi.magazineadmin.controller.article.domain.Article;
 import com.changbi.magazineadmin.controller.article.domain.ArticleHead;
+import com.changbi.magazineadmin.controller.article.domain.ArticleMeta;
 import com.changbi.magazineadmin.controller.magazine.domain.Magazine;
 import com.changbi.magazineadmin.service.ArticleService;
 import com.changbi.magazineadmin.service.MagazineService;
@@ -80,8 +81,14 @@ public class ArticleController {
 
     }
 
+    @GetMapping("/articleMeta/{articleSeq}")
+    @ResponseBody
+    public List<ArticleMeta> selectArticleAuthor(@PathVariable(name = "articleSeq") int articleSeq){
+        return articleService.selectArticleAuthor(articleSeq);
+    }
+
     /*로직*/
-    @GetMapping("/delete/{articleSeq}")
+    @DeleteMapping("/delete/{articleSeq}")
     @ResponseBody
     public int deleteMethod(@PathVariable(name = "articleSeq") int articleSeq){
         return articleService.deleteArticle(articleSeq);

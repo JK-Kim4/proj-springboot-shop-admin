@@ -12,6 +12,7 @@ public class Article {
     private int magazineSeq;
     private String magazineVolume;
     private int articleHeadSeq;
+    private String articleHeadTitle;
     private String articleTitle;
     private String articleContent;
     private int ebookPage;

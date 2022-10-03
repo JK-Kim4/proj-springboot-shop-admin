@@ -109,12 +109,79 @@ let main = {
     }
     ,
     update : function (){
+        let articleSeq = $("#articleSeq").val();
+        let title = $("#inputTitle").val();
+        let useYn = $(":radio[name=inputUseYn]:checked").val();
+        let content = CKEDITOR.instances['inputContent'].getData();
+        let magazineSeq = $("#inputVolume").val();
+        let articleHeadSeq = $("#inputHeadTitle").val();
+        let ebookPage = $("#inputEbookPage").val();
+        let ordered = $("#inputOrdered").val();
 
+        let data = {
+            articleTitle: title,
+            articleContent: content,
+            useYn: useYn,
+            magazineSeq: magazineSeq,
+            articleHeadSeq: articleHeadSeq,
+            ebookPage: ebookPage,
+            ordered : ordered
+        };
+
+        //저자 List
+        if(authCnt > 0){
+            let authArray = [];
+            for(let i = 1; i <= authCnt; i ++ ){
+                if($("#inputCode"+i+"_01").val() != undefined){
+                    authArray.push({authorSeq : $("#inputCode"+i+"_01").val(), articleSeq : 0});
+                }
+            }
+            data.authArray = authArray;
+        };
+
+
+        $.ajax({
+            url: "/article/update/"+articleSeq,
+            method: "POST",
+            dataType: "json",
+            data: data,
+            success: function (result){
+               if(result > 0){
+                   alert("아티클 수정 성공");
+                   location.reload();
+               }else{
+                   alert("아티클 수정 실패");
+                   location.reload();
+               }
+            },
+            error: function (x,h,r){
+               alert("시스템 오류 발생. 관리자에게 문의해 주세요");
+               return;
+            }
+
+        });
 
     },
     delete : function (){
+        let articleSeq = $("#articleSeq").val();
 
-
+        $.ajax({
+            url: "/article/delete/"+articleSeq,
+            method: "DELETE",
+            success: function (result){
+                if(result > 0){
+                    alert("아티클 삭제 성공");
+                    location.href = "/article/list";
+                }else{
+                    alert("아티클 삭제 실패");
+                    location.reload();
+                }
+            },
+            error : function (x,h,r){
+                alert("시스템 에러 발생. 관리자에게 문의해 주세요");
+                return;
+            }
+        });
     },
     getArticleList : function (pageNum, pageSize){
         $.ajax({
@@ -318,6 +385,62 @@ let main = {
                 return;
             }
         })
+
+    },
+    getArticleData: function (articleSeq){
+        $.ajax({
+            url: "/article/"+articleSeq,
+            method: "GET",
+            contentType: 'application/json; charset=utf-8',
+            success : function (result){
+
+                $("#inputTitle").val(result.articleTitle);
+                //content
+                $("#inputContent").val(result.articleContent);
+                //useYn
+                if(result.useYn == 1){
+                    $("#useY").prop("checked", true);
+                }else{
+                    $("#useN").prop("checked", true);
+                }
+
+                $("#inputEbookPage").val(result.ebookPage);
+                $("#inputOrdered").val(result.ordered);
+                $("#inputVolume").val(result.magazineSeq).attr("selected", "selected");
+                if(main.getArticleHeadList(result.magazineSeq)){
+                    $("#inputHeadTitle").val(result.articleHeadSeq).attr("selected", "selected");
+                }
+
+            },
+            error : function (x,h,r){
+                alert("시스템 에러 발생. 관리자에게 문의해 주세요.");
+                return;
+            }
+
+        })
+
+    },
+    getArticleAuthData : function (articleSeq){
+        $.ajax({
+            url : "/article/authorMeta/"+articleSeq,
+            method : "GET",
+            dataType: "json",
+            success : function (result){
+                let html = "";
+                if(result != null && result.length > 0){
+                    authCnt = result.length;
+                    result.forEach((element,index) => {
+                        $("#inputAuthSearch").append("<span>"+element.authorKrName+", </span>");
+                        html += "<input type='hidden' id='inputCode"+(index+1)+"_01' value='"+element.authorSeq+"'>";
+                    });
+                    $("#inputAuthSearch").append(html);
+                }
+            },
+            error : function (x,h,r){
+                console.log(x);
+                alert("시스템 에러 발생 : 저자 조회");
+            }
+        });
 
     }
 }

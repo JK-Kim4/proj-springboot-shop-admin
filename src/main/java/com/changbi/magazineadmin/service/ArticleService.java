@@ -65,6 +65,7 @@ public class ArticleService {
                     .builder()
                     .articleSeq(0)
                     .authorSeq(0)
+                    .authorKrName("없음")
             .build();
             emptyList.add(temp);
             param = emptyList;
@@ -73,7 +74,22 @@ public class ArticleService {
     }
 
     public int updateArticle(Article article, int articleSeq) {
+        int result = 0;
         article.setArticleSeq(articleSeq);
-        return articleRepository.updateArticle(article);
+        try {
+            List<ArticleMeta> authList = setArticleAuthor(article.getAuthArray(), articleSeq);
+            articleRepository.updateArticle(article);
+            articleRepository.deleteArticleAuthor(articleSeq);
+            result = articleRepository.insertArticleAuthor(authList);
+            return result;
+        }catch (Exception e){
+            log.error("Article update error occur !!", e);
+            result = 0;
+            return result;
+        }
+    }
+
+    public List<ArticleMeta> selectArticleAuthor(int articleSeq) {
+        return articleRepository.selectArticleAuthor(articleSeq);
     }
 }

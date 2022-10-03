@@ -29,4 +29,8 @@ public interface ArticleRepository {
     int updateArticle(Article article);
 
     int insertArticleAuthor(List<ArticleMeta> authList);
+
+    List<ArticleMeta> selectArticleAuthor(int articleSeq);
+
+    int deleteArticleAuthor(int articleSeq);
 }

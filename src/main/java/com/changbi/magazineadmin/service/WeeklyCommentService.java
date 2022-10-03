@@ -78,7 +78,7 @@ public class WeeklyCommentService {
             result = weeklyCommentRepository.insertWeeklyAuthor(authList);
             return result;
         }catch (Exception e){
-            log.error("Weekly Comment insert error occur !!", e);
+            log.error("Weekly Comment update error occur !!", e);
             result = 0;
             return result;
         }
