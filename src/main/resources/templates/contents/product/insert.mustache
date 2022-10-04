@@ -17,9 +17,9 @@
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="form-group mb-3">
-                                    <label for="inputKrNm"> 한글 이름 </label>
+                                    <label for="inputKrNm"> 상품명 </label>
                                     <small class="text-muted"><sup  style="color:red;">*</sup></small>
-                                    <input type="text" class="form-control " id="inputKrNm" placeholder="한글 이름" required>
+                                    <input type="text" class="form-control " id="inputTitle" placeholder="상품명" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="helpInputTop">노출 여부</label>
@@ -37,6 +37,53 @@
                                         </div>
                                     </fieldset>
                                 </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group mb-3">
+                                            <label for="inputTitle"> 가격 </label>
+                                            <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                                            <input type="number" class="form-control " id="inputPrice" placeholder="가격을 입력해 주세요" required>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="col-md-3">
+                                        <div class="form-group mb-3">
+                                            <label for="inputIsbn"> 할인율(%) </label>
+                                            <input type="text" class="form-control " id="inputDiscountRate" placeholder="할인율">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="col-md-3">
+                                        <div class="form-group mb-3">
+                                            <label for="inputIsbn"> 상품 기간 </label>
+                                            <select class="form-control" name="inputPeriod" id="inputPeriod">
+                                                <option value="10">10일</option>
+                                                <option value="365">1년</option>
+                                                <option value="530">2년</option>
+                                                <option value="1095">3년</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <label for="helpInputTop">게시 기간</label><small class="text-muted"><sup  style="color:red;">*</sup></small>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <input type="date" class="form-control" name="inputStartDate" id="inputStartDate">
+                                    </div>
+                                    <div class="col-2">
+                                        <input type="time" class="form-control" name="inputStartTime" id="inputStartTime">
+                                    </div>
+                                    <div class="col-auto"><h4>-</h4></div>
+                                    <div class="col-2">
+                                        <input type="date" class="form-control" name="inputEndDate" id="inputEndDate">
+                                    </div>
+                                    <div class="col-2">
+                                        <input type="time" class="form-control" name="inputEndTime" id="inputEndTime">
+                                    </div>
+                                </div>
+                                <br>
                                 <div class="form-group mb-3">
                                     <label for="inputContent">저자 소개</label>
                                     <textarea class="form-control" id="inputContent" rows="13"></textarea>
@@ -68,4 +115,20 @@
     </main>
     <script src="/js/ckeditor/ckeditor.js"></script>
     <script src="/js/product.js"></script>
+    <script type="text/javascript">
+        $(function (){
+            /*CKeditor - 상품 상세*/
+            CKEDITOR.replace("inputContent", {
+                filebrowserUploadUrl: '/file/ckeditor/image/upload',
+                filebrowserUploadMethod: 'form',
+                font_names:
+                        '맑은 고딕/Malgun Gothic;굴림/Gulim;돋움/Dotum;바탕/Batang;궁서/Gungsuh;Arial/Arial;Comic Sans MS/Comic Sans MS;Courier New/Courier New;Georgia/Georgia;Lucida Sans Unicode/Lucida Sans Unicode;Tahoma/Tahoma;Times New Roman/Times New Roman;MS Mincho/MS Mincho;Trebuchet MS/Trebuchet MS;Verdana/Verdana',
+                font_defaultLabel: '맑은 고딕/Malgun Gothic',
+                fontSize_defaultLabel: '12',
+                skin: 'office2013',
+                language: 'ko',
+                height: '350px'
+            });
+        });
+    </script>
 {{>layouts/footer}}

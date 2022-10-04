@@ -19,5 +19,7 @@ public class Product {
     private boolean useYn;
     private LocalDateTime appendDate;
     private LocalDateTime updateDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
 }
