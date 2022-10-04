@@ -15,81 +15,106 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-9">
-                                <div class="form-group mb-3">
-                                    <label for="inputKrNm"> 상품명 </label>
+                            <div class="form-group col-md-6">
+                                <label for="inputKrNm"> 상품명 </label>
+                                <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                                <input type="text" class="form-control " id="inputTitle" placeholder="상품명을 입력해 주세요" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label for="helpInputTop">노출 여부</label>
+                                <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                                <fieldset class="form-control">
+                                    <div class="form-group">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inputYn" value="true" checked>
+                                            <label class="form-check-label" for="inputYn">Y</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inputYn" value="false">
+                                            <label class="form-check-label" for="inputYn">N</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <label for="helpInputTop">판매 기간</label>
+                            <div class="col-2">
+                                <input type="date" class="form-control" name="inputStartDate" id="inputStartDate">
+                            </div>
+                            <div class="col-2">
+                                <input type="time" class="form-control" name="inputStartTime" id="inputStartTime">
+                            </div>
+                            <div class="col-auto"><h4>-</h4></div>
+                            <div class="col-2">
+                                <input type="date" class="form-control" name="inputEndDate" id="inputEndDate">
+                            </div>
+                            <div class="col-2">
+                                <input type="time" class="form-control" name="inputEndTime" id="inputEndTime">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="inputTitle"> 가격 </label>
                                     <small class="text-muted"><sup  style="color:red;">*</sup></small>
-                                    <input type="text" class="form-control " id="inputTitle" placeholder="상품명" required>
+                                    <input type="number" class="form-control " id="inputPrice" placeholder="가격을 입력해 주세요" required>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="helpInputTop">노출 여부</label>
-                                    <small class="text-muted"><sup  style="color:red;">*</sup></small>
-                                    <fieldset class="form-control">
-                                        <div class="form-group">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inputYn" value="true" checked>
-                                                <label class="form-check-label" for="inputYn">Y</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inputYn" value="false">
-                                                <label class="form-check-label" for="inputYn">N</label>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group mb-3">
-                                            <label for="inputTitle"> 가격 </label>
-                                            <small class="text-muted"><sup  style="color:red;">*</sup></small>
-                                            <input type="number" class="form-control " id="inputPrice" placeholder="가격을 입력해 주세요" required>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="col-md-3">
-                                        <div class="form-group mb-3">
-                                            <label for="inputIsbn"> 할인율(%) </label>
-                                            <input type="text" class="form-control " id="inputDiscountRate" placeholder="할인율">
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="col-md-3">
-                                        <div class="form-group mb-3">
-                                            <label for="inputIsbn"> 상품 기간 </label>
-                                            <select class="form-control" name="inputPeriod" id="inputPeriod">
-                                                <option value="10">10일</option>
-                                                <option value="365">1년</option>
-                                                <option value="530">2년</option>
-                                                <option value="1095">3년</option>
-                                            </select>
-                                        </div>
+                            </div>
+                            <br>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="inputIsbn"> 할인율(%) </label>  <button class="btn-dark" id="directInputDiscount">직접 입력</button>
+                                    <div id="discountDiv" class="row">
+                                        <select class="form-control" name="inputDiscountRate" id="inputDiscountRate">
+                                            <option value="0">0 %</option>
+                                            <option value="10">10%</option>
+                                            <option value="20">20%</option>
+                                            <option value="30">30%</option>
+                                            <option value="40">40%</option>
+                                            <option value="50">50%</option>
+                                            <option value="60">60%</option>
+                                            <option value="70">70%</option>
+                                            <option value="80">80%</option>
+                                            <option value="90">90%</option>
+                                            <option value="100">100%</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <br>
-                                <label for="helpInputTop">게시 기간</label><small class="text-muted"><sup  style="color:red;">*</sup></small>
-                                <div class="row">
-                                    <div class="col-2">
-                                        <input type="date" class="form-control" name="inputStartDate" id="inputStartDate">
+                            </div>
+                            <br>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="inputIsbn"> 상품 기간(일) </label>  <button class="btn-dark" id="directInputPeriod">직접 입력</button>
+                                    <div id="periodDiv">
+                                        <select class="form-control" name="inputPeriod" id="inputPeriod">
+                                            <option value="" selected disabled>기간을 선택해주세요.</option>
+                                            <option value="10">10일</option>
+                                            <option value="365">1년</option>
+                                            <option value="530">2년</option>
+                                            <option value="1095">3년</option>
+                                            <option value="1825">5년</option>
+                                            <option value="3650">10년</option>
+                                            <option value="5475">15년</option>
+                                            <option value="10950">30년</option>
+                                        </select>
                                     </div>
-                                    <div class="col-2">
-                                        <input type="time" class="form-control" name="inputStartTime" id="inputStartTime">
-                                    </div>
-                                    <div class="col-auto"><h4>-</h4></div>
-                                    <div class="col-2">
-                                        <input type="date" class="form-control" name="inputEndDate" id="inputEndDate">
-                                    </div>
-                                    <div class="col-2">
-                                        <input type="time" class="form-control" name="inputEndTime" id="inputEndTime">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="form-group mb-3">
-                                    <label for="inputContent">저자 소개</label>
-                                    <textarea class="form-control" id="inputContent" rows="13"></textarea>
                                 </div>
                             </div>
                         </div>
+                        <br>
+                        <div class="row">
+                            <div class="form-group mb-3">
+                                <label for="inputContent">상품 소개</label>
+                                <textarea class="form-control" id="inputContent" rows="13"></textarea>
+                            </div>
+                        </div>
+                        <br>
                         <div class="row">
                             <!--file upload test-->
                             <div class="col-md-6">
@@ -116,7 +141,24 @@
     <script src="/js/ckeditor/ckeditor.js"></script>
     <script src="/js/product.js"></script>
     <script type="text/javascript">
-        $(function (){
+        $(document).ready(function (){
+
+            $("#inputDiscountRate").on("change", function (){
+                $("#rateViewer").val($("#inputDiscountRate").val() + "%")
+            });
+
+            $("#directInputDiscount").on("click", function (){
+                $("#discountDiv").empty();
+                let html = '<input type="number" class="form-control" name="inputDiscountRate" id="inputDiscountRate" value="0">';
+                $("#discountDiv").html(html);
+            });
+
+            $("#directInputPeriod").on("click", function (){
+                $("#periodDiv").empty();
+                let html = '<input type="number" class="form-control" name="inputPeriod" id="inputPeriod" value="0">';
+                $("#periodDiv").html(html);
+            });
+
             /*CKeditor - 상품 상세*/
             CKEDITOR.replace("inputContent", {
                 filebrowserUploadUrl: '/file/ckeditor/image/upload',
