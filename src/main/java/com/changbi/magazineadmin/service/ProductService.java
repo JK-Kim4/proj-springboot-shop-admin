@@ -18,4 +18,16 @@ public class ProductService {
     public List<Product> selectProductAll() {
         return productRepository.selectProductAll();
     }
+
+    public int insertProduct(Product product) {
+        return productRepository.insertProduct(product);
+    }
+
+    public Product selectProductBySeq(int productSeq) {
+        return productRepository.selectProductBySeq(productSeq);
+    }
+
+    public int deleteProduct(int productSeq) {
+        return productRepository.deleteProduct(productSeq);
+    }
 }

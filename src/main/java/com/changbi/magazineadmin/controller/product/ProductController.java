@@ -8,10 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -34,11 +31,13 @@ public class ProductController {
         return "/contents/product/update";
     }
 
+    /*페이지*/
     @GetMapping("/insert")
     public String insertPage(){
         return "/contents/product/insert";
     }
 
+    /*로직*/
     @GetMapping("/products")
     @ResponseBody
     public PageInfo<Product> selectProductAll(int pageNum, int pageSize){
@@ -46,4 +45,29 @@ public class ProductController {
         return PageInfo.of(productService.selectProductAll());
     }
 
+    /*로직*/
+    @PostMapping("/insert")
+    @ResponseBody
+    public int insertMethod(@RequestBody Product product){
+
+        log.debug("request body start date : {}", product.getStartDate());
+        log.debug("request body end date : {}", product.getEndDate());
+
+
+        return productService.insertProduct(product);
+    }
+
+    /*로직*/
+    @GetMapping("/{productSeq}")
+    @ResponseBody
+    public Product selectProductBySeq(@PathVariable(name = "productSeq") int productSeq){
+        return productService.selectProductBySeq(productSeq);
+    }
+
+    /*로직*/
+    @DeleteMapping("/delete/{productSeq}")
+    @ResponseBody
+    public int deleteProduct(@PathVariable(name = "productSeq") int productSeq){
+        return productService.deleteProduct(productSeq);
+    }
 }

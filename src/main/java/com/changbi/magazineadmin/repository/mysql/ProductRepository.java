@@ -10,4 +10,9 @@ public interface ProductRepository {
 
     List<Product> selectProductAll();
 
+    int insertProduct(Product product);
+
+    Product selectProductBySeq(int productSeq);
+
+    int deleteProduct(int productSeq);
 }

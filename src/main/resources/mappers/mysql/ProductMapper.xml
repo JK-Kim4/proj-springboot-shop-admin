@@ -10,4 +10,51 @@
         ORDER BY PRODUCT_SEQ DESC
     </select>
 
+    <select id="selectProductBySeq" resultType="product" parameterType="int">
+        SELECT *
+        FROM PRODUCT
+        WHERE PRODUCT_SEQ = #{productSeq}
+    </select>
+
+    <insert id="insertProduct" parameterType="product">
+        INSERT INTO PRODUCT
+        (
+            PRODUCT_TYPE
+            ,PRODUCT_NAME
+            ,PRODUCT_CONTENT
+            ,PRODUCT_PRICE
+            ,DISCOUNT_RATE
+            ,PRODUCT_PERIOD
+            ,PRODUCT_IMAGE_FILE
+            ,PRODUCT_IMAGE_FILE_NAME
+            ,USE_YN
+            <if test="startDate != null and !''.equals(startDate)">
+                ,START_DATE
+            </if>
+            <if test="endDate != null and !''.equals(endDate)">
+                ,END_DATE
+            </if>
+        ) VALUES (
+            #{productType}
+            ,#{productName}
+            ,#{productContent}
+            ,#{productPrice}
+            ,#{discountRate}
+            ,#{productPeriod}
+            ,#{productImageFile}
+            ,#{productImageFileName}
+            ,#{useYn}
+            <if test="startDate != null and !''.equals(startDate)">
+                ,#{startDate}
+            </if>
+            <if test="endDate != null and !''.equals(endDate)">
+                ,#{endDate}
+            </if>
+        )
+    </insert>
+
+    <delete id="deleteProduct" parameterType="int">
+        DELETE FROM PRODUCT
+        WHERE PRODUCT_SEQ = #{productSeq}
+    </delete>
 </mapper>
