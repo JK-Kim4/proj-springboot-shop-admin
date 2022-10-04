@@ -48,6 +48,8 @@ public class Admin implements UserDetails {
 
     public String getUserEmail(){return this.adminEmail;}
 
+    public boolean getUseYn(){return this.useYn;}
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

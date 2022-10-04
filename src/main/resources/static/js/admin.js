@@ -9,8 +9,29 @@ let main = {
         });
 
         $("#loginBtn").on("click", function (){
-            $("#loginFrm").submit();
+            _this.checkFailCount();
         });
+    },
+    checkFailCount : function (){
+        $.ajax({
+            url: "/admin/validate",
+            method: "POST",
+            dataType: "json",
+            data: $("#adminId").val(),
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                if(result == true){
+                    $("#loginFrm").submit();
+                }else{
+                    alert("사용할 수 없는 계정입니다. 관리자에게 문의해 주세요.");
+                    return;
+                }
+            },
+            error: function (x,h,r){
+                alert("시스템 에러 발생. 관리자에게 문의해 주세요.");
+                return;
+            }
+        })
     },
     signUp : function (){
         let adminId = $("#adminId").val();

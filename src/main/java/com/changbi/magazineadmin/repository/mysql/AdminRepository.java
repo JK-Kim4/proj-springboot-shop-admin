@@ -14,4 +14,6 @@ public interface AdminRepository {
     int loginFailCountPlus(Admin admin);
 
     int clearFailCount(String loginId);
+
+    int updateUseYn(String adminId);
 }

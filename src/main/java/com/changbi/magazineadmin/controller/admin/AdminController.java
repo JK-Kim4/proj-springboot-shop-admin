@@ -44,4 +44,11 @@ public class AdminController {
     public int signUp(@RequestBody Admin admin) {
         return adminService.signUpAdmin(admin);
     }
+
+    /*계정 사용 여부 확인*/
+    @PostMapping("/admin/validate")
+    @ResponseBody
+    public boolean validation(@RequestBody String adminId){
+        return adminService.validation(adminId);
+    }
 }

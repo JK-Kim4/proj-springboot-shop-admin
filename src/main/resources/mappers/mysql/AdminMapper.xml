@@ -28,6 +28,12 @@
         WHERE ADMIN_ID = #{loginId}
     </update>
 
+    <update id="updateUseYn">
+        UPDATE ADMINISTRATOR
+        SET USE_YN = FALSE
+        WHERE ADMIN_ID = #{loginId}
+    </update>
+
     <insert id="signUpAdmin" parameterType="admin">
         INSERT INTO ADMINISTRATOR
         (

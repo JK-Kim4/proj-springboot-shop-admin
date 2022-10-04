@@ -49,6 +49,10 @@ public class AdminService implements UserDetailsService {
         Admin admin = adminRepository.validationAdmin(adminId);
         if(admin != null){
             result = adminRepository.loginFailCountPlus(admin);
+            admin = adminRepository.validationAdmin(adminId);
+            if(admin.getLoginFailCount() > 5){
+                adminRepository.updateUseYn(adminId);
+            }
         }else {
             throw new NullPointerException("사용자가 존재하지 않습니다.");
         }
@@ -62,5 +66,14 @@ public class AdminService implements UserDetailsService {
         result = adminRepository.clearFailCount(loginId);
 
         return result;
+    }
+
+    public boolean validation(String adminId) {
+        Admin admin = adminRepository.validationAdmin(adminId);
+        if(admin.getUseYn() == true){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
