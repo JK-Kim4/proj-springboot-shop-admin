@@ -1,6 +1,7 @@
 package com.changbi.magazineadmin.common.config;
 
 import com.changbi.magazineadmin.common.handler.LoginFailHandler;
+import com.changbi.magazineadmin.common.handler.LoginSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfig {
 
     private final LoginFailHandler loginFailHandler;
+    private final LoginSuccessHandler loginSuccessHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -40,6 +42,7 @@ public class WebSecurityConfig {
                 .loginProcessingUrl("/login/auth")
                 .failureHandler(loginFailHandler)
                 .defaultSuccessUrl("/", true)
+                .successHandler(loginSuccessHandler)
                 .usernameParameter("adminId")
                 .passwordParameter("adminPassword")
                 .and()

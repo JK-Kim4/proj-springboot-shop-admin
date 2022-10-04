@@ -34,12 +34,33 @@ public class AdminService implements UserDetailsService {
 
         if(loginAdmin != null){
             sessionAdmin = new SessionAdmin(loginAdmin);
-            session.setAttribute("user", sessionAdmin);
+            session.setAttribute("admin", sessionAdmin);
 
         }else {
-            throw new NullPointerException("회원이 존재하지 않습니다.");
+            throw new UsernameNotFoundException("회원이 존재하지 않습니다.");
         }
 
         return loginAdmin;
+    }
+
+    public int loginFailCountPlus(String adminId) {
+
+        int result = 0;
+        Admin admin = adminRepository.validationAdmin(adminId);
+        if(admin != null){
+            result = adminRepository.loginFailCountPlus(admin);
+        }else {
+            throw new NullPointerException("사용자가 존재하지 않습니다.");
+        }
+
+        return result;
+    }
+
+    public int clearFailCount(String loginId) {
+        int result = 0;
+
+        result = adminRepository.clearFailCount(loginId);
+
+        return result;
     }
 }

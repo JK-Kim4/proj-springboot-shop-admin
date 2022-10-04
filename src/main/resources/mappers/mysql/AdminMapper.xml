@@ -10,12 +10,44 @@
         WHERE ADMIN_ID = #{adminId}
     </select>
 
+    <select id="validationAdmin" resultType="admin">
+        SELECT *
+        FROM ADMINISTRATOR
+        WHERE ADMIN_ID = #{adminId}
+    </select>
+
+    <update id="loginFailCountPlus" parameterType="admin">
+        UPDATE ADMINISTRATOR
+        SET LOGIN_FAIL_COUNT = LOGIN_FAIL_COUNT +1
+        WHERE ADMIN_ID = #{adminId}
+    </update>
+
+    <update id="clearFailCount">
+        UPDATE ADMINISTRATOR
+        SET LOGIN_FAIL_COUNT = 0
+        WHERE ADMIN_ID = #{loginId}
+    </update>
+
     <insert id="signUpAdmin" parameterType="admin">
         INSERT INTO ADMINISTRATOR
         (
-            ADMIN_ID, ADMIN_PASSWORD, ADMIN_NAME, ADMIN_RULE, APPEND_DATE, UPDATE_DATE, PASSWORD_EXPIRED_DATE
+            ADMIN_ID
+            ,ADMIN_PASSWORD
+            ,ADMIN_NAME
+            ,ADMIN_EMAIL
+            ,ADMIN_RULE
+            ,APPEND_DATE
+            ,UPDATE_DATE
+            ,PASSWORD_EXPIRED_DATE
         ) VALUES (
-             #{adminId}, #{adminPassword}, #{adminName}, #{adminRule}, now(), now(), (now() + interval 5 month)
+             #{adminId}
+             ,#{adminPassword}
+             ,#{adminName}
+             ,#{adminEmail}
+             ,#{adminRule}
+             ,now()
+             ,now()
+             ,(now() + interval 5 month)
         )
     </insert>
 

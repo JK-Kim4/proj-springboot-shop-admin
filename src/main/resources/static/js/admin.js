@@ -2,19 +2,22 @@ let main = {
 
     init : function(){
 
-        var _this = this;
+        let _this = this;
 
         $("#signUpBtn").on("click", function (){
             _this.signUp();
         });
 
+        $("#loginBtn").on("click", function (){
+            $("#loginFrm").submit();
+        });
     },
     signUp : function (){
         let adminId = $("#adminId").val();
         let adminPassword = $("#adminPassword").val();
         let adminName = $("#adminName").val();
         let adminEmail = $("#adminEmail").val();
-        let auth = $(':radio[name="inputAuth"]:checked').val();
+        let adminAuth = $(':radio[name="inputAuth"]:checked').val();
 
 
         /*if(sendvalidNun == '' || sendvalidNun == undefined){
@@ -47,7 +50,7 @@ let main = {
             adminPassword : adminPassword,
             adminName : adminName,
             adminEmail : adminEmail,
-            adminAuth : auth
+            adminRule : adminAuth
         }
         $.ajax({
             url : "/signUp",

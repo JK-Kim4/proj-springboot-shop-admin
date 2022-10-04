@@ -13,6 +13,7 @@ public class SessionAdmin implements Serializable {
     private int adminSeq;
     private String adminId;
     private String adminName;
+    private String adminEmail;
     private String role;
 
     @Builder
@@ -20,6 +21,7 @@ public class SessionAdmin implements Serializable {
         this.adminSeq = admin.getAdminSeq();
         this.adminId = admin.getAdminId();
         this.adminName = admin.getAdminName();
+        this.adminEmail = admin.getAdminEmail();
         this.role = admin.getAdminRule();
     }
 }

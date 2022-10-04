@@ -8,4 +8,10 @@ public interface AdminRepository {
     int signUpAdmin(Admin admin);
 
     Admin getAdminAccount(String adminId);
+
+    Admin validationAdmin(String adminId);
+
+    int loginFailCountPlus(Admin admin);
+
+    int clearFailCount(String loginId);
 }

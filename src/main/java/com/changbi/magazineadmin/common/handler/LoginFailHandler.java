@@ -1,5 +1,8 @@
 package com.changbi.magazineadmin.common.handler;
 
+import com.changbi.magazineadmin.service.AdminService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -11,21 +14,31 @@ import org.springframework.stereotype.Component;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.URLEncoder;
 
 @Component
+@RequiredArgsConstructor
+@Slf4j
 public class LoginFailHandler extends SimpleUrlAuthenticationFailureHandler {
+
+    private final AdminService adminService;
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request,
                                         HttpServletResponse response,
                                         AuthenticationException exception) throws IOException, ServletException {
 
+        HttpSession session = request.getSession();
+        String loginId = request.getParameter("adminId");
+        log.debug("[FAIL]login attempt user : {}", loginId);
         String errorMessage;
 
         if (exception instanceof BadCredentialsException) {
             errorMessage = "아이디 또는 비밀번호가 맞지 않습니다. 다시 확인해 주세요.";
+            /*login fail count +1*/
+            adminService.loginFailCountPlus(loginId);
         } else if (exception instanceof InternalAuthenticationServiceException) {
             errorMessage = "내부적으로 발생한 시스템 문제로 인해 요청을 처리할 수 없습니다. 관리자에게 문의하세요.";
         } else if (exception instanceof UsernameNotFoundException) {
