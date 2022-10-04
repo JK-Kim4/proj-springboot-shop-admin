@@ -67,7 +67,7 @@
             ,MAGAZINE_SEASON = #{magazineSeason}
             ,MAGAZINE_THUMBNAIL_IMAGE = #{magazineThumbnailImage}
             ,MAGAZINE_THUMBNAIL_IMAGE_FILE_NAME = #{magazineThumbnailImageFileName}
-            ,USE_YN = #{useYn},
+            ,USE_YN = #{useYn}
             ,UPDATE_DATE = now()
         WHERE MAGAZINE_SEQ = #{magazineSeq}
     </update>

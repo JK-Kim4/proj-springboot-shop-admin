@@ -107,8 +107,8 @@ main = {
         };
 
         //헤드 타이틀 List
+        let articleHeadArray = [];
         if(articleCnt > 0){
-            let articleHeadArray = [];
             for(let i = 1; i <= articleCnt; i ++ ){
                 if($("#inputArticleHead"+i+"_01").val() != undefined){
                     if($("#inputArticleHead"+i+"_02").val() == '' || $("#inputArticleHead"+i+"_02").val() == undefined){
@@ -119,10 +119,9 @@ main = {
                     }
                 }
             }
-            data.articleHeadArray = articleHeadArray;
         };
 
-        console.log(data.articleHeadArray[0]);
+        data.articleHeadArray = articleHeadArray;
 
         $.ajax({
             url : "/magazine/insert",
@@ -189,6 +188,23 @@ main = {
             magazineThumbnailImage : magazineThumbnailImage,
             magazineThumbnailImageFileName : magazineThumbnailImageFileName
         };
+
+        //헤드 타이틀 List
+        let articleHeadArray = [];
+        if(articleCnt > 0){
+            for(let i = 1; i <= articleCnt; i ++ ){
+                if($("#inputArticleHead"+i+"_01").val() != undefined){
+                    if($("#inputArticleHead"+i+"_02").val() == '' || $("#inputArticleHead"+i+"_02").val() == undefined){
+                        alert("정렬 순서를 설정해 주세요");
+                        return
+                    }else{
+                        articleHeadArray.push({articleHeadTitle : $("#inputArticleHead"+i+"_01").val(), ordered : $("#inputArticleHead"+i+"_02").val()});
+                    }
+                }
+            }
+        }
+
+        data.articleHeadArray = articleHeadArray;
 
         $.ajax({
             url : "/magazine/update/"+magazineSeq,
@@ -329,7 +345,7 @@ main = {
             }
         });
     },
-   getArticleHead : function (magazineSeq){
+    getArticleHead : function (magazineSeq){
         $.ajax({
             url : "/article/head/"+magazineSeq,
             method : "GET",
@@ -338,13 +354,9 @@ main = {
                 if(result != null && result.length > 0){
                     let html = "";
                     articleCnt = result.length;
-                    console.log(articleCnt);
 
                     $.each(result, function (index, item){
-
-                        alert(item.articleHeadTitle);
-
-                        /*html += "<div id='articleHead"+(index + 1)+"' class='row'>" +
+                        html += "<div id='articleHead"+(index + 1)+"' class='row'>" +
                                     "<span>"+(index + 1) +". </span>" +
                                     "<div class='col-8'>" +
                                         "<input  class='form-control' type='text' id='inputArticleHead"+((index + 1))+"_01' value='"+item.articleHeadTitle+"' disabled>" +
@@ -357,16 +369,16 @@ main = {
                                         "<button type='button' class='btn btn-primary gotoUpdate' data-cnt='"+((item.articleHeadSeq))+"' style='max-height: 35px;' >수정</button>" +
                                     "</div>" +
                                 "</div>";
+                    });
 
-                        $("#articleHeadDiv").append(html);
+                    $("#articleHeadDiv").append(html);
 
-                        $(".articleHeadRemoveBtn").off().on("click", function (){
-                            $("#articleHead"+$(this).attr("data-cnt")).remove();
-                            /!*$(this).prev().prev().remove(); // remove the textbox
-                            $(this).remove(); // remove the button*!/
-                            $(this).remove();
-                            articleCnt--;
-                        });*/
+                    $(".articleHeadRemoveBtn").off().on("click", function (){
+                        $("#articleHead"+$(this).attr("data-cnt")).remove();
+                        /*$(this).prev().prev().remove(); // remove the textbox
+                        $(this).remove(); // remove the button*/
+                        $(this).remove();
+                        articleCnt--;
                     });
                 }
             },

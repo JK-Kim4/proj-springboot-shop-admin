@@ -45,6 +45,7 @@ public class MagazineService {
         return result;
     }
 
+    /*TODO update 처리 수정 2022.10.04*/
     public int updateMagazine(Magazine magazine, int magazineSeq) {
         magazine.setMagazineSeq(magazineSeq);
         return magazineRepository.updateMagazine(magazine);
