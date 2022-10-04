@@ -4,6 +4,12 @@
 
 <mapper namespace="com.changbi.magazineadmin.repository.mysql.AdminRepository">
 
+    <select id="getAdminAccount" resultType="admin">
+        SELECT *
+        FROM ADMINISTRATOR
+        WHERE ADMIN_ID = #{adminId}
+    </select>
+
     <insert id="signUpAdmin" parameterType="admin">
         INSERT INTO ADMINISTRATOR
         (

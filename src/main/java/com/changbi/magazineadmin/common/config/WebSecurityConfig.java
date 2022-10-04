@@ -18,6 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfig {
 
     private final LoginFailHandler loginFailHandler;
+
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -39,8 +40,8 @@ public class WebSecurityConfig {
                 .loginProcessingUrl("/login/auth")
                 .failureHandler(loginFailHandler)
                 .defaultSuccessUrl("/", true)
-                .usernameParameter("userId")
-                .passwordParameter("userPwd")
+                .usernameParameter("adminId")
+                .passwordParameter("adminPassword")
                 .and()
                 .logout()
                 .invalidateHttpSession(true).deleteCookies("JSESSIONID")

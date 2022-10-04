@@ -18,6 +18,7 @@ public class Admin implements UserDetails {
     private String adminId;
     private String adminPassword;
     private String adminName;
+    private String adminEmail;
     private LocalDateTime appendDate;
     private LocalDateTime updateDate;
     private LocalDateTime passwordExpiredDate;
@@ -44,6 +45,8 @@ public class Admin implements UserDetails {
     public String getUserNickName(){
         return this.adminName;
     }
+
+    public String getUserEmail(){return this.adminEmail;}
 
     @Override
     public boolean isAccountNonExpired() {
