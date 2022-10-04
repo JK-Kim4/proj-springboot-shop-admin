@@ -10,12 +10,12 @@ let main = {
 
         /*수정*/
         $("#articleUpdateBtn").on("click", function (){
-
+            _this.update();
         });
 
         /*삭제*/
         $("#articleDeleteBtn").on("click", function (){
-
+            _this.delete();
         });
 
         /*호수 선택 시*/
@@ -108,8 +108,8 @@ let main = {
             data : JSON.stringify(data),
             success : function (result){
                 if(result != null && result > 0){
-                    console.log(result);
-
+                    alert("아티클 등록 성공");
+                    location.href = "/article/list";
                 }else{
                     alert("아티클 등록 실패");
                     return;
@@ -120,10 +120,7 @@ let main = {
                 alert("시스템 에러 발생. 관리자에게 문의해 주세요");
                 return;
             }
-
-        })
-
-
+        });
     },
     update : function (){
         let articleSeq = $("#articleSeq").val();
@@ -182,7 +179,8 @@ let main = {
             url: "/article/update/"+articleSeq,
             method: "POST",
             dataType: "json",
-            data: data,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(data),
             success: function (result){
                if(result > 0){
                    alert("아티클 수정 성공");
@@ -202,7 +200,6 @@ let main = {
     },
     delete : function (){
         let articleSeq = $("#articleSeq").val();
-
         $.ajax({
             url: "/article/delete/"+articleSeq,
             method: "DELETE",

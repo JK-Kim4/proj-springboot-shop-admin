@@ -104,6 +104,7 @@
         (
             AUTHOR_SEQ
             ,ARTICLE_SEQ
+            ,MAGAZINE_SEQ
         )VALUES
         ]]>
         <foreach collection="list" item="item" separator=",">
@@ -111,13 +112,14 @@
         (
             #{item.authorSeq}
             ,#{item.articleSeq}
+            ,(SELECT MAGAZINE_SEQ FROM ARTICLE WHERE ARTICLE_SEQ = #{item.articleSeq})
         )
         ]]>
         </foreach>
     </insert>
 
     <update id="updateArticle" parameterType="article">
-        UPDATE ARTICE
+        UPDATE ARTICLE
         SET
             ARTICLE_TITLE = #{articleTitle}
             ,ARTICLE_CONTENT = #{articleContent}

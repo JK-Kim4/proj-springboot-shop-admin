@@ -86,10 +86,6 @@ main = {
             alert("본문 제목을 입력해 주세요. (필수 항목)");
             $("#inputTitle").focus();
             return;
-        }else if(content == '' || content == undefined){
-            alert("내용을 입력해 주세요. (필수 항목)");
-            $("#inputContent").focus();
-            return;
         }else if((year == '' || year == undefined) ||
                     (season == '' || season == undefined) ||
                         (volume == '' || volume == undefined)){
@@ -173,10 +169,6 @@ main = {
         if(title == '' || title == undefined){
             alert("본문 제목을 입력해 주세요. (필수 항목)");
             $("#inputTitle").focus();
-            return;
-        }else if(content == '' || content == undefined){
-            alert("내용을 입력해 주세요. (필수 항목)");
-            $("#inputContent").focus();
             return;
         }else if((year == '' || year == undefined) ||
             (season == '' || season == undefined) ||
@@ -346,9 +338,13 @@ main = {
                 if(result != null && result.length > 0){
                     let html = "";
                     articleCnt = result.length;
+                    console.log(articleCnt);
 
                     $.each(result, function (index, item){
-                        html += "<div id='articleHead"+(index + 1)+"' class='row'>" +
+
+                        alert(item.articleHeadTitle);
+
+                        /*html += "<div id='articleHead"+(index + 1)+"' class='row'>" +
                                     "<span>"+(index + 1) +". </span>" +
                                     "<div class='col-8'>" +
                                         "<input  class='form-control' type='text' id='inputArticleHead"+((index + 1))+"_01' value='"+item.articleHeadTitle+"' disabled>" +
@@ -366,11 +362,11 @@ main = {
 
                         $(".articleHeadRemoveBtn").off().on("click", function (){
                             $("#articleHead"+$(this).attr("data-cnt")).remove();
-                            /*$(this).prev().prev().remove(); // remove the textbox
-                            $(this).remove(); // remove the button*/
+                            /!*$(this).prev().prev().remove(); // remove the textbox
+                            $(this).remove(); // remove the button*!/
                             $(this).remove();
                             articleCnt--;
-                        });
+                        });*/
                     });
                 }
             },

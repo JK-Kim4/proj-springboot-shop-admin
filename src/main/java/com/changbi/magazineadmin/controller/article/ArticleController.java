@@ -48,7 +48,6 @@ public class ArticleController {
         model.addAttribute("magazines", magazines);
         model.addAttribute("articleSeq", articleSeq);
         return "/contents/article/update";
-
     }
 
     /*로직*/
@@ -82,7 +81,7 @@ public class ArticleController {
     }
 
     /*logic*/
-    @GetMapping("/articleMeta/{articleSeq}")
+    @GetMapping("/authorMeta/{articleSeq}")
     @ResponseBody
     public List<ArticleMeta> selectArticleAuthor(@PathVariable(name = "articleSeq") int articleSeq){
         return articleService.selectArticleAuthor(articleSeq);
