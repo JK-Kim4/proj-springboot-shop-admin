@@ -1,0 +1,48 @@
+{{>layouts/header}}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">구독권 관리</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="/index">홈</a></li>
+                <li class="breadcrumb-item active">구독권 목록</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-primary" onclick="location.href='/product/insert'"> 구독권 추가 </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th class="col-md-1"> 번호 </th>
+                                    <th class="col-md-1"> 구독권 타입 </th>
+                                    <th class="col-md-1"> 상품명 </th>
+                                    <th class="col-md-1"> 가격 </th>
+                                    <th class="col-md-1"> 판매 여부 </th>
+                                    <th class="col-md-1"> 등록일 </th>
+                                    <th class="col-md-1"> 수정일 </th>
+                                </thead>
+                                <tbody id="productList">
+                                </tbody>
+                            </table>
+
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination" id="pagingNav">
+                                </ul>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="/js/product.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function (){
+            main.getProductList(1,10);
+        });
+    </script>
+{{>layouts/footer}}
