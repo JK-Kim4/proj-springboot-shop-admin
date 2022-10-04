@@ -58,8 +58,26 @@ let main = {
         let ebookPage = $("#inputEbookPage").val();
         let ordered = $("#inputOrdered").val();
 
-        //TODO input data validation
+        if(title == undefined || title == ''){
+            alert("기사 제목을 입력해 주세요. (필수)");
+            return;
+        }
 
+        if(magazineSeq == undefined || magazineSeq == ''){
+            alert("계간지 호수를 선택해 주세요. (필수)");
+            $("#inputVolume").focus();
+            return;
+        }
+
+        if(articleHeadSeq == undefined || articleHeadSeq == ''){
+            alert("기사-헤드타이틀을 선택해 주세요. (필수)");
+            $("#inputHeadTitle").focus();
+            return;
+        }
+
+        if(ordered == undefined || ordered == ''){
+            ordered = 1;
+        }
 
         let data = {
             articleTitle: title,
@@ -106,8 +124,7 @@ let main = {
         })
 
 
-    }
-    ,
+    },
     update : function (){
         let articleSeq = $("#articleSeq").val();
         let title = $("#inputTitle").val();
@@ -117,6 +134,27 @@ let main = {
         let articleHeadSeq = $("#inputHeadTitle").val();
         let ebookPage = $("#inputEbookPage").val();
         let ordered = $("#inputOrdered").val();
+
+        if(title == undefined || title == ''){
+            alert("기사 제목을 입력해 주세요. (필수)");
+            return;
+        }
+
+        if(magazineSeq == undefined || magazineSeq == ''){
+            alert("계간지 호수를 선택해 주세요. (필수)");
+            $("#inputVolume").focus();
+            return;
+        }
+
+        if(articleHeadSeq == undefined || articleHeadSeq == ''){
+            alert("기사-헤드타이틀을 선택해 주세요. (필수)");
+            $("#inputHeadTitle").focus();
+            return;
+        }
+
+        if(ordered == undefined || ordered == ''){
+            ordered = 1;
+        }
 
         let data = {
             articleTitle: title,

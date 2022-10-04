@@ -38,7 +38,6 @@ let main = {
     },
     insert : function (){
 
-        //TODO : 필수 데이터 검증
         let krName = $("#inputKrNm").val();
         let chName = $("#inputChNm").val();
         let enName = $("#inputEnNm").val();
@@ -86,7 +85,6 @@ let main = {
     },
     update : function (){
 
-        //TODO : 필수 데이터 검증
         let authorSeq = $("#authorSeq").val();
         let krName = $("#inputKrNm").val();
         let chName = $("#inputChNm").val();
@@ -98,7 +96,6 @@ let main = {
             alert("저자 이름을 입력해 주세요");
             return;
         }
-
 
         let data = {
             authorKrName : krName,
@@ -137,7 +134,7 @@ let main = {
 
         $.ajax({
             url : "/author/delete/"+authorSeq,
-            method : "POST",
+            method : "DELETE",
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success : function (result){

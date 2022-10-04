@@ -55,7 +55,7 @@ public class AuthorController {
     }
 
     /*로직*/
-    @PostMapping("/delete/{authorSeq}")
+    @DeleteMapping("/delete/{authorSeq}")
     @ResponseBody
     public int deleteMethod(@PathVariable("authorSeq") int authorSeq){
         return authorService.deleteAuthor(authorSeq);
