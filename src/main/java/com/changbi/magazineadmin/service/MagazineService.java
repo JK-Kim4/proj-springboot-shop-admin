@@ -45,8 +45,9 @@ public class MagazineService {
         return result;
     }
 
-    public int updateMagazine(Magazine magazine, int megazineSeq) {
-        return 0;
+    public int updateMagazine(Magazine magazine, int magazineSeq) {
+        magazine.setMagazineSeq(magazineSeq);
+        return magazineRepository.updateMagazine(magazine);
     }
 
     private List<ArticleHead> setMagazineSeq(List<ArticleHead> param, int magazineSeq){
@@ -67,5 +68,15 @@ public class MagazineService {
 
     public List<Magazine> selectMagazineBySearch(String searchKeyword, int searchType) {
         return magazineRepository.selectMagazineBySearch(searchKeyword, searchType);
+    }
+
+    public Magazine selectMagazineBySeq(int magazineSeq) {
+        return magazineRepository.selectMagazineBySeq(magazineSeq);
+    }
+
+    public int deleteMagazine(int magazineSeq) {
+        articleRepository.deleteArticlesByMgSeq(magazineSeq);
+        articleRepository.deleteArticleHead(magazineSeq);
+        return magazineRepository.deleteMagazine(magazineSeq);
     }
 }

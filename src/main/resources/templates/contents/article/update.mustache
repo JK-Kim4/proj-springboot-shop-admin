@@ -1,0 +1,182 @@
+{{>layouts/header}}
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">아티클 등록</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="/index">홈</a></li>
+                <li class="breadcrumb-item active">계간지</li>
+                <li class="breadcrumb-item active">계간지-아티클 등록</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card">
+                    <div class="card-header">
+                    </div>
+                    <div class="card-body">
+                        <input type="hidden" name="articleSeq" id="articleSeq" value="{{articleSeq}}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="inputTitle"> 아티클 제목 </label>
+                                    <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                                    <input type="text" class="form-control " id="inputTitle" placeholder="제목을 입력해 주세요" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3 form-check-inline">
+                                <label for="inputUseYn">노출 여부</label>
+                                <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                                <fieldset>
+                                    <div class="form-group">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inputUseYn" id="useY" value="true" checked>
+                                            <label class="form-check-label" for="useY">Y</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inputUseYn" id="useN" value="false">
+                                            <label class="form-check-label" for="useN">N</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#searchAuthModal">
+                                    저자 연결
+                                </button>
+                                <button type="button" class="btn btn-danger" id="resetAuth">
+                                    저자 연결 초기화
+                                </button>
+                                <!-- 저저 연결 Modal START-->
+                                <!-- Modal -->
+                                <div class="modal fade" id="searchAuthModal" tabindex="-1" role="dialog" aria-labelledby="searchAuthModal" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="searchModalTitle">저자 검색</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="col-8 col-sm-2">
+                                                            저자 이름
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-8 col-sm-6">
+                                                                <input type="text" class="form-control " id="searchAuthNm" placeholder="저자">
+                                                            </div>
+                                                            <div class="col-4 col-sm-6">
+                                                                <button class="btn btn-secondary" id="searchAuthBtn">검색</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12" >
+                                                        <table class="table">
+                                                            <thead>
+                                                            <th scope="col">이름1</th>
+                                                            <th scope="col">이름2</th>
+                                                            </thead>
+                                                            <tbody id="searchAuthResult">
+                                                            </tbody>
+                                                        </table>
+
+                                                        <button type="button" class="btn btn-primary" id="authRegBtn">등록</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 저저 연결 Modal END-->
+                                <div id="inputAuthSearch"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 form-check-inline">
+                                <label for="inputInformation">추가 정보</label>
+                                <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <span>웹뷰 페이지</span>
+                                <input type="number" class="form-control" name="inputEbookPage" id="inputEbookPage" placeholder="페이지">
+                            </div>
+                            <div class="col-md-2">
+                                <span>노출 순서</span>
+                                <input type="number" class="form-control" name="inputOrdered" id="inputOrdered" placeholder="노출 순서">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <span>계간지 호수</span>
+                                <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                                <select class="form-control" name="inputVolume" id="inputVolume">
+                                    <option disabled selected>계간지 호수를 선택해 주세요.</option>
+                                    {{#magazines}}
+                                        <option value="{{magazineSeq}}">{{magazineVolume}} 호</option>
+                                    {{/magazines}}
+                                    {{^magazines}}
+                                        <option disabled selected>등록된 계간지가 없습니다.</option>
+                                    {{/magazines}}
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <span>아티클 헤드</span>
+                                <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                                <select class="form-control" name="inputHeadTitle" id="inputHeadTitle">
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="form-group mb-3">
+                                <label for="inputContent"> 아티클 본문 </label>
+                                <textarea class="form-control" id="inputContent" rows="13"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-success" id="articleUpdateBtn"> 수정 </button>
+                        <button class="btn btn-danger" id="articleDeleteBtn"> 삭제 </button>
+                        <button class="btn btn-dark" onclick="history.back();"> 취소 </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript">
+        let authCnt = 0;
+        /*Ready Start*/
+        $(function (){
+            /*CKeditor - 아티클 본문*/
+            CKEDITOR.replace("inputContent", {
+                filebrowserUploadUrl: '/file/ckeditor/image/upload',
+                filebrowserUploadMethod: 'form',
+                font_names:
+                        '맑은 고딕/Malgun Gothic;굴림/Gulim;돋움/Dotum;바탕/Batang;궁서/Gungsuh;Arial/Arial;Comic Sans MS/Comic Sans MS;Courier New/Courier New;Georgia/Georgia;Lucida Sans Unicode/Lucida Sans Unicode;Tahoma/Tahoma;Times New Roman/Times New Roman;MS Mincho/MS Mincho;Trebuchet MS/Trebuchet MS;Verdana/Verdana',
+                font_defaultLabel: '맑은 고딕/Malgun Gothic',
+                fontSize_defaultLabel: '12',
+                skin: 'office2013',
+                language: 'ko',
+                height: '350px'
+            });
+
+            main.getArticleData($("#articleSeq").val());
+            main.getArticleAuthData($("#articleSeq").val());
+        });
+        /*Ready End*/
+    </script>
+    <script src="/js/ckeditor/ckeditor.js"></script>
+    <script src="/js/article.js"></script>
+{{>layouts/footer}}

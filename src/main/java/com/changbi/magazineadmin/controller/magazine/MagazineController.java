@@ -46,6 +46,13 @@ public class MagazineController {
     }
 
     /*로직*/
+    @GetMapping("/{magazineSeq}")
+    @ResponseBody
+    public Magazine selectMagazineBySeq(@PathVariable(name = "magazineSeq") int magazineSeq){
+        return magazineService.selectMagazineBySeq(magazineSeq);
+    }
+
+    /*로직*/
     @PostMapping("/insert")
     @ResponseBody
     public int insertMethod(@RequestBody Magazine magazine){
@@ -60,6 +67,13 @@ public class MagazineController {
         return magazineService.updateMagazine(magazine, magazineSeq);
     }
 
+    /*로직*/
+    @PostMapping("/delete/{magazineSeq}")
+    @ResponseBody
+    public int deleteMethod(@PathVariable(name = "magazineSeq")int magazineSeq){
+        return magazineService.deleteMagazine(magazineSeq);
+
+    }
     /*로직*/
     @GetMapping("/search/{searchKeyword}/{searchType}")
     @ResponseBody

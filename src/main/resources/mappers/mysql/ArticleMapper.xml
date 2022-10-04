@@ -4,6 +4,80 @@
 
 <mapper namespace="com.changbi.magazineadmin.repository.mysql.ArticleRepository">
 
+    <resultMap id="articleList" type="article">
+
+    </resultMap>
+
+    <select id="selectArticleBySeq" resultType="article">
+        SELECT *
+        FROM ARTICLE
+        WHERE ARTICLE_SEQ = #{articleSeq}
+    </select>
+
+    <select id="selectArticleAll" resultMap="articleList">
+        SELECT
+            A.ARTICLE_SEQ
+            ,A.ARTICLE_TITLE
+            ,A.USE_YN
+            ,A.APPEND_DATE
+            ,A.UPDATE_DATE
+            ,B.ARTICLE_HEAD_SEQ
+            ,B.ARTICLE_HEAD_TITLE
+            ,C.MAGAZINE_VOLUME
+            ,C.MAGAZINE_SEQ
+        FROM ARTICLE A
+        LEFT JOIN ARTICLE_HEAD B
+        ON A.ARTICLE_HEAD_SEQ = B.ARTICLE_HEAD_SEQ
+        LEFT JOIN MAGAZINE C
+        ON B.MAGAZINE_SEQ = C.MAGAZINE_SEQ
+        ORDER BY ARTICLE_SEQ DESC
+    </select>
+
+    <select id="selectArticleHeadByMgSeq" resultType="articleHead">
+        SELECT *
+        FROM ARTICLE_HEAD
+        WHERE MAGAZINE_SEQ = #{magazineSeq}
+    </select>
+
+    <select id="selectArticleAuthor" resultType="articleMeta">
+        SELECT
+            A.ARTICLE_SEQ
+           ,B.AUTHOR_SEQ
+           ,B.AUTHOR_KR_NAME
+        FROM AUTHOR_ARTICLE A
+        LEFT JOIN AUTHOR B
+        ON A.AUTHOR_SEQ = B.AUTHOR_SEQ
+        WHERE A.ARTICLE_SEQ = #{articleSeq}
+    </select>
+
+    <insert id="insertArticle" parameterType="article"
+            useGeneratedKeys="true" keyProperty="articleSeq" keyColumn="ARTICLE_SEQ">
+        <![CDATA[
+        INSERT INTO ARTICLE
+        (
+            MAGAZINE_SEQ
+            ,ARTICLE_HEAD_SEQ
+            ,ARTICLE_TITLE
+            ,ARTICLE_CONTENT
+            ,EBOOK_PAGE
+            ,ORDERED
+            ,APPEND_DATE
+            ,UPDATE_DATE
+        )
+            VALUES
+        (
+            (SELECT MAGAZINE_SEQ FROM ARTICLE_HEAD WHERE ARTICLE_HEAD_SEQ = #{articleHeadSeq})
+            ,#{articleHeadSeq}
+            ,#{articleTitle}
+            ,#{articleContent}
+            ,#{ebookPage}
+            ,#{ordered}
+            ,now()
+            ,now()
+        )
+        ]]>
+    </insert>
+
     <insert id="insertArticleHead" parameterType="articleHead">
         <![CDATA[
         INSERT INTO ARTICLE_HEAD
@@ -23,4 +97,53 @@
         ]]>
         </foreach>
     </insert>
+
+    <insert id="insertArticleAuthor" parameterType="articleMeta">
+        <![CDATA[
+        INSERT INTO AUTHOR_ARTICLE
+        (
+            AUTHOR_SEQ
+            ,ARTICLE_SEQ
+        )VALUES
+        ]]>
+        <foreach collection="list" item="item" separator=",">
+            <![CDATA[
+        (
+            #{item.authorSeq}
+            ,#{item.articleSeq}
+        )
+        ]]>
+        </foreach>
+    </insert>
+
+    <update id="updateArticle" parameterType="article">
+        UPDATE ARTICE
+        SET
+            ARTICLE_TITLE = #{articleTitle}
+            ,ARTICLE_CONTENT = #{articleContent}
+            ,EBOOK_PAGE = #{ebookPage}
+            ,ORDERED = #{ordered}
+            ,UPDATE_DATE = now()
+        WHERE ARTICLE_SEQ = #{articleSeq}
+    </update>
+
+    <delete id="deleteArticleHead">
+        DELETE FROM ARTICLE_HEAD
+        WHERE MAGAZINE_SEQ = #{magazineSeq}
+    </delete>
+
+    <delete id="deleteArticle">
+        DELETE FROM ARTICLE
+        WHERE ARTICLE_SEQ = #{articleSeq}
+    </delete>
+
+    <delete id="deleteArticlesByMgSeq">
+        DELETE FROM ARTICLE
+        WHERE MAGAZINE_SEQ = #{magazineSeq}
+    </delete>
+
+    <delete id="deleteArticleAuthor">
+        DELETE FROM AUTHOR_ARTICLE
+        WHERE ARTICLE_SEQ = #{articleSeq}
+    </delete>
 </mapper>

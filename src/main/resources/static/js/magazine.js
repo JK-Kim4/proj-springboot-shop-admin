@@ -7,6 +7,16 @@ main = {
            _this.insert();
         });
 
+        /*수정*/
+        $("#magazineUpdateBtn").on("click", function (){
+            _this.update();
+
+        })
+        /*삭제*/
+        $("#magazineDeleteBtn").on("click", function (){
+            _this.delete();
+        })
+
         /*검색*/
         $("#searchBtn").on('click', function (){
             let searchKeyword = $("#searchKeyword").val();
@@ -142,6 +152,96 @@ main = {
         });
 
     },
+    update : function (){
+        let magazineSeq = $("#selectedMagazineSeq").val();
+        //입력값
+        //사용여부
+        let useYn = $(":radio[name=inputUseYn]:checked").val();
+        //주간논평 제목
+        let title = $("#inputTitle").val();
+        let category = $("select[name=inputCategory] option:selected").val();
+        let year = $("select[name=inputYear] option:selected").val();
+        let season= $("select[name=inputSeason] option:selected").val();
+        let volume = $("#inputVolume").val();
+        //주간논평 본문
+        let content = CKEDITOR.instances['inputContent'].getData();
+        //섬네일 이미지
+        let magazineThumbnailImage = $("#magazineThumbnailImage").val();
+        let magazineThumbnailImageFileName = $("#magazineThumbnailImageFileName").val();
+
+        /*입력 데이터 검증*/
+        if(title == '' || title == undefined){
+            alert("본문 제목을 입력해 주세요. (필수 항목)");
+            $("#inputTitle").focus();
+            return;
+        }else if(content == '' || content == undefined){
+            alert("내용을 입력해 주세요. (필수 항목)");
+            $("#inputContent").focus();
+            return;
+        }else if((year == '' || year == undefined) ||
+            (season == '' || season == undefined) ||
+            (volume == '' || volume == undefined)){
+            alert("계간지 발간 정보를 입력해 주세요.");
+            $("select[name=inputYear]").focus();
+            return;
+        };
+
+        let data = {
+            useYn : useYn,
+            magazineTitle : title,
+            magazineCategorySeq : category,
+            magazineContent : content,
+            magazineVolume : volume,
+            magazineYear : year,
+            magazineSeason : season,
+            magazineThumbnailImage : magazineThumbnailImage,
+            magazineThumbnailImageFileName : magazineThumbnailImageFileName
+        };
+
+        $.ajax({
+            url : "/magazine/update/"+magazineSeq,
+            method : "POST",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data : JSON.stringify(data),
+            success : function (result){
+
+                if(result > 0){
+                    alert("계간지 수정 성공");
+                    location.reload();
+                }else{
+                    alert("계간지 수정 실패");
+                    location.reload();
+                }
+
+            },
+            error : function (x, h, r){
+                alert("시스템 에러 발생. 지속적인 오류 발생 시 관리자에게 문의해 주세요");
+                location.reload();
+            }
+        });
+    },
+    delete : function (){
+        let magazineSeq = $("#selectedMagazineSeq").val();
+        $.ajax({
+           url: "/magazine/delete/"+magazineSeq,
+           method: "POST",
+            success: function (result){
+               if(result > 0){
+                   alert("계간지 삭제 성공");
+                   location.href = "/magazine/list";
+               }else{
+                   alert("계간지 삭제 실패");
+                   location.reload();
+               }
+
+            },
+            error : function (x, h, r){
+               alert("시스템 오류 발생. 관리자에게 문의해 주세요.");
+               return;
+            }
+        });
+    },
     upload : function (){
 
         let inputFile = $("#inputFile")[0].files[0];
@@ -199,28 +299,80 @@ main = {
             }
         });
     },
-    getMagazine : function (magazineSeq){
+    getMagazineData : function (magazineSeq){
         $.ajax({
             url : "/magazine/"+magazineSeq,
             method : "GET",
             dataType: 'json',
             success : function (result){
+                if(result != null && result != undefined){
+
+                    $("#inputTitle").val(result.magazineTitle);
+                    if(result.useYn == 1){
+                        $("#useY").prop("checked", true);
+                    }else{
+                        $("#useN").prop("checked", true);
+                    }
+                    $("#inputCategory").val(result.magazineCategorySeq).attr("selected", "selected");
+                    $("#inputYear").val(result.magazineYear).attr("selected", "selected");
+                    $("#inputSeason").val(result.magazineYear).attr("selected", "selected");
+                    $("#inputVolume").val(result.magazineVolume);
+                    $("#inputContent").val(result.magazineContent);
+
+                    $("#magazineThumbnailImage").val(result.magazineThumbnailImage);
+                    $("#magazineThumbnailImageFileName").val(result.magazineThumbnailImageFileName);
+
+                    $("#uploadedImg").val('업로드 자료 : ' +result.magazineThumbnailImageFileName);
+
+                }else{
+                    alert("데이터 조회 실패, 다시 시도해 주세요.");
+                    return;
+                }
 
 
             },
             error : function (x,h,r){
-                console.log(x);
+                alert("시스템 오류 발생. 관리자에게 문의해 주세요.");
+                return;
             }
         });
     },
-    getArticleHead : function (magazineSeq){
+   getArticleHead : function (magazineSeq){
         $.ajax({
             url : "/article/head/"+magazineSeq,
             method : "GET",
             dataType: 'json',
             success : function (result){
+                if(result != null && result.length > 0){
+                    let html = "";
+                    articleCnt = result.length;
 
+                    $.each(result, function (index, item){
+                        html += "<div id='articleHead"+(index + 1)+"' class='row'>" +
+                                    "<span>"+(index + 1) +". </span>" +
+                                    "<div class='col-8'>" +
+                                        "<input  class='form-control' type='text' id='inputArticleHead"+((index + 1))+"_01' value='"+item.articleHeadTitle+"' disabled>" +
+                                    "</div>" +
+                                    "<div class='col-2'>" +
+                                        "<input class='form-control' type='number' id='inputArticleHead"+((index + 1))+"_02' value='"+item.ordered+"' disabled>"+
+                                    "</div>" +
+                                    "<div class='col-2'>"+
+                                        "<button type='button' class='btn btn-danger articleHeadRemoveBtn' data-cnt='"+((index + 1))+"' style='max-height: 35px;' >삭제</button>" +
+                                        "<button type='button' class='btn btn-primary gotoUpdate' data-cnt='"+((item.articleHeadSeq))+"' style='max-height: 35px;' >수정</button>" +
+                                    "</div>" +
+                                "</div>";
 
+                        $("#articleHeadDiv").append(html);
+
+                        $(".articleHeadRemoveBtn").off().on("click", function (){
+                            $("#articleHead"+$(this).attr("data-cnt")).remove();
+                            /*$(this).prev().prev().remove(); // remove the textbox
+                            $(this).remove(); // remove the button*/
+                            $(this).remove();
+                            articleCnt--;
+                        });
+                    });
+                }
             },
             error : function (x,h,r){
                 console.log(x);

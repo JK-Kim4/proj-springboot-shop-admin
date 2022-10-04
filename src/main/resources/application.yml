@@ -1,6 +1,6 @@
 ## server configuration
 server:
-  port: 8080
+  port: 9090
   servlet:
     encoding:
       charset: UTF-8
