@@ -70,4 +70,12 @@ public class ProductController {
     public int deleteProduct(@PathVariable(name = "productSeq") int productSeq){
         return productService.deleteProduct(productSeq);
     }
+
+    /*로직*/
+    @PostMapping("/update/{productSeq}")
+    @ResponseBody
+    public int updateMethod(@PathVariable(name = "productSeq") int productSeq, @RequestBody Product product){
+        product.setProductSeq(productSeq);
+        return productService.updateProduct(product);
+    }
 }

@@ -15,4 +15,6 @@ public interface ProductRepository {
     Product selectProductBySeq(int productSeq);
 
     int deleteProduct(int productSeq);
+
+    int updateProduct(Product product);
 }

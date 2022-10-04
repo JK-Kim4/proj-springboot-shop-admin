@@ -13,6 +13,9 @@ let main = {
         });
 
         /*상품 수정*/
+        $("#productUpdateBtn").on("click", function (){
+           _this.update();
+        });
 
         /*상품 삭제*/
         $("#productDeleteBtn").on("click", function (){
@@ -93,6 +96,83 @@ let main = {
                 return;
             }
         });
+    },
+    update : function (){
+        let productSeq = $("#productSeq").val();
+        //입력 값
+        let productName = $("#inputTitle").val();
+        let useYn = $(":radio[name='inputYn']:checked").val();
+        let productPrice = $("#inputPrice").val();
+        let discountRate = $("#inputDiscountRate").val();
+        let productPeriod = $("#inputPeriod").val();
+        let productContent = CKEDITOR.instances["inputContent"].getData();
+        let productImageFile = $("#productImageFile").val();
+        let productImageFileName = $("#productImageFileName").val();
+        let productType = $("#inputType").val();
+
+        if(productName == undefined || productName == ''){
+            alert("상품명을 입력해 주세요.(필수)");
+            $("#inputTitle").focus();
+            return;
+        }else if(productPrice == undefined || productPrice == ''){
+            alert("상품 가격을 입력해 주세요.(필수)");
+            $("#inputPrice").focus();
+            return;
+        }else if(productPeriod == undefined || productPeriod == ''){
+            alert("상품 기간을 입력해 주세요.");
+            $("#inputPeriod").focus();
+            return;
+        }
+
+        let data = {
+            productType : productType,
+            productName: productName,
+            productContent: productContent,
+            productPrice: productPrice,
+            productPeriod: productPeriod,
+            useYn: useYn,
+            discountRate: discountRate,
+            productImageFile : productImageFile,
+            productImageFileName: productImageFileName
+        }
+
+        if( ($("#inputStartDate").val() != undefined && $("#inputStartDate").val() != '') &&
+            ($("#inputEndDate").val() != undefined && $("#inputEndDate").val() != '')){
+
+            let startDate = $("#inputStartDate").val() + " " + "00:00";
+            let endDate = $("#inputEndDate").val() + " " + "23:59";
+            if(!moment(endDate).isAfter(startDate)){
+                alert("게시 종료일은 게시 시작일 보다 앞설 수 없습니다. \n 기간을 다시 설정해 주세요");
+                return;
+            }else{
+                startDate = moment(startDate).format('YYYY-MM-DD HH:mm');
+                endDate = moment(endDate).format('YYYY-MM-DD HH:mm');
+            }
+            data.startDate = new Date(startDate);
+            data.endDate = new Date(endDate);
+        }
+
+        $.ajax({
+            url: "/product/update/" + productSeq,
+            method: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf8",
+            data: JSON.stringify(data),
+            success : function (result){
+                if(result > 0){
+                    alert("상품 정보 수정 성공");
+                    location.reload();
+                }else{
+                    alert("상품 정보 수정 실패");
+                    return;
+                }
+            },
+            error : function (x,h,r){
+                alert("시스템 오류 발생. 관리자에게 문의해 주세요.");
+                return;
+            }
+        });
+
     },
     delete : function (){
         let productSeq = $("#productSeq").val();

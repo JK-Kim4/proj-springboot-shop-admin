@@ -53,6 +53,27 @@
         )
     </insert>
 
+    <update id="updateProduct" parameterType="product">
+        UPDATE PRODUCT
+        SET
+            PRODUCT_TYPE = #{productType}
+            ,PRODUCT_NAME = #{productName}
+            ,PRODUCT_CONTENT = #{productContent}
+            ,PRODUCT_PRICE = #{productPrice}
+            ,DISCOUNT_RATE = #{discountRate}
+            ,PRODUCT_PERIOD = #{productPeriod}
+            ,PRODUCT_IMAGE_FILE = #{productImageFile}
+            ,PRODUCT_IMAGE_FILE_NAME = #{productImageFileName}
+            ,USE_YN = #{useYn}
+            <if test="startDate != null and !''.equals(startDate)">
+            ,START_DATE = #{startDate}
+            </if>
+            <if test="endDate != null and !''.equals(endDate)">
+            ,END_DATE = #{endDate}
+            </if>
+        WHERE PRODUCT_SEQ = #{productSeq}
+    </update>
+
     <delete id="deleteProduct" parameterType="int">
         DELETE FROM PRODUCT
         WHERE PRODUCT_SEQ = #{productSeq}

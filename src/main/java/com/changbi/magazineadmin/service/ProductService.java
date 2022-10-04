@@ -30,4 +30,8 @@ public class ProductService {
     public int deleteProduct(int productSeq) {
         return productRepository.deleteProduct(productSeq);
     }
+
+    public int updateProduct(Product product) {
+        return productRepository.updateProduct(product);
+    }
 }
