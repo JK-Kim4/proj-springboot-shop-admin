@@ -63,9 +63,14 @@
             ,ORDERED
             ,APPEND_DATE
             ,UPDATE_DATE
+        ]]>
+            <if test="">
+
+            </if>
         )
             VALUES
         (
+        <![CDATA[
             (SELECT MAGAZINE_SEQ FROM ARTICLE_HEAD WHERE ARTICLE_HEAD_SEQ = #{articleHeadSeq})
             ,#{articleHeadSeq}
             ,#{articleTitle}
@@ -74,8 +79,9 @@
             ,#{ordered}
             ,now()
             ,now()
-        )
         ]]>
+        )
+
     </insert>
 
     <insert id="insertArticleHead" parameterType="articleHead">

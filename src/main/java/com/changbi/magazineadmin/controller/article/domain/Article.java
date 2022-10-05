@@ -15,6 +15,7 @@ public class Article {
     private String articleHeadTitle;
     private String articleTitle;
     private String articleContent;
+    private String authorDirect;
     private int ebookPage;
     private int ordered;
     private int viewCount;

@@ -37,6 +37,15 @@ let main = {
             _this.modalHide("searchAuthModal");
         });
 
+        /*저자 직접 입력*/
+        $("#directAuth").on("click", function (){
+            let html = "";
+            $("#linkAuth").hide();
+            $("#resetAuth").hide();
+            html += "<input type='text' id='directAuthor' name='directAuthor'>";
+            $("#inputAuthSearch").html(html);
+        });
+
         /*검색*/
         $("#searchBtn").on('click', function (){
             let keyword = $("#searchKeyword").val();
@@ -57,6 +66,7 @@ let main = {
         let articleHeadSeq = $("#inputHeadTitle").val();
         let ebookPage = $("#inputEbookPage").val();
         let ordered = $("#inputOrdered").val();
+        let directAuthor = $("#directAuthor").val();
 
         if(title == undefined || title == ''){
             alert("기사 제목을 입력해 주세요. (필수)");
@@ -89,15 +99,17 @@ let main = {
             ordered : ordered
         }
 
+        let authArray = [];
         //저자 List
         if(authCnt > 0){
-            let authArray = [];
             for(let i = 1; i <= authCnt; i ++ ){
                 if($("#inputCode"+i+"_01").val() != undefined){
                     authArray.push({authorSeq : $("#inputCode"+i+"_01").val(), articleSeq : 0});
                 }
             }
             data.authArray = authArray;
+        }else{
+            data.directAuthor = directAuthor;
         };
 
         $.ajax({

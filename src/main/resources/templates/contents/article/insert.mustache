@@ -44,11 +44,14 @@
 
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
-                                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#searchAuthModal">
+                                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#searchAuthModal" id="linkAuth">
                                         저자 연결
                                     </button>
                                     <button type="button" class="btn btn-danger" id="resetAuth">
                                         저자 연결 초기화
+                                    </button>
+                                    <button type="button" class="btn btn-dark" id="directAuth">
+                                        직접 입력
                                     </button>
                                     <!-- 저저 연결 Modal START-->
                                     <!-- Modal -->
@@ -85,7 +88,6 @@
                                                                 <tbody id="searchAuthResult">
                                                                 </tbody>
                                                             </table>
-
                                                             <button type="button" class="btn btn-primary" id="authRegBtn">등록</button>
                                                         </div>
                                                     </div>
