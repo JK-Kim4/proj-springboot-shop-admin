@@ -194,9 +194,7 @@ let main = {
                alert("시스템 오류 발생. 관리자에게 문의해 주세요");
                return;
             }
-
         });
-
     },
     delete : function (){
         let articleSeq = $("#articleSeq").val();

@@ -71,4 +71,9 @@
             ,UPDATE_DATE = now()
         WHERE MAGAZINE_SEQ = #{magazineSeq}
     </update>
+
+    <delete id="deleteMagazine">
+        DELETE FROM MAGAZINE
+        WHERE MAGAZINE_SEQ = #{magazineSeq}
+    </delete>
 </mapper>

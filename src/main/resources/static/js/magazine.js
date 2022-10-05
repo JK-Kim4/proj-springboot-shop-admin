@@ -233,7 +233,7 @@ main = {
         let magazineSeq = $("#selectedMagazineSeq").val();
         $.ajax({
            url: "/magazine/delete/"+magazineSeq,
-           method: "POST",
+           method: "DELETE",
             success: function (result){
                if(result > 0){
                    alert("계간지 삭제 성공");
@@ -323,7 +323,7 @@ main = {
                     }
                     $("#inputCategory").val(result.magazineCategorySeq).attr("selected", "selected");
                     $("#inputYear").val(result.magazineYear).attr("selected", "selected");
-                    $("#inputSeason").val(result.magazineYear).attr("selected", "selected");
+                    $("#inputSeason").val(result.magazineSeason).attr("selected", "selected");
                     $("#inputVolume").val(result.magazineVolume);
                     $("#inputContent").val(result.magazineContent);
 

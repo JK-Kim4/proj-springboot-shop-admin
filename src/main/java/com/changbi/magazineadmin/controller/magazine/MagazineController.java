@@ -68,7 +68,7 @@ public class MagazineController {
     }
 
     /*로직*/
-    @PostMapping("/delete/{magazineSeq}")
+    @DeleteMapping("/delete/{magazineSeq}")
     @ResponseBody
     public int deleteMethod(@PathVariable(name = "magazineSeq")int magazineSeq){
         return magazineService.deleteMagazine(magazineSeq);

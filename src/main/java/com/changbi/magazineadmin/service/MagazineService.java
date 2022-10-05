@@ -47,8 +47,25 @@ public class MagazineService {
 
     /*TODO update 처리 수정 2022.10.04*/
     public int updateMagazine(Magazine magazine, int magazineSeq) {
+        int result = 0;
         magazine.setMagazineSeq(magazineSeq);
-        return magazineRepository.updateMagazine(magazine);
+        try{
+            result = magazineRepository.updateMagazine(magazine);
+            articleRepository.deleteArticleHead(magazineSeq);
+            if(result > 0){
+                if(magazine.getArticleHeadArray() != null && magazine.getArticleHeadArray().size() > 0){
+                    List<ArticleHead> articleHeads = magazine.getArticleHeadArray();
+                    articleHeads = setMagazineSeq(articleHeads, magazine.getMagazineSeq());
+                    result = articleRepository.insertArticleHead(articleHeads);
+                }
+            }else {
+                throw new IllegalArgumentException("[error] 계간지 수정 실패");
+            }
+        }catch (Exception e){
+            log.error("magazine insert error occur !!", e);
+            result = 0;
+        }
+        return result;
     }
 
     private List<ArticleHead> setMagazineSeq(List<ArticleHead> param, int magazineSeq){

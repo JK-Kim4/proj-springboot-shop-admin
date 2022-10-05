@@ -42,17 +42,19 @@ public class ArticleService {
         try {
             result = articleRepository.insertArticle(article);
             int genArticleSeq = article.getArticleSeq();
-
-            List<ArticleMeta> authList = setArticleAuthor(article.getAuthArray(), genArticleSeq);
-            result = articleRepository.insertArticleAuthor(authList);
-
-            return result;
+            if(result > 0){
+                if(article.getAuthArray() != null && article.getAuthArray().size() > 0){
+                    List<ArticleMeta> authList = setArticleAuthor(article.getAuthArray(), genArticleSeq);
+                    result = articleRepository.insertArticleAuthor(authList);
+                }
+            }else {
+                throw new IllegalArgumentException("[error] 계간지 등록 실패");
+            }
         }catch (Exception e){
             log.error("Article insert error occur !!", e);
             result = 0;
-            return result;
         }
-
+        return result;
     }
 
     private List<ArticleMeta> setArticleAuthor(List<ArticleMeta> param, int genArticleSeq) {
@@ -78,16 +80,21 @@ public class ArticleService {
         int result = 0;
         article.setArticleSeq(articleSeq);
         try {
-            List<ArticleMeta> authList = setArticleAuthor(article.getAuthArray(), articleSeq);
-            articleRepository.updateArticle(article);
-            articleRepository.deleteArticleAuthor(articleSeq);
-            result = articleRepository.insertArticleAuthor(authList);
-            return result;
+            result = articleRepository.updateArticle(article);
+            if(result > 0){
+                if(article.getAuthArray() != null && article.getAuthArray().size() > 0){
+                    List<ArticleMeta> authList = setArticleAuthor(article.getAuthArray(), articleSeq);
+                    articleRepository.deleteArticleAuthor(articleSeq);
+                    result = articleRepository.insertArticleAuthor(authList);
+                }
+            }else {
+                throw new IllegalArgumentException("[error] 계간지 수정 실패");
+            }
         }catch (Exception e){
             log.error("Article update error occur !!", e);
             result = 0;
-            return result;
         }
+        return result;
     }
 
     public List<ArticleMeta> selectArticleAuthor(int articleSeq) {

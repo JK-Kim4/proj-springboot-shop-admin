@@ -123,9 +123,12 @@
         SET
             ARTICLE_TITLE = #{articleTitle}
             ,ARTICLE_CONTENT = #{articleContent}
+            ,ARTICLE_HEAD_SEQ = #{articleHeadSeq}
+            ,MAGAZINE_SEQ = #{magazineSeq}
             ,EBOOK_PAGE = #{ebookPage}
             ,ORDERED = #{ordered}
             ,UPDATE_DATE = now()
+            ,USE_YN = #{useYn}
         WHERE ARTICLE_SEQ = #{articleSeq}
     </update>
 
