@@ -42,3 +42,5 @@ application-loc.yml
 application-prod.yml
 
 **/samples
+
+/logs/
