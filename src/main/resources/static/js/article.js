@@ -74,7 +74,7 @@ let main = {
         }
 
         if(magazineSeq == undefined || magazineSeq == ''){
-            alert("계간지 호수를 선택해 주세요. (필수)");
+            alert("상품 호수를 선택해 주세요. (필수)");
             $("#inputVolume").focus();
             return;
         }
@@ -150,7 +150,7 @@ let main = {
         }
 
         if(magazineSeq == undefined || magazineSeq == ''){
-            alert("계간지 호수를 선택해 주세요. (필수)");
+            alert("상품 호수를 선택해 주세요. (필수)");
             $("#inputVolume").focus();
             return;
         }

@@ -89,7 +89,7 @@ main = {
         }else if((year == '' || year == undefined) ||
                     (season == '' || season == undefined) ||
                         (volume == '' || volume == undefined)){
-            alert("계간지 발간 정보를 입력해 주세요.");
+            alert("상품 발간 정보를 입력해 주세요.");
             $("select[name=inputYear]").focus();
             return;
         };
@@ -132,10 +132,10 @@ main = {
             success : function (result){
 
                 if(result > 0){
-                    alert("계간지 등록 성공");
+                    alert("상품 등록 성공");
                     location.href = "/magazine/list";
                 }else{
-                    alert("계간지 등록 실패");
+                    alert("상품 등록 실패");
                     location.reload();
                 }
 
@@ -172,7 +172,7 @@ main = {
         }else if((year == '' || year == undefined) ||
             (season == '' || season == undefined) ||
             (volume == '' || volume == undefined)){
-            alert("계간지 발간 정보를 입력해 주세요.");
+            alert("상품 발간 정보를 입력해 주세요.");
             $("select[name=inputYear]").focus();
             return;
         };
@@ -215,10 +215,10 @@ main = {
             success : function (result){
 
                 if(result > 0){
-                    alert("계간지 수정 성공");
+                    alert("상품 수정 성공");
                     location.reload();
                 }else{
-                    alert("계간지 수정 실패");
+                    alert("상품 수정 실패");
                     location.reload();
                 }
 
@@ -236,10 +236,10 @@ main = {
            method: "DELETE",
             success: function (result){
                if(result > 0){
-                   alert("계간지 삭제 성공");
+                   alert("상품 삭제 성공");
                    location.href = "/magazine/list";
                }else{
-                   alert("계간지 삭제 실패");
+                   alert("상품 삭제 실패");
                    location.reload();
                }
 
@@ -401,7 +401,7 @@ main = {
                 if(result.list.length > 0){
                     html = main.drawMagazineList(result.list);
                 }else{
-                    html = "<tr><td colspan='6' style='text-align: center;'> 등록된 계간지가 없습니다.</td></tr>"
+                    html = "<tr><td colspan='6' style='text-align: center;'> 등록된 상품가 없습니다.</td></tr>"
                 }
 
                 $("#magazineList").html(html);
@@ -487,9 +487,9 @@ main = {
             html += "<tr>" +
                         "<td class='col-md-1'>"+item.magazineSeq+"</td>" +
                         "<td class='col-md-1'>";
-                        if(item.magazineCategorySeq == 1) html += "계간 창작과비평";
-                        if(item.magazineCategorySeq == 2) html += "계간 창비어린이";
-                        if(item.magazineCategorySeq == 3) html += "계간 창작과비평 L";
+                        if(item.magazineCategorySeq == 1) html += "  프로젝트";
+                        if(item.magazineCategorySeq == 2) html += "  프로젝트어린이";
+                        if(item.magazineCategorySeq == 3) html += "  프로젝트 L";
                         html += "</td>" +
                         "<td class='col-md-2'><a href='/magazine/update/"+item.magazineSeq+"'>"+item.magazineTitle+"</a></td>" +
                         "<td class='col-md-1'>";

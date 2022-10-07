@@ -24,7 +24,7 @@ public class Member {
 
     private String updatedate;
 
-    /*회원 타입 : [01:관리자 ,02:일반 회원 ,03:어린이 회원 ,04:어린이 회원(보호자 미동의) , 05:창비 직원 ,06:미승인 회원]*/
+    /*회원 타입 : [01:관리자 ,02:일반 회원 ,03:어린이 회원 ,04:어린이 회원(보호자 미동의) , 05:프로젝트 직원 ,06:미승인 회원]*/
     private String webusertype;
 
     private boolean webuserconfirmyn;

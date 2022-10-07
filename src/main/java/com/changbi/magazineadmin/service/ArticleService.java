@@ -48,7 +48,7 @@ public class ArticleService {
                     result = articleRepository.insertArticleAuthor(authList);
                 }
             }else {
-                throw new IllegalArgumentException("[error] 계간지 등록 실패");
+                throw new IllegalArgumentException("[error] 상품 등록 실패");
             }
         }catch (Exception e){
             log.error("Article insert error occur !!", e);
@@ -88,7 +88,7 @@ public class ArticleService {
                     result = articleRepository.insertArticleAuthor(authList);
                 }
             }else {
-                throw new IllegalArgumentException("[error] 계간지 수정 실패");
+                throw new IllegalArgumentException("[error] 상품 수정 실패");
             }
         }catch (Exception e){
             log.error("Article update error occur !!", e);
