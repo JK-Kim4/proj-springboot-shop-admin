@@ -1,7 +1,7 @@
 package com.changbi.magazineadmin.service;
 
 import com.changbi.magazineadmin.controller.member.domain.Member;
-import com.changbi.magazineadmin.repository.oracle.MemberRepository;
+import com.changbi.magazineadmin.repository.mysql.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

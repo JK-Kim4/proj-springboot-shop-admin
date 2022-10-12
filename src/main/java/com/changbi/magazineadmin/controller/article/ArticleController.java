@@ -3,9 +3,9 @@ package com.changbi.magazineadmin.controller.article;
 import com.changbi.magazineadmin.controller.article.domain.Article;
 import com.changbi.magazineadmin.controller.article.domain.ArticleHead;
 import com.changbi.magazineadmin.controller.article.domain.ArticleMeta;
-import com.changbi.magazineadmin.controller.magazine.domain.Magazine;
+import com.changbi.magazineadmin.controller.product.domain.Product;
 import com.changbi.magazineadmin.service.ArticleService;
-import com.changbi.magazineadmin.service.MagazineService;
+import com.changbi.magazineadmin.service.ProductService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ import java.util.List;
 public class ArticleController {
 
     private final ArticleService articleService;
-    private final MagazineService magazineService;
+    private final ProductService productService;
 
     /*페이지*/
     @GetMapping("/list")
@@ -35,8 +35,8 @@ public class ArticleController {
     @GetMapping("/insert")
     public String insertPage(Model model){
 
-        List<Magazine> magazines = magazineService.selectMagazineAll();
-        model.addAttribute("magazines", magazines);
+        List<Product> products = productService.selectMagazineAll();
+        model.addAttribute("magazines", products);
 
         return "/contents/article/insert";
     }
@@ -44,8 +44,8 @@ public class ArticleController {
     /*페이지*/
     @GetMapping("/update/{articleSeq}")
     public String updatePage (@PathVariable(name = "articleSeq")int articleSeq, Model model){
-        List<Magazine> magazines = magazineService.selectMagazineAll();
-        model.addAttribute("magazines", magazines);
+        List<Product> products = productService.selectMagazineAll();
+        model.addAttribute("magazines", products);
         model.addAttribute("articleSeq", articleSeq);
         return "/contents/article/update";
     }

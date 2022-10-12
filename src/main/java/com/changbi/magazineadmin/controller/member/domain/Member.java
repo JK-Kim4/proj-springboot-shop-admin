@@ -2,56 +2,26 @@ package com.changbi.magazineadmin.controller.member.domain;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class Member {
 
 
-    private int customercode;
+    private int memberSeq;                      // 고유 번호
+    private String memberId;                    // 회원 ID
+    private String memberNickname;              // 회원 별명
+    private String memberPassword;              // 회원 비밀번호
+    private int memberType;                     // 회원 타입 (0: 일반회원 / 1: 판매자 인증 회원 / 99: 차단 회원)
+    private String memberThumbnailImage;        // 회원 섬네일 이미지
+    private String memberThumbnailImageName;    // 회원 섬네일 이미지 파일명
+    private LocalDateTime appendDate;           // 등록일
+    private LocalDateTime updateDate;           // 수정일
+    private int appendUser;                     // 등록자
+    private int updateUser;                     // 수정자
+    private boolean useYn;                      // 사용 여부
+    private int loginFailCount;                 // 로그인 실패 횟수
+    private String memo;                        // 메모
 
-    private String customername;
-
-    private int customerkind;
-
-    private String email;
-
-    private String webuserid;
-
-    private String nickname;
-
-    private String mobileno;
-
-    private String joindate;
-
-    private String updatedate;
-
-    /*회원 타입 : [01:관리자 ,02:일반 회원 ,03:어린이 회원 ,04:어린이 회원(보호자 미동의) , 05:프로젝트 직원 ,06:미승인 회원]*/
-    private String webusertype;
-
-    private boolean webuserconfirmyn;
-
-    private String POSTNO1;
-    private String ADDRESS1_1;
-    private String ADDRESS1_2;
-
-    private String POSTNO2;
-    private String ADDRESS2_1;
-    private String ADDRESS2_2;
-
-    private String POSTNO3;
-    private String ADDRESS3_1;
-    private String ADDRESS3_2;
-
-    private String POSTNO1_NEW;
-    private String ADDRESS1_1NEW;
-    private String ADDRESS1_2_NEW;
-
-
-    private String POSTNO2_NEW;
-    private String ADDRESS2_1_NEW;
-    private String ADDRESS2_2_NEW;
-
-    private String POSTNO3_New;
-    private String ADDRESS3_1_NEW;
-    private String ADDRESS3_2_NEW;
 
 }

@@ -10,16 +10,14 @@
     <typeAliases>
         <typeAlias type="com.changbi.magazineadmin.controller.member.domain.Member" alias="member" />
         <typeAlias type="com.changbi.magazineadmin.controller.author.domain.Author" alias="author" />
-        <typeAlias type="com.changbi.magazineadmin.controller.weekly_comment.domain.WeeklyComment" alias="weeklyComment" />
-        <typeAlias type="com.changbi.magazineadmin.controller.weekly_comment.domain.WeeklyCommentCategory" alias="weeklyCommentCategory" />
-        <typeAlias type="com.changbi.magazineadmin.controller.weekly_comment.domain.WeeklyMeta" alias="WeeklyMeta"/>
-        <typeAlias type="com.changbi.magazineadmin.controller.magazine.domain.Magazine" alias="magazine"/>
+        <typeAlias type="com.changbi.magazineadmin.controller.post.domain.Post" alias="weeklyComment" />
+        <typeAlias type="com.changbi.magazineadmin.controller.post.domain.PostCategory" alias="weeklyCommentCategory" />
+        <typeAlias type="com.changbi.magazineadmin.controller.product.domain.Product" alias="product"/>
         <typeAlias type="com.changbi.magazineadmin.controller.article.domain.Article" alias="article"/>
         <typeAlias type="com.changbi.magazineadmin.controller.article.domain.ArticleHead" alias="articleHead"/>
         <typeAlias type="com.changbi.magazineadmin.dto.SearchDto" alias="searchDto"/>
         <typeAlias type="com.changbi.magazineadmin.controller.article.domain.ArticleMeta" alias="articleMeta"/>
         <typeAlias type="com.changbi.magazineadmin.controller.admin.domain.Admin" alias="admin"/>
-        <typeAlias type="com.changbi.magazineadmin.controller.product.domain.Product" alias="product"/>
     </typeAliases>
 
 

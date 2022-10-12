@@ -123,12 +123,12 @@
                                 <small class="text-muted"><sup  style="color:red;">*</sup></small>
                                 <select class="form-control" name="inputVolume" id="inputVolume">
                                     <option disabled selected>상품 호수를 선택해 주세요.</option>
-                                    {{#magazines}}
+                                    {{#products}}
                                         <option value="{{magazineSeq}}">{{magazineVolume}} 호</option>
-                                    {{/magazines}}
-                                    {{^magazines}}
+                                    {{/products}}
+                                    {{^products}}
                                         <option disabled selected>등록된 상품가 없습니다.</option>
-                                    {{/magazines}}
+                                    {{/products}}
                                 </select>
                             </div>
                             <div class="col-md-6">

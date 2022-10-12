@@ -3,172 +3,145 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4">구독권 관리</h1>
+            <h1 class="mt-4">상위 상품 관리</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="/index">홈</a></li>
-                <li class="breadcrumb-item active">구독권 관리</li>
-                <li class="breadcrumb-item active">구독권 등록</li>
+                <li class="breadcrumb-item active">상위 상품</li>
+                <li class="breadcrumb-item active">상위 상품 등록</li>
             </ol>
             <div class="card mb-4">
                 <div class="card">
                     <div class="card-header">
                     </div>
                     <div class="card-body">
-                        <input type="hidden" name="productSeq" id="productSeq" value="{{productSeq}}">
+                        <input type="hidden" id="selectedMagazineSeq" value="{{magazineSeq}}">
                         <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="inputKrNm"> 상품명 </label>
-                                <small class="text-muted"><sup  style="color:red;">*</sup></small>
-                                <input type="text" class="form-control " id="inputTitle" placeholder="상품명을 입력해 주세요" required>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="inputTitle"> 상위상품 명 </label>
+                                    <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                                    <input type="text" class="form-control " id="inputTitle" placeholder="제목을 입력해 주세요" required>
+                                </div>
                             </div>
                         </div>
-                        <br>
+
                         <div class="row">
-                            <div class="form-group col-md-3">
-                                <label for="helpInputTop">노출 여부</label>
+                            <div class="col-md-3 form-check-inline">
+                                <label for="inputUseYn">노출 여부</label>
                                 <small class="text-muted"><sup  style="color:red;">*</sup></small>
                                 <fieldset class="form-control">
                                     <div class="form-group">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inputYn" id="useY" value="true" checked>
-                                            <label class="form-check-label" for="inputYn">Y</label>
+                                            <input class="form-check-input" type="radio" name="inputUseYn" id="useY" value="true" checked>
+                                            <label class="form-check-label" for="useY">Y</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inputYn" id="useN" value="false">
-                                            <label class="form-check-label" for="inputYn">N</label>
+                                            <input class="form-check-input" type="radio" name="inputUseYn" id="useN" value="false">
+                                            <label class="form-check-label" for="useN">N</label>
                                         </div>
                                     </div>
                                 </fieldset>
                             </div>
-                            <div class="form-group col-md-3">
-                                <label for="helpInputTop">상품 종류</label>
-                                <small class="text-muted"><sup  style="color:red;">*</sup></small>
-                                <select class="form-control" name="inputType" id="inputType">
-                                    <option value="1">종이 구독 (  프로젝트)</option>
-                                    <option value="2">전자 구독 (  프로젝트)</option>
-                                    <option value="3">프로젝트 어린이</option>
-                                </select>
-                            </div>
                         </div>
                         <br>
                         <div class="row">
-                            <label for="helpInputTop">판매 기간</label>
+                            <div class="col-md-3 form-check-inline">
+                                <label for="inputInformation">상품 정보</label>
+                                <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-1">
+                                <select class="form-control" name="inputYear" id="inputYear">
+                                    <script type="text/javascript">
+                                        $(document).ready(function (){
+                                            main.getMagazineYears();
+                                        });
+                                    </script>
+                                </select>
+                            </div>
+                            <div class="col-md-1">년</div>
+                            <div class="col-md-1">
+                                <select class="form-control" name="inputSeason" id="inputSeason">
+                                    <option value="1">봄</option>
+                                    <option value="2">여름</option>
+                                    <option value="3">가을</option>
+                                    <option value="4">겨울</option>
+                                </select>
+                            </div>
+                            <div class="col-md-1"> </div>
+                            <div class="col-md-1">
+                                <input type="text" class="form-control" name="inputVolume" id="inputVolume" placeholder="호수">
+                            </div>
+                            <div class="col-md-1">
+                                <span>호</span>
+                            </div>
+                        </div>
+                        <br>
+                        <!--<label for="helpInputTop">상품 게시 기간</label><small class="text-muted"><sup  style="color:red;">*</sup></small>
+                        <div class="row">
                             <div class="col-2">
                                 <input type="date" class="form-control" name="inputStartDate" id="inputStartDate">
                             </div>
-
+                            <div class="col-2">
+                                <input type="time" class="form-control" name="inputStartTime" id="inputStartTime">
+                            </div>
                             <div class="col-auto"><h4>-</h4></div>
                             <div class="col-2">
                                 <input type="date" class="form-control" name="inputEndDate" id="inputEndDate">
                             </div>
-
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="inputTitle"> 가격 </label>
-                                    <small class="text-muted"><sup  style="color:red;">*</sup></small>
-                                    <input type="number" class="form-control " id="inputPrice" placeholder="가격을 입력해 주세요" required>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="inputIsbn"> 할인율(%) </label>  <button class="btn-dark" id="directInputDiscount">직접 입력</button>
-                                    <div id="discountDiv" class="row">
-                                        <select class="form-control" name="inputDiscountRate" id="inputDiscountRate">
-                                            <option value="0">0 %</option>
-                                            <option value="0.1">10%</option>
-                                            <option value="0.2">20%</option>
-                                            <option value="0.3">30%</option>
-                                            <option value="0.4">40%</option>
-                                            <option value="0.5">50%</option>
-                                            <option value="0.6">60%</option>
-                                            <option value="0.7">70%</option>
-                                            <option value="0.8">80%</option>
-                                            <option value="0.9">90%</option>
-                                            <option value="1">100%</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="inputIsbn"> 상품 기간(일) </label>  <button class="btn-dark" id="directInputPeriod">직접 입력</button>
-                                    <div id="periodDiv">
-                                        <select class="form-control" name="inputPeriod" id="inputPeriod">
-                                            <option value="" selected disabled>기간을 선택해주세요.</option>
-                                            <option value="10">10일</option>
-                                            <option value="365">1년</option>
-                                            <option value="530">2년</option>
-                                            <option value="1095">3년</option>
-                                            <option value="1825">5년</option>
-                                            <option value="3650">10년</option>
-                                            <option value="5475">15년</option>
-                                            <option value="10950">30년</option>
-                                        </select>
-                                    </div>
-                                </div>
+                            <div class="col-2">
+                                <input type="time" class="form-control" name="inputEndTime" id="inputEndTime">
                             </div>
                         </div>
-                        <br>
+                        <br>-->
                         <div class="row">
                             <div class="form-group mb-3">
-                                <label for="inputContent">상품 소개</label>
+                                <label for="inputContent"> 상품 본문 </label>
                                 <textarea class="form-control" id="inputContent" rows="13"></textarea>
                             </div>
                         </div>
-                        <br>
+
+                        <div class="form-group mb-3">
+                            <label for="inputArticleHead"> 기사 헤드 타이틀 (Chapter)</label>
+                            <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                            <button type="button" id="addArticleHeadBtn">추가</button>
+                            <div id="articleHeadDiv"></div>
+                        </div>
+
+                        <!--표지 이미지 업로드 START-->
                         <div class="row">
                             <!--file upload test-->
                             <div class="col-md-6">
-                                <label class="form-label" for="fileUploadTest">상품 이미지</label>
+                                <label class="form-label" for="inputImage">섬네일 이미지</label>
                                 <input type="text" class="form-control" id="uploadedImg" disabled>
                                 <input type="file" class="form-control" id="inputFile" name="inputFile" >
                                 <input type="hidden" id="uploadValid" value="N">
-                                <input type="hidden" id="productImageFile" >
-                                <input type="hidden" id="productImageFileName" >
+                                <input type="hidden" id="magazineThumbnailImage" >
+                                <input type="hidden" id="magazineThumbnailImageFileName" >
                             </div>
                             <div class="col-md-3" style="padding-top:32px;" id="imgControl">
-                                <button class="btn btn-danger" id="uploadBtn" style="display: block">업로드</button>
+                                <button class="btn btn-dark" id="uploadBtn" style="display: block">이미지 업로드</button>
                                 <!--<button class="btn btn-success" id="defaultSuccess" style="display: none;" disabled>업로드 완료</button>-->
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-success" id="productUpdateBtn"> 수정 </button>
-                        <button class="btn btn-danger" id="productDeleteBtn"> 삭제 </button>
+                        <button class="btn btn-success" id="magazineUpdateBtn"> 수정 </button>
+                        <button class="btn btn-danger" id="magazineDeleteBtn"> 삭제 </button>
                         <button class="btn btn-dark" onclick="history.back();"> 취소 </button>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-    <script src="/js/ckeditor/ckeditor.js"></script>
-    <script src="/js/product.js"></script>
     <script type="text/javascript">
-        $(document).ready(function (){
 
-            main.getProductData($("#productSeq").val());
+        let articleCnt = 0;
 
-            $("#inputDiscountRate").on("change", function (){
-                $("#rateViewer").val($("#inputDiscountRate").val() + "%")
-            });
-
-            $("#directInputDiscount").on("click", function (){
-                $("#discountDiv").empty();
-                let html = '<input type="number" class="form-control" name="inputDiscountRate" id="inputDiscountRate" value="0">';
-                $("#discountDiv").html(html);
-            });
-
-            $("#directInputPeriod").on("click", function (){
-                $("#periodDiv").empty();
-                let html = '<input type="number" class="form-control" name="inputPeriod" id="inputPeriod" value="0">';
-                $("#periodDiv").html(html);
-            });
-
+        /*Ready Start*/
+        $(function (){
             /*CKeditor - 상품 상세*/
             CKEDITOR.replace("inputContent", {
                 filebrowserUploadUrl: '/file/ckeditor/image/upload',
@@ -181,6 +154,12 @@
                 language: 'ko',
                 height: '350px'
             });
+
+            main.getMagazineData($("#selectedMagazineSeq").val());
+            main.getArticleHead($("#selectedMagazineSeq").val());
         });
+        /*Ready End*/
     </script>
+    <script src="/js/ckeditor/ckeditor.js"></script>
+    <script src="/js/product.js"></script>
 {{>layouts/footer}}
