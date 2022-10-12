@@ -8,12 +8,12 @@
     </settings>
 
     <typeAliases>
-        <typeAlias type="com.changbi.magazineadmin.controller.member.domain.Member" alias="member" />
-        <typeAlias type="com.changbi.magazineadmin.controller.post.domain.Post" alias="weeklyComment" />
-        <typeAlias type="com.changbi.magazineadmin.controller.post.domain.PostCategory" alias="weeklyCommentCategory" />
-        <typeAlias type="com.changbi.magazineadmin.controller.product.domain.Product" alias="product"/>
-        <typeAlias type="com.changbi.magazineadmin.dto.SearchDto" alias="searchDto"/>
-        <typeAlias type="com.changbi.magazineadmin.controller.admin.domain.Admin" alias="admin"/>
+        <typeAlias type="com.tutomato.bootshopadmin.controller.member.domain.Member" alias="member" />
+        <typeAlias type="com.tutomato.bootshopadmin.controller.post.domain.Post" alias="weeklyComment" />
+        <typeAlias type="com.tutomato.bootshopadmin.controller.post.domain.PostCategory" alias="weeklyCommentCategory" />
+        <typeAlias type="com.tutomato.bootshopadmin.controller.product.domain.Product" alias="product"/>
+        <typeAlias type="com.tutomato.bootshopadmin.dto.SearchDto" alias="searchDto"/>
+        <typeAlias type="com.tutomato.bootshopadmin.controller.admin.domain.Admin" alias="admin"/>
     </typeAliases>
 
 
