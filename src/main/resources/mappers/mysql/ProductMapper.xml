@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tutomato.bootshopadmin.repository.mysql.ProductRepository">
+
+    <select id="selectProductCategoryAll" resultType="productCategory">
+        SELECT *
+        FROM PRODUCT_CATEGORY
+        WHERE USE_YN = TRUE
+    </select>
+
+    <insert id="insertProduct" parameterType="product">
+        INSERT INTO PRODUCT
+        (
+            PRODUCT_CATEGORY_SEQ
+            ,PRODUCT_TITLE
+            ,PRODUCT_CONTENT
+            ,PRODUCT_PRICE
+            ,PRODUCT_RELEASE_DATE
+            ,PRODUCT_STOCK
+            ,PRODUCT_THUMBNAIL_IMAGE
+            ,PRODUCT_THUMBNAIL_IMAGE_NAME
+            ,APPEND_DATE
+            ,UPDATE_DATE
+            ,APPEND_USER
+            ,UPDATE_USER
+            ,USE_YN
+        )
+         VALUES
+        (
+            #{productCategorySeq}
+            ,#{productTitle}
+            ,#{productContent}
+            ,#{productPrice}
+            ,#{productReleaseDate}
+            ,#{productStock}
+            ,#{productThumbnailImage}
+            ,#{productThumbnailImageName}
+            ,now()
+            ,now()
+            ,1
+            ,1
+            ,#{useYn}
+        )
+    </insert>
+</mapper>

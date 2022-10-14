@@ -10,8 +10,8 @@ public class CommonValues {
     public static final String IMG_UPLOAD_DIR = "images/";
     public static final String FILE_UPLOAD_DIR = "files/";
     public static final String POST_UPLOAD_DIR = "post/";
-    public static final String NCP_BUCKET_NAME_DEV = "dev-magazine-changbi";
-    public static final String NCP_BUCKET_NAME_PROD = "magazine-changbi";
+    public static final String NCP_BUCKET_NAME_DEV = "dev-bootshop";
+    public static final String NCP_BUCKET_NAME_PROD = "bootshop";
 
     /*Result Code*/
     public static final String RESULT_CODE_ERROR = "9999";

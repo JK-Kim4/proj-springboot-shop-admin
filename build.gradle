@@ -43,7 +43,8 @@ dependencies {
 
     //DBMS: mariaDB
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.1'
+    runtimeOnly 'mysql:mysql-connector-java'
+    //
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 
     //mybatis
