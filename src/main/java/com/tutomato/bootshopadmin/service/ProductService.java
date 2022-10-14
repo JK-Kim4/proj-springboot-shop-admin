@@ -23,4 +23,12 @@ public class ProductService {
     public List<ProductCategory> selectProductCategoryAll() {
         return productRepository.selectProductCategoryAll();
     }
+
+    public List<Product> selectProductAll() {
+        return productRepository.selectProductAll();
+    }
+
+    public Product selectProductBySeq(int productSeq) {
+        return productRepository.selectProductBySeq(productSeq);
+    }
 }

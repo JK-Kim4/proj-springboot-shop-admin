@@ -26,4 +26,6 @@ public class Product {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
+    private String productCategoryValue;
+
 }

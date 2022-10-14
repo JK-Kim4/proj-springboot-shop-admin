@@ -26,12 +26,12 @@
                                 <thead class=" text-primary">
                                     <th class="col-md-1"> 번호 </th>
                                     <th class="col-md-1"> 카테고리 </th>
-                                    <th class="col-md-2"> 상위 상품명 </th>
+                                    <th class="col-md-2"> 상품명 </th>
                                     <th class="col-md-1"> 사용여부 </th>
                                     <th class="col-md-1"> 등록일 </th>
                                     <th class="col-md-1"> 수정일 </th>
                                 </thead>
-                                <tbody id="magazineList">
+                                <tbody id="productList">
                                 </tbody>
                             </table>
 
@@ -49,7 +49,7 @@
     <script src="/js/product.js"></script>
     <script type="text/javascript">
         $(document).ready(function (){
-            main.getMagazineList(1,10);
+            main.getProductList(1,10);
         });
     </script>
 {{>layouts/footer}}

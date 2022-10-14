@@ -14,19 +14,16 @@
                     <div class="card-header">
                     </div>
                     <div class="card-body">
-                        <input type="hidden" id="selectedProductSeq" value="{{productSeq}}">
                         <div class="row">
+                            <input type="hidden" name="selectedProductSeq" id="selectedProductSeq" value="{{productSeq}}">
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
-                                    <label for="inputTitle"> 상위상품 명 </label>
+                                    <label for="inputTitle"> 상품 명 </label>
                                     <small class="text-muted"><sup  style="color:red;">*</sup></small>
                                     <input type="text" class="form-control " id="inputTitle" placeholder="제목을 입력해 주세요" required>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-3 form-check-inline">
+                            <div class="col-md-6">
                                 <label for="inputUseYn">노출 여부</label>
                                 <small class="text-muted"><sup  style="color:red;">*</sup></small>
                                 <fieldset class="form-control">
@@ -43,83 +40,57 @@
                                 </fieldset>
                             </div>
                         </div>
-                        <br>
                         <div class="row">
-                            <div class="col-md-3 form-check-inline">
-                                <label for="inputInformation">상품 정보</label>
-                                <small class="text-muted"><sup  style="color:red;">*</sup></small>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-1">
-                                <select class="form-control" name="inputYear" id="inputYear">
-                                    <script type="text/javascript">
-                                        $(document).ready(function (){
-                                            main.getMagazineYears();
-                                        });
-                                    </script>
+                            <div class="col-md-6">
+                                <label for="inputCategory"> 상품 카테고리 </label>
+                                <select class="form-control" name="inputCategory" id="inputCategory" required>
+                                    <option value="" disabled selected>카테고리를 선택해 주세요</option>
+                                    {{#categories}}
+                                        <option value={{productCategorySeq}}>{{productCategoryValue}}</option>
+                                    {{/categories}}
                                 </select>
                             </div>
-                            <div class="col-md-1">년</div>
-                            <div class="col-md-1">
-                                <select class="form-control" name="inputSeason" id="inputSeason">
-                                    <option value="1">봄</option>
-                                    <option value="2">여름</option>
-                                    <option value="3">가을</option>
-                                    <option value="4">겨울</option>
-                                </select>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="inputPrice"> 상품 가격 </label>
+                                    <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                                    <input type="number" class="form-control " id="inputPrice" placeholder="상품 가격을 입력해 주세요." required>
+                                </div>
                             </div>
-                            <div class="col-md-1"> </div>
-                            <div class="col-md-1">
-                                <input type="text" class="form-control" name="inputVolume" id="inputVolume" placeholder="호수">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="inputReleaseDate"> 상품 출시 일 </label>
+                                    <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                                    <input type="date" class="form-control " id="inputReleaseDate" placeholder="상품 출시일을 입력해 주세요." required>
+                                </div>
                             </div>
-                            <div class="col-md-1">
-                                <span>호</span>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="inputStock"> 상품 재고 </label>
+                                    <small class="text-muted"><sup  style="color:red;">*</sup></small>
+                                    <input type="number" class="form-control " id="inputStock" placeholder="재고 수량을 입력해 주세요.(기본값: 0)." value="0" required>
+                                </div>
                             </div>
                         </div>
                         <br>
-                        <!--<label for="helpInputTop">상품 게시 기간</label><small class="text-muted"><sup  style="color:red;">*</sup></small>
-                        <div class="row">
-                            <div class="col-2">
-                                <input type="date" class="form-control" name="inputStartDate" id="inputStartDate">
-                            </div>
-                            <div class="col-2">
-                                <input type="time" class="form-control" name="inputStartTime" id="inputStartTime">
-                            </div>
-                            <div class="col-auto"><h4>-</h4></div>
-                            <div class="col-2">
-                                <input type="date" class="form-control" name="inputEndDate" id="inputEndDate">
-                            </div>
-                            <div class="col-2">
-                                <input type="time" class="form-control" name="inputEndTime" id="inputEndTime">
-                            </div>
-                        </div>
-                        <br>-->
                         <div class="row">
                             <div class="form-group mb-3">
                                 <label for="inputContent"> 상품 본문 </label>
                                 <textarea class="form-control" id="inputContent" rows="13"></textarea>
                             </div>
                         </div>
-
-                        <div class="form-group mb-3">
-                            <label for="inputArticleHead"> 기사 헤드 타이틀 (Chapter)</label>
-                            <small class="text-muted"><sup  style="color:red;">*</sup></small>
-                            <button type="button" id="addArticleHeadBtn">추가</button>
-                            <div id="articleHeadDiv"></div>
-                        </div>
-
                         <!--표지 이미지 업로드 START-->
                         <div class="row">
                             <!--file upload test-->
                             <div class="col-md-6">
                                 <label class="form-label" for="inputImage">섬네일 이미지</label>
-                                <input type="text" class="form-control" id="uploadedImg" disabled>
+                                <input type="text" name="uploadedImg" id="uploadedImg" disabled>
                                 <input type="file" class="form-control" id="inputFile" name="inputFile" >
                                 <input type="hidden" id="uploadValid" value="N">
-                                <input type="hidden" id="magazineThumbnailImage" >
-                                <input type="hidden" id="magazineThumbnailImageFileName" >
+                                <input type="hidden" id="productThumbnailImage" >
+                                <input type="hidden" id="productThumbnailImageFileName" >
                             </div>
                             <div class="col-md-3" style="padding-top:32px;" id="imgControl">
                                 <button class="btn btn-dark" id="uploadBtn" style="display: block">이미지 업로드</button>
@@ -128,8 +99,8 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-success" id="magazineUpdateBtn"> 수정 </button>
-                        <button class="btn btn-danger" id="magazineDeleteBtn"> 삭제 </button>
+                        <button class="btn btn-primary" id="productUpdateBtn"> 수정 </button>
+                        <button class="btn btn-primary" id="productDeleteBtn"> 삭제 </button>
                         <button class="btn btn-dark" onclick="history.back();"> 취소 </button>
                     </div>
                 </div>
@@ -137,9 +108,6 @@
         </div>
     </main>
     <script type="text/javascript">
-
-        let articleCnt = 0;
-
         /*Ready Start*/
         $(function (){
             /*CKeditor - 상품 상세*/
@@ -155,8 +123,7 @@
                 height: '350px'
             });
 
-            main.getMagazineData($("#selectedMagazineSeq").val());
-            main.getArticleHead($("#selectedMagazineSeq").val());
+            main.getProductData($("#selectedProductSeq").val());
         });
         /*Ready End*/
     </script>

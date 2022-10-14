@@ -13,4 +13,7 @@ public interface ProductRepository {
 
     List<ProductCategory> selectProductCategoryAll();
 
+    List<Product> selectProductAll();
+
+    Product selectProductBySeq(int productSeq);
 }

@@ -4,6 +4,27 @@
 
 <mapper namespace="com.tutomato.bootshopadmin.repository.mysql.ProductRepository">
 
+
+    <select id="selectProductBySeq" resultType="product">
+        SELECT *
+        FROM PRODUCT
+        WHERE PRODUCT_SEQ = #{productSeq}
+    </select>
+
+    <select id="selectProductAll" resultType="product">
+        SELECT
+               A.*
+              ,B.PRODUCT_CATEGORY_VALUE
+        FROM
+            PRODUCT A
+        LEFT JOIN
+            PRODUCT_CATEGORY B
+        ON
+            A.PRODUCT_CATEGORY_SEQ = B.PRODUCT_CATEGORY_SEQ
+        ORDER BY PRODUCT_SEQ DESC
+    </select>
+
+
     <select id="selectProductCategoryAll" resultType="productCategory">
         SELECT *
         FROM PRODUCT_CATEGORY

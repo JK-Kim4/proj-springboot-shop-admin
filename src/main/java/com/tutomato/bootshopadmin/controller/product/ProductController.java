@@ -1,5 +1,7 @@
 package com.tutomato.bootshopadmin.controller.product;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.tutomato.bootshopadmin.controller.product.domain.Product;
 import com.tutomato.bootshopadmin.controller.product.domain.ProductCategory;
 import com.tutomato.bootshopadmin.service.ProductService;
@@ -38,6 +40,8 @@ public class ProductController {
     /*페이지*/
     @GetMapping("/update/{productSeq}")
     public String updatePage(@PathVariable("productSeq") int productSeq, Model model){
+        List<ProductCategory> categoryList = productService.selectProductCategoryAll();
+        model.addAttribute("categories", categoryList);
         model.addAttribute("productSeq", productSeq);
         return "contents/product/update";
     }
@@ -50,6 +54,25 @@ public class ProductController {
             return productService.insertProduct(product);
         }else {
             throw new NullPointerException("필수 파라미터가 존재하지 않습니다.");
+        }
+    }
+
+    /*select all*/
+    @GetMapping("/products")
+    @ResponseBody
+    public PageInfo<Product> selectAll(int pageNum, int pageSize){
+        PageHelper.startPage(pageNum, pageSize);
+        return PageInfo.of(productService.selectProductAll());
+    }
+
+    /*select by seq*/
+    @GetMapping("/{productSeq}")
+    @ResponseBody
+    public Product selectProductBySeq(@PathVariable(name = "productSeq")int productSeq){
+        if(productSeq > 0){
+            return productService.selectProductBySeq(productSeq);
+        }else {
+            throw new IllegalArgumentException("필수 파라미터가 존재하지 않습니다.");
         }
     }
 
