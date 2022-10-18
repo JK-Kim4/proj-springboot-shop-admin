@@ -71,6 +71,13 @@ dependencies {
     //lucy xss filter (admin page 내 xss filter 사용 시 form-data에 대한 filtering 처리만으로 유효함)
     implementation group: 'com.navercorp.lucy', name: 'lucy-xss-servlet', version: '2.0.0'
 
+    //WEB Socket
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.webjars:webjars-locator-core'
+    implementation 'org.webjars:sockjs-client:1.0.2'
+    implementation 'org.webjars:stomp-websocket:2.3.3'
+    implementation 'org.webjars:bootstrap:3.3.7'
+    implementation 'org.webjars:jquery:3.1.1-1'
 }
 
 //logging - Spring boot starter는 기본적으로 logback logging을 사용하므로 log4j2사용을 위해 exclude 처리
